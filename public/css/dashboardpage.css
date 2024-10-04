@@ -1,0 +1,397 @@
+/* Dashboard */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    /* background-image: url(/img/background2.png); */
+    /* background-size: cover; */
+    background-image: linear-gradient(50deg, #afc3c6 0%, #302e5d 100%);
+}
+
+header {
+    width: 100%;
+    height: 50px;
+    background-color: #2D4373;
+    padding: 10px 0;
+    position: fixed;
+    z-index: 1001;
+    display: flex;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0;
+    padding: 0 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-left: 10px;
+}
+
+.logo p {
+    color: white;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.user {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.user p {
+    margin-right: 10px;
+}
+
+.user img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    clip-path: circle(50% at 50% 50% );
+}
+
+
+/* Sidebar Layout */
+
+.container-sidebar {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: white;
+    width: 250px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 60px;
+    height: calc(100vh - 60px);
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    color: #2D4373;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav li a {
+    display: block;
+    padding: 10px;
+    color: #2D4373;
+    text-decoration: none;
+    transition: 0.3s;
+    width: calc(100% + 10px);
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.sidebar nav li a.active {
+    color: white;
+    background-color: #2D4373;
+    display: block;
+    padding: 10px 15px;
+    width: calc(100% + 10px);
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+
+.sidebar nav li a:hover {
+    color: white;
+    background-color: #2D4373;
+    padding: 10px 15px;
+    width: calc(100% + 10px);
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 20px;
+}
+
+/* .badge {
+    background-color: red;
+    color: white;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+} */
+
+/* Notification Section */
+.notification {
+    margin-top: 20px;
+}
+
+.notification h3 {
+    color: #2D4373;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.notification-item {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notification-item h4 {
+    color: red;
+    margin: 0;
+    font-size: 14px;
+}
+
+.notification-item p {
+    margin: 5px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.notification button {
+    /* display: block; */
+    background-color: gray;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.notification button:hover {
+    background-color: #2D4373;
+}
+
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: absolute;
+    z-index: 1001;
+    left: 89%;
+    transform: translateX(-50%);
+    top: 80px;
+    width: 300px;
+}
+
+.modal-content {
+    background-color: white;
+    height: 300px;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+/* Close Button */
+.close {
+    color: gray;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+/* Profile Details */
+.profile-details img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-details h3 {
+    margin-top: 10px;
+    color: #2D4373;
+}
+
+.profile-details p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#logoutButton {
+    padding: 10px 20px;
+    background-color: #2D4373;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 90px;
+}
+
+#logoutButton:hover {
+    background-color: red;
+}
+
+/* Edit Profile Modal */
+#editModal {
+    display: none;
+    position: fixed; /* Fixed positioning for the modal */
+    z-index: 1002;
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Adjust for perfect centering */
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Set a max width */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content-edit {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content-edit h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.modal-content-edit label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.modal-content-edit input[type="text"],
+.modal-content-edit input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.modal-content-edit .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-content-edit button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#saveButton {
+    background-color: #4285f4;
+    color: white;
+}
+
+#cancelButton {
+    background-color: #f1f3f4;
+    color: #333;
+}
+
+.close-edit {
+    display: none; /* Hide the close button */
+}
+
+.edit-icon {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+/* Latest Resolved Issues */
+.resolved-issues {
+    height: calc(100vh - 120px);
+    background-color: rgba(128, 128, 128, 0.282);
+    color: white;
+    padding: 20px;
+    margin-left: 290px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.resolved-issues h2 {
+    color: #2D4373;
+    text-align: start;
+    margin-left: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.issues-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.issue-card {
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    width: 20%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2D4373;
+}
+
+.issue-card img {
+    width: 100%;
+    max-width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.issue-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.issue-card p {
+    font-size: 14px;
+}
+
+.learn-more {
+    color: white;
+    text-decoration: none;
+}

@@ -1,0 +1,73 @@
+/* Report History Page */
+
+body{
+    background-color: gray;
+    background-image: url(/img/background2.png);
+    
+}
+
+table {
+    width: 110%;
+    margin: 150px;
+    font-size: 13px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.761);
+    align-content: end;
+    margin-left: 300px;
+}
+
+/* Add a top bar for search/filter */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* New Reports Section */
+thead {
+    background-color: #2f5ca7;
+    color: #fff;
+}
+
+thead th {
+    padding: 12px;
+}
+
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+tbody td .status {
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.status.on-process {
+    color: #0066ff;
+}
+
+.status.pending {
+    color: #ff9900;
+}
+
+.status.complete {
+    color: #28a745;
+}
+
+.view-btn {
+    padding: 6px 12px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    background-color: #d0d0d0;
+}
