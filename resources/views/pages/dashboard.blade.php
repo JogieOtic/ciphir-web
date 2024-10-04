@@ -15,6 +15,7 @@
             </div>
             <div class="user">
                 <p>Welcome, ADMIN</p>
+                <p>Welcome, ADMIN</p>
                 <a href="#profileModal" id="profileButton">
                     <img src="img/RENNEE Photo.png" alt="User Profile" id="adminProfilePic">
                 </a>
