@@ -15,13 +15,14 @@
             </div>
             <div class="user">
                 <p>Welcome, ADMIN</p>
-                <p>Welcome, ADMIN</p>
                 <a href="#profileModal" id="profileButton">
-                    <img src="img/RENNEE Photo.png" alt="User Profile" id="adminProfilePic">
+                    <i class="fas fa-user-circle"></i>
                 </a>
             </div>
         </div>
     </header>
+
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
     <main>
         <div class="container-sidebar">
@@ -29,53 +30,90 @@
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                        <li><a href="/dashboard" class="active" id="homelink">Home</a></li>
-                        <li><a href="/newreport" id="newreportlink">New Reports </a></li>
-                        <!-- <li><a href="/newreport">New Reports <span class="badge">10+</span></a></li> -->
-                        <li><a href="/priorityreport" id="priorityreport">Priority Report</a></li>
-                        <li><a href="/reporthistory" id="reporthistory">Report History</a></li>
-                        <li><a href="/notification" id="notification">Notification</a></li>
+                    <li><a href="/dashboard" class="active" id="homelink">
+                        <i class="fas fa-home"></i> Home
+                    </a></li>
+                    <li><a href="/newreport" id="newreportlink">
+                        <i class="fas fa-file-alt"></i> New Reports
+                    </a></li>
+                    <li><a href="/priorityreport" id="priorityreport">
+                        <i class="fas fa-exclamation-circle"></i> Priority Report
+                    </a></li>
+                    <li><a href="/reporthistory" id="reporthistory">
+                        <i class="fas fa-history"></i> Report History
+                    </a></li>
+                    <li><a href="/notification" id="notification">
+                        <i class="fas fa-bell"></i> Notification
+                    </a></li>
                     </ul>
                 </nav>
             </div>
+
+            <div id="profileModal" class="profile-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="profile-details">
+                        <h3>Administrator</h3>
+                        <a href="#editModal" id="manageAccount">Manage Account</a>
+                        <button id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insightful Data Section -->
+            <section class="admin-info">
+                <div class="stats">
+                    <div class="stat-item registered-users">
+                        <h3>Registered Users</h3>
+                        <p>49</p>
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-item reports-today">
+                        <h3>Reports Submitted Today</h3>
+                        <p>10</p>
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-item resolved-reports">
+                        <h3>Resolved Reports</h3>
+                        <p>4</p>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-item unresolved-reports">
+                        <h3>Unresolved Reports</h3>
+                        <p>7</p>
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </div>
+
+                <!-- Common Infrastructure Report Chart -->
+                <div class="chart-container">
+                    <canvas id="infraChart"></canvas>
+                </div>
+            </section>
         </div>
     </main>
 
-    <div id="profileModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-details">
-                <img id="modalProfilePic" alt="Profile Picture">
-                <h3>Administrator</h3>
-                <p><a href="#editModal" id="manageAccount">Manage your Account</a></p>
-                <button id="logoutButton">Logout</button>
-            </div>
-        </div>
-    </div>
     
     <div id="editModal" class="modal">
-        <div class="modal-content-edit">
-            <h3>Profile Information</h3>
-            <label for="employeeId">Employee ID</label>
-            <div>
-                <input type="text" id="employeeId" placeholder="Enter Employee ID">
-                <!-- <span class="edit-icon">✏️</span> -->
-            </div>
-            <label for="email">Email</label>
-            <div>
-                <input type="email" id="email" placeholder="Enter Email">
-                <!-- <span class="edit-icon">✏️</span> -->
-            </div>
-            <div class="button-group">
-                <button id="saveButton">Save</button>
-                <button id="cancelButton">Cancel</button>
-            </div>
+    <div class="modal-content-edit">
+        <h3>Profile Information</h3>
+        <label for="employeeId">Employee ID</label>
+        <div>
+            <input type="text" id="employeeId" placeholder="Enter Employee ID">
+        </div>
+        <label for="email">Email</label>
+        <div>
+            <input type="email" id="email" placeholder="Enter Email">
+        </div>
+        <div class="button-group">
+            <button id="saveButton">Save</button>
+            <button id="cancelButton">Cancel</button>
         </div>
     </div>
+    </div>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
 
-    <!-- JavaScript for Modal -->
+
     <script>
             var modal = document.getElementById("profileModal");
             var btn = document.getElementById("profileButton");
@@ -85,9 +123,11 @@
 
             // Open the modal when the user clicks the profile button
             btn.onclick = function(event) {
-                event.preventDefault(); // Prevent the default anchor behavior
+                event.preventDefault();
                 modal.style.display = "block";
                 
+                document.body.style.overflow = "hidden"; 
+
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
                 modalImg.src = adminPicSrc;
@@ -96,7 +136,10 @@
             // Close the modal when the user clicks the close (x) button
             span.onclick = function() {
                 modal.style.display = "none";
+
+                document.body.style.overflow = "auto";
             }
+
 
             // Close the modal when the user clicks outside the modal content
             window.onclick = function(event) {
@@ -109,6 +152,8 @@
             logoutButton.onclick = function() {
                 window.location.href = "/";
             }
+
+
 
             // Manage Your Account      
             var editModal = document.getElementById("editModal");
@@ -172,59 +217,90 @@
         document.getElementById("newReportLink").classList.remove("active");
         this.classList.add("active");
     };
-</script>
+    </script>
 
-<script>
-        function initMap() {
-            var mapOptions = {
-                center: { lat: 13.618774, lng: 123.158076 }, // Coordinates for Naga City
-                zoom: 12,
-                styles: [
-                    {
-                        featureType: "all",
-                        elementType: "labels",
-                        stylers: [{ visibility: "off" }] // Hides all labels
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var ctx = document.getElementById('infraChart').getContext('2d');
+        var infraChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
+                datasets: [{
+                    label: 'Common Infrastructure Type Reported',
+                    data: [90, 10, 50, 80, 30, 40, 15, 30, 25],
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffcd56',
+                        '#4bc0c0',
+                        '#9966ff',
+                        '#ff9f40',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffcd56'
+                    ],
+                    borderColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffcd56',
+                        '#4bc0c0',
+                        '#9966ff',
+                        '#ff9f40',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#ffcd56'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
                     }
-                ]
-            };
-
-            // Create the map
-            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        }
-
-        // Initialize map when the page loads
-        window.onload = initMap;
+                }
+            }
+        });
     </script>
 
     
-         <!-- Latest Resolved Issues -->
+    <!-- Latest Resolved Issues -->
    <section class="resolved-issues">
             <h2>Latest Resolved Issues</h2>
             <div class="issues-list">
                 <div class="issue-card">
                     <img src="/img/electric.png" alt="Electric Posts">
-                    <h3>Electric Posts</h3>
-                    <a href="#" class="learn-more">View</a>
+                    <h3>Waste Management</h3>
+                    <a href="#" class="learn-more">View  Details</a>
+
                 </div>
                 <div class="issue-card">
                     <img src="/img/electric.png" alt="Electric Posts">
                     <h3>Electric Posts</h3>
-                    <a href="#" class="learn-more">View</a>
+                    <a href="#" class="learn-more">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/road.jpg" alt="Road Issue">
                     <h3>Road Issue</h3>
-                    <a href="#" class="learn-more">View</a>
+                    <a href="#" class="learn-more">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/waste.jpg" alt="Waste Disposal">
                     <h3>Waste Disposal</h3>
-                    <a href="#" class="learn-more">View</a>
+                    <a href="#" class="learn-more">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/waste.jpg" alt="Waste Disposal">
                     <h3>Waste Disposal</h3>
-                    <a href="#" class="learn-more">View</a>
+                    <a href="#" class="learn-more">View Details</a>
                 </div>
             </div>
       </section>

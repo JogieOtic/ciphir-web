@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard New Report</title>
+    <title>New Reports</title>
     <link href="/css/dashboardpage.css" rel="stylesheet">
-    <link href="/css/newreportpage.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -22,121 +21,66 @@
         </div>
     </header>
 
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
+
     <main>
         <div class="container-sidebar">
             <div class="sidebar">
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                        <li><a href="/dashboard" id="homelink">Home</a></li>
-                        <li><a href="/newreport" class="active" id="newreportlink">New Reports </a></li>
-                        <!-- <li><a href="/newreport">New Reports <span class="badge">10+</span></a></li> -->
-                        <li><a href="/priorityreport" id="priorityreport">Priority Report</a></li>
-                        <li><a href="/reporthistory" id="reporthistory">Reports History</a></li>
+                    <li><a href="/dashboard"  id="homelink">
+                        <i class="fas fa-home"></i> Home
+                    </a></li>
+                    <li><a href="/newreport" class="active" id="newreportlink">
+                        <i class="fas fa-file-alt"></i> New Reports
+                    </a></li>
+                    <li><a href="/priorityreport" id="priorityreport">
+                        <i class="fas fa-exclamation-circle"></i> Priority Report
+                    </a></li>
+                    <li><a href="/reporthistory" id="reporthistory">
+                        <i class="fas fa-history"></i> Report History
+                    </a></li>
+                    <li><a href="/notification" id="notification">
+                        <i class="fas fa-bell"></i> Notification
+                    </a></li>
                     </ul>
                 </nav>
-                <div class="notification">
-                    <h3>Notification</h3>
-                    <div class="notification-item">
-                        <i class="fas fa-bell"></i>
-                        <h4>New Reminder!</h4>
-                        <p>Type of Issue: Electric Post <br> Posted by Jogie Otic last 2024-07-06 <br> still needs attention!</p>
-                    </div>
-                    <div class="notification-item">
-                        <i class="fas fa-bell"></i>
-                        <h4>New Reminder!</h4>
-                        <p>Type of Issue: Electric Post <br> Posted by Jogie Otic last 2024-07-06 <br> still needs attention!</p>
-                    </div>
-                    <button>Show all</button>
-                </div>
             </div>
 
-    <div class="container-newreport"> 
-        <h2>New Report</h2>
-        <table class="report-table">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Report ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Info</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <!-- <td><span class="star">⭐</span> -->
-                <td>1.</td>
-                <td>100006062024</td>
-                <td>2024-07-07</td>
-                <td>11:32 am</td>
-                <td>Electric Post</td>
-                <td><span class="status on-process">On Process</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-            <tr>
-                <td>2.</td>
-                <td>100006062024</td>
-                <td>2024-07-03</td>
-                <td>8:44 am</td>
-                <td>Pothole</td>
-                <td><span class="status pending">Pending</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-            <tr>
-                <td>3.</td>
-                <td>100006062024</td>
-                <td>2024-07-03</td>
-                <td>1:44 pm</td>
-                <td>Pothole</td>
-                <td><span class="status complete">Complete</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-        </div>
-    </div>
-    </main>
-
-    <div id="profileModal" class="modal">
+            <div id="profileModal" class="profile-modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="profile-details">
                 <img id="modalProfilePic" alt="Profile Picture">
                 <h3>Administrator</h3>
-                <p><a href="#editModal" id="manageAccount">Manage your Account</a></p>
+                <a href="#editModal" id="manageAccount">Manage Account</a>
                 <button id="logoutButton">Logout</button>
             </div>
         </div>
     </div>
+
     
     <div id="editModal" class="modal">
-        <div class="modal-content-edit">
-            <h3>Profile Information</h3>
-            <label for="employeeId">Employee ID</label>
-            <div>
-                <!-- <span class="edit-icon">✏️</span> -->
-                <input type="text" id="employeeId" placeholder="Enter Employee ID">
-            </div>
-            <label for="email">Email</label>
-            <div>
-                <!-- <span class="edit-icon">✏️</span> -->
-                <input type="email" id="email" placeholder="Enter Email">
-            </div>
-            <div class="button-group">
-                <button id="saveButton">Save</button>
-                <button id="cancelButton">Cancel</button>
-            </div>
+    <div class="modal-content-edit">
+        <h3>Profile Information</h3>
+        <label for="employeeId">Employee ID</label>
+        <div>
+            <input type="text" id="employeeId" placeholder="Enter Employee ID">
+        </div>
+        <label for="email">Email</label>
+        <div>
+            <input type="email" id="email" placeholder="Enter Email">
+        </div>
+        <div class="button-group">
+            <button id="saveButton">Save</button>
+            <button id="cancelButton">Cancel</button>
         </div>
     </div>
+    </div>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
 
-    <!-- JavaScript for Modal -->
+
     <script>
             var modal = document.getElementById("profileModal");
             var btn = document.getElementById("profileButton");
@@ -146,9 +90,11 @@
 
             // Open the modal when the user clicks the profile button
             btn.onclick = function(event) {
-                event.preventDefault(); // Prevent the default anchor behavior
+                event.preventDefault();
                 modal.style.display = "block";
                 
+                document.body.style.overflow = "hidden"; 
+
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
                 modalImg.src = adminPicSrc;
@@ -157,7 +103,10 @@
             // Close the modal when the user clicks the close (x) button
             span.onclick = function() {
                 modal.style.display = "none";
+
+                document.body.style.overflow = "auto";
             }
+
 
             // Close the modal when the user clicks outside the modal content
             window.onclick = function(event) {
@@ -170,6 +119,8 @@
             logoutButton.onclick = function() {
                 window.location.href = "/";
             }
+
+
 
             // Manage Your Account      
             var editModal = document.getElementById("editModal");
@@ -233,7 +184,6 @@
         document.getElementById("newReportLink").classList.remove("active");
         this.classList.add("active");
     };
-</script>
-
+    </script>
 </body>
 </html>

@@ -5,9 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
-    /* background-image: url(/img/background2.png); */
-    /* background-size: cover; */
-    background-image: linear-gradient(50deg, #afc3c6 0%, #302e5d 100%);
+    overflow-x: hidden;
 }
 
 header {
@@ -47,13 +45,23 @@ header {
 
 .user {
     position: absolute;
-    right: 20px;
+    right: 50px;
     display: flex;
     align-items: center;
     color: white;
 }
 
+.user i {
+    font-size: 40px; /* Set the size of the icon */
+    color: white; /* Change this to the preferred color */
+    background-color: #2D4373; /* You can set a background if needed */
+    border-radius: 50%; /* Make it round */
+    padding: 5px; /* Space inside the circle */
+    margin-left: 10px; /* Space between the text and the icon */
+}
+
 .user p {
+    color: white; /* Ensure the welcome text remains visible */
     margin-right: 10px;
 }
 
@@ -70,16 +78,17 @@ header {
 .container-sidebar {
     display: flex;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     margin: 0;
     padding: 0;
+    flex-shrink: 0;
 }
 
 .sidebar {
     background-color: white;
-    width: 250px;
+    width: 180px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     position: fixed;
     left: 0;
     top: 60px;
@@ -103,14 +112,16 @@ header {
 }
 
 .sidebar nav li a {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 10px;
     color: #2D4373;
     text-decoration: none;
     transition: 0.3s;
-    width: calc(100% + 10px);
-    margin-left: -20px;
-    margin-right: -20px;
+}
+
+.sidebar nav li a i {
+    margin-right: 10px;
 }
 
 .sidebar nav li a.active {
@@ -128,20 +139,11 @@ header {
     color: white;
     background-color: #2D4373;
     padding: 10px 15px;
-    width: calc(100% + 10px);
+    width: calc(100% + 5px);
     margin-left: -20px;
     margin-right: -20px;
     border-radius: 20px;
 }
-
-/* .badge {
-    background-color: red;
-    color: white;
-    padding: 3px 7px;
-    border-radius: 50%;
-    font-size: 12px;
-    margin-left: 5px;
-} */
 
 /* Notification Section */
 .notification {
@@ -192,34 +194,75 @@ header {
 }
 
 
-/* Modal Background */
-.modal {
+/* Profile Modal Specific Styles */
+.profile-modal {
     display: none;
     position: absolute;
-    z-index: 1001;
-    left: 89%;
-    transform: translateX(-50%);
     top: 80px;
-    width: 300px;
+    right: 20px;
+    z-index: 1001;
+    width: 250px;
+    background-color: #2D4373;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.modal-content {
+/* Profile Options (Manage Account, Logout) */
+.profile-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
-    height: 300px;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 10px;
-    text-align: center;
-}
-
-
-/* Close Button */
-.close {
-    color: gray;
-    float: right;
-    font-size: 28px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: black;
     font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.profile-option span {
+    font-size: 16px;
+}
+
+.profile-option i {
+    font-size: 24px;
+}
+
+/* Manage Account Icon and Logout Icon Custom Colors */
+.profile-option.manage-account i {
+    color: #1e90ff; /* Blue color for the manage account icon */
+}
+
+.profile-option.logout i {
+    color: red; /* Red color for the logout icon */
+}
+
+/* Hover Effects */
+.profile-option:hover {
+    background-color: #d0d0d0; /* Light gray on hover */
+}
+
+.profile-modal .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: none;
+    text-align: center;
+    position: relative;
+}
+
+.profile-modal .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px; /* Larger size for the close button */
+    cursor: pointer;
+}
+
 
 .close:hover,
 .close:focus {
@@ -232,42 +275,68 @@ header {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    border: 2px solid white;
 }
 
 .profile-details h3 {
+    font-size: 18px;
     margin-top: 10px;
     color: #2D4373;
+    font-weight: bold;
 }
 
-.profile-details p {
+/* Manage Account button */
+.profile-details a {
     font-size: 16px;
-    margin: 10px 0;
+    color: #0066ff;
+    text-decoration: none;
+    background-color: #cecaca;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.30);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.profile-details a:hover {
+    background-color: #2D4373;
+    color: white;
+}
+
+/* Logout Button */
 #logoutButton {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #2D4373;
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
-    margin-top: 90px;
+    width: 40%;
+    font-size: 12px;
+    margin-top: 100px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.30);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #logoutButton:hover {
-    background-color: red;
+    background-color: red; /* Lighter purple on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
 /* Edit Profile Modal */
 #editModal {
     display: none;
-    position: fixed; /* Fixed positioning for the modal */
+    position: fixed;
     z-index: 1002;
-    left: 50%; /* Center horizontally */
-    top: 50%; /* Center vertically */
-    transform: translate(-50%, -50%); /* Adjust for perfect centering */
-    width: 90%; /* Responsive width */
-    max-width: 400px; /* Set a max width */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -327,7 +396,7 @@ header {
 }
 
 .close-edit {
-    display: none; /* Hide the close button */
+    display: none;
 }
 
 .edit-icon {
@@ -335,63 +404,182 @@ header {
     margin-left: 5px;
 }
 
+/* Admin Info Section */
+.admin-info {
+    background-color: rgba(135, 133, 133, 0.25);
+    margin-left: 235px;
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    border-radius: 20px;
+    width: 1230px;
+}
+
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-basis: 220px;
+}
+
+.stat-item {
+    background-color: white;
+    padding: 20px;
+    top: 50px;
+    position: relative;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    height: 95px;
+    width: 230px;
+}
+
+.stat-item h3 {
+    background-color: #2D4373;
+    color: white;
+    text-align: start;
+    padding: 10px;
+    margin: -20px -20px 10px -20px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.stat-item p {
+    font-size: 36px;
+    color: #2D4373;
+    font-weight: bold;
+    line-height: 1;
+    text-align: start;
+}
+
+.stat-item i {
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 40px;
+}
+
+.stat-item.registered-users i {
+    color: blue; /* Blue for Registered Users */
+}
+
+.stat-item.reports-today i {
+    color: orange; /* Yellow for Reports Submitted Today */
+}
+
+.stat-item.resolved-reports i {
+    color: green; /* Green for Resolved Reports */
+}
+
+.stat-item.unresolved-reports i {
+    color: red; /* Red for Unresolved Reports */
+}
+
+.chart-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chart-container canvas {
+    max-width: 100%;
+    height: 500px;
+    margin: 0 auto;
+}
+
+
 
 /* Latest Resolved Issues */
 .resolved-issues {
-    height: calc(100vh - 120px);
-    background-color: rgba(128, 128, 128, 0.282);
-    color: white;
-    padding: 20px;
-    margin-left: 290px;
+    padding: 10px;
+    margin-left: 235px;
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: center;
+    border-radius: 20px;
+    color: white;
+    background-color: rgba(135, 133, 133, 0.25);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    max-width: 1250px;
+    margin-right: auto;
+    overflow: hidden;
 }
 
 .resolved-issues h2 {
     color: #2D4373;
     text-align: start;
-    margin-left: 10px;
+    margin-left: 20px;
     font-size: 20px;
     margin-bottom: 20px;
 }
 
 .issues-list {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 1px;
 }
 
 .issue-card {
-    border-radius: 8px;
+    background-color: #2D4373;
+    border-radius: 20px;
+    width: calc(19.5% - 5px);
+    min-width: 150px;
     padding: 5px;
     text-align: center;
-    width: 20%;
-    height: auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #2D4373;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.issue-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .issue-card img {
     width: 100%;
-    max-width: 300px;
-    height: 400px;
+    height: 405px;
+    max-width: 400px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 20px;
     margin-bottom: 10px;
 }
 
 .issue-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 15px;
+    margin-bottom: 10px 0;
+    color: #f8f8f8;
 }
 
-.issue-card p {
-    font-size: 14px;
+.issue-card a {
+    font-size: 10px;
 }
 
 .learn-more {
-    color: white;
+    color: #d0e3ff;
     text-decoration: none;
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid #d0e3ff;
+    padding: 2px 5px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom: 10px;
+}
+
+.learn-more:hover {
+    background-color: #d0e3ff;
+    color: #1c2753;
 }

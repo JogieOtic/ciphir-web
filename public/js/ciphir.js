@@ -1,6 +1,6 @@
 // Get modal elements
 const modal = document.getElementById('issueModal');
-const closeModal = document.querySelector('.close');
+const closeIssueModal = document.querySelector('.close');
 const modalTitle = document.querySelector('#modalTitle');
 
 // Infrastructure issues data from the provided image
@@ -72,7 +72,7 @@ viewIssuesBtns.forEach(btn => {
 });
 
 // Close modal when 'X' is clicked
-closeModal.onclick = function() {
+closeIssueModal.onclick = function() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';  // Enable background scrolling again
 }
@@ -84,3 +84,90 @@ window.onclick = function(event) {
         document.body.style.overflow = 'auto';  // Enable background scrolling again
     }
 }
+
+
+
+// Profile Modal Elements
+const profileModal = document.getElementById("profileModal");
+const profileButton = document.getElementById("profileButton");
+const closeProfileModal = document.querySelector(".close-profile"); // Update selector for profile modal close button
+
+// Function to open the profile modal and position it below the profile picture
+profileButton.onclick = function(event) {
+    event.preventDefault();
+    profileModal.style.display = "block";
+    
+    // Position the modal below the profile picture
+    profileModal.style.position = "absolute";
+    const profilePicRect = profileButton.getBoundingClientRect(); // Get the profile picture's position
+    profileModal.style.top = (profilePicRect.bottom + window.scrollY) + "px"; // Position below the image
+    profileModal.style.left = (profilePicRect.left - 100) + "px"; // Slight offset to the left for centering
+
+    // Disable background scrolling
+    document.body.style.overflow = "hidden";
+};
+
+// Close the profile modal when 'X' is clicked
+closeProfileModal.onclick = function() {
+    profileModal.style.display = "none";
+    document.body.style.overflow = "auto";  // Enable background scrolling again
+};
+
+// Close the profile modal if clicked outside the modal content
+window.onclick = function(event) {
+    if (event.target == profileModal) {
+        profileModal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+};
+
+const ctx = document.getElementById('infraChart').getContext('2d');
+const infraChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
+        datasets: [{
+            label: 'Common Infrastructure Type Reported',
+            data: [90, 10, 40, 80, 30, 50, 20, 45, 15],
+            backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40', '#ff6384', '#36a2eb', '#ffcd56'],
+        }]
+    },
+    options: {
+        responsive: true,
+        indexAxis: 'y',
+        scales: {
+            x: {
+                ticks: {
+                    color: 'white',
+                    font: {
+                        size: 12
+                    }
+                },
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'  // Optionally set the grid color (lighter white)
+                }
+            },
+            y: {
+                ticks: {
+                    color: 'white',  // Set the color of the y-axis labels to white
+                    font: {
+                        size: 12  // Optionally set the font size
+                    }
+                },
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'  // Optionally set the grid color (lighter white)
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white',  // Set the legend text color to white
+                    font: {
+                        size: 14  // Optionally set the font size
+                    }
+                }
+            }
+        }
+    }
+});
