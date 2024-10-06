@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Priority Report</title>
+    <title>Report History</title>
+    <link href="/css/reporthistorypage.css" rel="stylesheet">
     <link href="/css/dashboardpage.css" rel="stylesheet">
-    <link href="/css/priorityreportpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -16,11 +19,13 @@
             </div>
             <div class="user">
                 <a href="#profileModal" id="profileButton">
-                    <img src="img/RENNEE Photo.png" alt="User Profile" id="adminProfilePic">
+                    <i class="fas fa-user-circle"></i>
                 </a>
             </div>
         </div>
     </header>
+
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
     <main>
         <div class="container-sidebar">
@@ -28,113 +33,113 @@
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                        <li><a href="/dashboard" id="homelink">Home</a></li>
-                        <li><a href="/newreport" id="newreportlink">New Reports </a></li>
-                        <li><a href="/priorityreport" id="priorityreport">Priority Report</a></li>
-                        <li><a href="/reporthistory" class="active" id="reporthistory">Reports History</a></li>
+                    <li><a href="/dashboard"  id="homelink">
+                        <i class="fas fa-home"></i> Home
+                    </a></li>
+                    <li><a href="/newreport"  id="newreportlink">
+                        <i class="fas fa-file-alt"></i> New Reports
+                    </a></li>
+                    <li><a href="/priorityreport" id="priorityreport">
+                        <i class="fas fa-exclamation-circle"></i> Priority Report
+                    </a></li>
+                    <li><a href="/reporthistory" class="active" id="reporthistory">
+                        <i class="fas fa-history"></i> Report History
+                    </a></li>
+                    <li><a href="/notification" id="notification">
+                        <i class="fas fa-bell"></i> Notification
+                    </a></li>
                     </ul>
                 </nav>
-                <div class="notification">
-                    <h3>Notification</h3>
-                    <div class="notification-item">
-                        <i class="fas fa-bell"></i>
-                        <h4>New Reminder!</h4>
-                        <p>Type of Issue: Electric Post <br> Posted by Jogie Otic last 2024-07-06 <br> still needs attention!</p>
+            </div>
+
+            <div id="profileModal" class="profile-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="profile-details">
+                        <h3>Administrator</h3>
+                        <a href="#editModal" id="manageAccount">Manage Account</a>
+                        <button id="logoutButton">Logout</button>
                     </div>
-                    <div class="notification-item">
-                        <i class="fas fa-bell"></i>
-                        <h4>New Reminder!</h4>
-                        <p>Type of Issue: Electric Post <br> Posted by Jogie Otic last 2024-07-06 <br> still needs attention!</p>
+                </div>
+            </div>
+
+            <!-- Main dashboard content -->
+            <div class="dashboard-container">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search here">
+                        <i class="fas fa-search search-icon"></i>
                     </div>
-                    <button>Show all</button>
+                </div>
+
+
+                <div class="table-container">
+                    <table id="reportTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Username</th>
+                                <th>Report ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Issue Type</th>
+                                <th>Infrastructure Type</th>
+                                <th>Status</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through the reports from the database -->
+                            @foreach($reports as $index => $report)
+                            <tr>
+                                <td>{{ $index + 1 }}.</td>
+                                <td>{{ $report->username }}</td>
+                                <td>{{ $report->report_id }}</td>
+                                <td>{{ $report->date }}</td>
+                                <td>{{ $report->time }}</td>
+                                <td>{{ $report->issue_type }}</td>
+                                <td>{{ $report->infrastructure_type }}</td>
+                                <td>
+                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->status)) }}">
+                                        {{ $report->status }}
+                                    </span>
+                                </td>
+                                <td><button class="view-details-btn" onclick="viewDetails({{ $index + 1 }})">View Details</button></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <!-- If no reports are available -->
+                    @if(empty($reports))
+                        <p>No reports available at the moment.</p>
+                    @endif
                 </div>
             </div>
         </div>
     </main>
 
-    <div class="container-newreport"> 
-        <h2>New Report</h2>
-        <table class="report-table">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Report ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Info</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <!-- <td><span class="star">⭐</span> -->
-                <td>1.</td>
-                <td>100006062024</td>
-                <td>2024-07-07</td>
-                <td>11:32 am</td>
-                <td>Electric Post</td>
-                <td><span class="status on-process">On Process</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-            <tr>
-                <td>2.</td>
-                <td>100006062024</td>
-                <td>2024-07-03</td>
-                <td>8:44 am</td>
-                <td>Pothole</td>
-                <td><span class="status pending">Pending</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-            <tr>
-                <td>3.</td>
-                <td>100006062024</td>
-                <td>2024-07-03</td>
-                <td>1:44 pm</td>
-                <td>Pothole</td>
-                <td><span class="status complete">Complete</span></td>
-                <td><button class="view-btn">View Details</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-
-    <div id="profileModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-details">
-                <img id="modalProfilePic" alt="Profile Picture">
-                <h3>Administrator</h3>
-                <p><a href="#editModal" id="manageAccount">Manage your Account</a></p>
-                <button id="logoutButton">Logout</button>
-            </div>
-        </div>
-    </div>
     
     <div id="editModal" class="modal">
-        <div class="modal-content-edit">
-            <h3>Profile Information</h3>
-            <label for="employeeId">Employee ID</label>
-            <div>
-                <input type="text" id="employeeId" placeholder="Enter Employee ID">
-                <!-- <span class="edit-icon">✏️</span> -->
-            </div>
-            <label for="email">Email</label>
-            <div>
-                <input type="email" id="email" placeholder="Enter Email">
-                <!-- <span class="edit-icon">✏️</span> -->
-            </div>
-            <div class="button-group">
-                <button id="saveButton">Save</button>
-                <button id="cancelButton">Cancel</button>
-            </div>
+    <div class="modal-content-edit">
+        <h3>Profile Information</h3>
+        <label for="employeeId">Employee ID</label>
+        <div>
+            <input type="text" id="employeeId" placeholder="Enter Employee ID">
+        </div>
+        <label for="email">Email</label>
+        <div>
+            <input type="email" id="email" placeholder="Enter Email">
+        </div>
+        <div class="button-group">
+            <button id="saveButton">Save</button>
+            <button id="cancelButton">Cancel</button>
         </div>
     </div>
+    </div>
 
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
 
-    <!-- JavaScript for Modal -->
+
     <script>
             var modal = document.getElementById("profileModal");
             var btn = document.getElementById("profileButton");
@@ -144,9 +149,11 @@
 
             // Open the modal when the user clicks the profile button
             btn.onclick = function(event) {
-                event.preventDefault(); // Prevent the default anchor behavior
+                event.preventDefault();
                 modal.style.display = "block";
                 
+                document.body.style.overflow = "hidden"; 
+
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
                 modalImg.src = adminPicSrc;
@@ -155,7 +162,10 @@
             // Close the modal when the user clicks the close (x) button
             span.onclick = function() {
                 modal.style.display = "none";
+
+                document.body.style.overflow = "auto";
             }
+
 
             // Close the modal when the user clicks outside the modal content
             window.onclick = function(event) {
@@ -168,6 +178,8 @@
             logoutButton.onclick = function() {
                 window.location.href = "/";
             }
+
+
 
             // Manage Your Account      
             var editModal = document.getElementById("editModal");
@@ -231,7 +243,47 @@
         document.getElementById("newReportLink").classList.remove("active");
         this.classList.add("active");
     };
-</script>
+    </script>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+
+        searchInput.addEventListener('keyup', function() {
+            const filterValue = searchInput.value.toUpperCase();
+            const table = document.getElementById('reportTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let i = 0; i < rows.length; i++) {
+                const usernameCell = rows[i].getElementsByTagName('td')[1]; // Username is in column 1
+                const reportIdCell = rows[i].getElementsByTagName('td')[2]; // Report ID is in column 2
+                const issueTypeCell = rows[i].getElementsByTagName('td')[5]; // Issue Type is in column 5
+                const infrastructureTypeCell = rows[i].getElementsByTagName('td')[6]; // Infrastructure Type is in column 6
+                const statusCell = rows[i].getElementsByTagName('td')[7]; // Status is in column 7
+
+                if (usernameCell || reportIdCell || issueTypeCell || infrastructureTypeCell || statusCell) {
+                    const usernameText = usernameCell.textContent || usernameCell.innerText;
+                    const reportIdText = reportIdCell.textContent || reportIdCell.innerText;
+                    const issueTypeText = issueTypeCell.textContent || issueTypeCell.innerText;
+                    const infrastructureTypeText = infrastructureTypeCell.textContent || infrastructureTypeCell.innerText;
+                    const statusText = statusCell.textContent || statusCell.innerText;
+
+                    if (
+                        usernameText.toUpperCase().indexOf(filterValue) > -1 ||
+                        reportIdText.toUpperCase().indexOf(filterValue) > -1 ||
+                        issueTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                        infrastructureTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                        statusText.toUpperCase().indexOf(filterValue) > -1
+                    ) {
+                        rows[i].style.display = ''; // Show row if match is found
+                    } else {
+                        rows[i].style.display = 'none'; // Hide row if no match
+                    }
+                }
+            }
+        });
+    });
+    </script>
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
 </html>

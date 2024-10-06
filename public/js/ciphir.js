@@ -85,89 +85,45 @@ window.onclick = function(event) {
     }
 }
 
-
+//*****************************************************************************
 
 // Profile Modal Elements
 const profileModal = document.getElementById("profileModal");
 const profileButton = document.getElementById("profileButton");
-const closeProfileModal = document.querySelector(".close-profile"); // Update selector for profile modal close button
+const closeProfileModal = document.querySelector(".close-profile"); // Close button in the modal
 
-// Function to open the profile modal and position it below the profile picture
+// Function to open the profile modal
 profileButton.onclick = function(event) {
     event.preventDefault();
-    profileModal.style.display = "block";
-    
-    // Position the modal below the profile picture
-    profileModal.style.position = "absolute";
-    const profilePicRect = profileButton.getBoundingClientRect(); // Get the profile picture's position
-    profileModal.style.top = (profilePicRect.bottom + window.scrollY) + "px"; // Position below the image
-    profileModal.style.left = (profilePicRect.left - 100) + "px"; // Slight offset to the left for centering
-
-    // Disable background scrolling
-    document.body.style.overflow = "hidden";
+    profileModal.style.display = "block";  // Show the modal
+    document.body.style.overflow = "hidden";  // Disable background scrolling
 };
 
-// Close the profile modal when 'X' is clicked
+// Close the profile modal when the 'X' button is clicked
 closeProfileModal.onclick = function() {
-    profileModal.style.display = "none";
-    document.body.style.overflow = "auto";  // Enable background scrolling again
+    profileModal.style.display = "none";  // Hide modal
+    document.body.style.overflow = "auto";  // Enable background scrolling
+};
+
+// Close the profile modal if clicked outside the modal content
+window.onclick = function(event) {
+    if (event.target !== profileModal && event.target !== profileButton) {
+        profileModal.style.display = "none";  // Hide modal if clicked outside
+        document.body.style.overflow = "auto";  // Enable background scrolling
+    }
 };
 
 // Close the profile modal if clicked outside the modal content
 window.onclick = function(event) {
     if (event.target == profileModal) {
-        profileModal.style.display = "none";
-        document.body.style.overflow = "auto";
+        profileModal.style.display = "none";  // Hide modal
+        document.body.style.overflow = "auto";  // Enable background scrolling again
     }
 };
 
-const ctx = document.getElementById('infraChart').getContext('2d');
-const infraChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
-        datasets: [{
-            label: 'Common Infrastructure Type Reported',
-            data: [90, 10, 40, 80, 30, 50, 20, 45, 15],
-            backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff', '#ff9f40', '#ff6384', '#36a2eb', '#ffcd56'],
-        }]
-    },
-    options: {
-        responsive: true,
-        indexAxis: 'y',
-        scales: {
-            x: {
-                ticks: {
-                    color: 'white',
-                    font: {
-                        size: 12
-                    }
-                },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)'  // Optionally set the grid color (lighter white)
-                }
-            },
-            y: {
-                ticks: {
-                    color: 'white',  // Set the color of the y-axis labels to white
-                    font: {
-                        size: 12  // Optionally set the font size
-                    }
-                },
-                grid: {
-                    color: 'rgba(255, 255, 255, 0.1)'  // Optionally set the grid color (lighter white)
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                labels: {
-                    color: 'white',  // Set the legend text color to white
-                    font: {
-                        size: 14  // Optionally set the font size
-                    }
-                }
-            }
-        }
-    }
-});
+// Close the profile modal when 'Manage Account' is clicked (optional if it navigates somewhere)
+const manageAccountButton = document.querySelector('.profile-option.manage-account');
+manageAccountButton.onclick = function() {
+    profileModal.style.display = "none";  // Close modal after clicking manage account
+    document.body.style.overflow = "auto";  // Enable background scrolling again
+};

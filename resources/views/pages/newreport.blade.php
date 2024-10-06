@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Reports</title>
+    <title>New Report</title>
+    <link href="/css/newreportpage.css" rel="stylesheet">
     <link href="/css/dashboardpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -15,7 +19,7 @@
             </div>
             <div class="user">
                 <a href="#profileModal" id="profileButton">
-                    <img src="img/RENNEE Photo.png" alt="User Profile" id="adminProfilePic">
+                    <i class="fas fa-user-circle"></i>
                 </a>
             </div>
         </div>
@@ -49,16 +53,63 @@
             </div>
 
             <div id="profileModal" class="profile-modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="profile-details">
-                <img id="modalProfilePic" alt="Profile Picture">
-                <h3>Administrator</h3>
-                <a href="#editModal" id="manageAccount">Manage Account</a>
-                <button id="logoutButton">Logout</button>
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="profile-details">
+                        <h3>Administrator</h3>
+                        <a href="#editModal" id="manageAccount">Manage Account</a>
+                        <button id="logoutButton">Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main dashboard content -->
+            <div class="dashboard-container">
+                <div class="table-container">
+                    <table id="reportTable">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Username</th>
+                                <th>Report ID</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Issue Type</th>
+                                <th>Infrastructure Type</th>
+                                <th>Status</th>
+                                <th>Info</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through the reports from the database -->
+                            @foreach($reports as $index => $report)
+                            <tr>
+                                <td>{{ $index + 1 }}.</td>
+                                <td>{{ $report->username }}</td>
+                                <td>{{ $report->report_id }}</td>
+                                <td>{{ $report->date }}</td>
+                                <td>{{ $report->time }}</td>
+                                <td>{{ $report->issue_type }}</td>
+                                <td>{{ $report->infrastructure_type }}</td>
+                                <td>
+                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->status)) }}">
+                                        {{ $report->status }}
+                                    </span>
+                                </td>
+                                <td><button class="view-details-btn" onclick="viewDetails({{ $index + 1 }})">View Details</button></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <!-- If no reports are available -->
+                    @if(empty($reports))
+                        <p>No reports available at the moment.</p>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     
     <div id="editModal" class="modal">
@@ -185,5 +236,6 @@
         this.classList.add("active");
     };
     </script>
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
 </html>

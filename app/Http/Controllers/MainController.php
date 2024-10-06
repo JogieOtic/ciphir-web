@@ -44,10 +44,52 @@ class MainController extends Controller
         return view('pages.profile');
     }
 
-    public function newreport()
+    public function newReport()
     {
-        return view('pages.newreport');
+        // For now, just create a sample empty array or dummy data
+        $reports = [
+            (object)[
+                'username' => 'Jogyo',
+                'report_id' => '100001',
+                'date' => '2024-07-10',
+                'time' => '12:00 pm',
+                'issue_type' => 'Exposed Wires',
+                'infrastructure_type' => 'Electric Grids',
+                'status' => 'On Process'
+            ],
+            (object)[
+                'username' => 'Nad',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Dia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+        ]; // Dummy data until the database is ready
+
+        // Pass the $reports variable to the view
+        return view('pages.newreport', compact('reports'));
     }
+
 
     public function priorityreport()
     {
@@ -56,6 +98,146 @@ class MainController extends Controller
 
     public function reporthistory()
     {
-        return view('pages.reporthistory');
+        // For now, just create a sample empty array or dummy data
+        $reports = [
+            (object)[
+                'username' => 'JohnDoe',
+                'report_id' => '100001',
+                'date' => '2024-07-10',
+                'time' => '12:00 pm',
+                'issue_type' => 'Exposed Wires',
+                'infrastructure_type' => 'Electric Grids',
+                'status' => 'On Process'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'jogyo',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Roadside',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Resolved'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'JaneSmith',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Resolved'
+            ],
+        ]; // Dummy data until the database is ready
+
+        // Pass the $reports variable to the view
+        return view('pages.reporthistory', compact('reports'));
     }
 }

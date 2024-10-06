@@ -229,7 +229,7 @@
                 labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
                 datasets: [{
                     label: 'Common Infrastructure Type Reported',
-                    data: [90, 10, 50, 80, 30, 40, 15, 30, 25],
+                    data: [40, 10, 50, 80, 30, 40, 15, 30, 25],
                     backgroundColor: [
                         '#ff6384',
                         '#36a2eb',
