@@ -51,7 +51,8 @@
                     </ul>
                 </nav>
             </div>
-
+            
+            <!--Profile Modal-->
             <div id="profileModal" class="profile-modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -224,65 +225,65 @@
             }
     </script>
     <script>
-    document.getElementById("newReportLink").onclick = function(event) {
-        event.preventDefault();
-        document.getElementById("homeContent").style.display = "none";
-        document.getElementById("newReportsContent").style.display = "block";
-        
-        // Update active link styling
-        document.getElementById("homeLink").classList.remove("active");
-        this.classList.add("active");
-    };
+            document.getElementById("newReportLink").onclick = function(event) {
+                event.preventDefault();
+                document.getElementById("homeContent").style.display = "none";
+                document.getElementById("newReportsContent").style.display = "block";
+                
+                // Update active link styling
+                document.getElementById("homeLink").classList.remove("active");
+                this.classList.add("active");
+            };
 
-    document.getElementById("homeLink").onclick = function(event) {
-        event.preventDefault();
-        document.getElementById("newReportsContent").style.display = "none";
-        document.getElementById("homeContent").style.display = "block";
+            document.getElementById("homeLink").onclick = function(event) {
+                event.preventDefault();
+                document.getElementById("newReportsContent").style.display = "none";
+                document.getElementById("homeContent").style.display = "block";
 
-        // Update active link styling
-        document.getElementById("newReportLink").classList.remove("active");
-        this.classList.add("active");
-    };
+                // Update active link styling
+                document.getElementById("newReportLink").classList.remove("active");
+                this.classList.add("active");
+            };
     </script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('searchInput');
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('searchInput');
 
-        searchInput.addEventListener('keyup', function() {
-            const filterValue = searchInput.value.toUpperCase();
-            const table = document.getElementById('reportTable');
-            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            
-            for (let i = 0; i < rows.length; i++) {
-                const usernameCell = rows[i].getElementsByTagName('td')[1]; // Username is in column 1
-                const reportIdCell = rows[i].getElementsByTagName('td')[2]; // Report ID is in column 2
-                const issueTypeCell = rows[i].getElementsByTagName('td')[5]; // Issue Type is in column 5
-                const infrastructureTypeCell = rows[i].getElementsByTagName('td')[6]; // Infrastructure Type is in column 6
-                const statusCell = rows[i].getElementsByTagName('td')[7]; // Status is in column 7
+                searchInput.addEventListener('keyup', function() {
+                    const filterValue = searchInput.value.toUpperCase();
+                    const table = document.getElementById('reportTable');
+                    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                    
+                    for (let i = 0; i < rows.length; i++) {
+                        const usernameCell = rows[i].getElementsByTagName('td')[1]; // Username is in column 1
+                        const reportIdCell = rows[i].getElementsByTagName('td')[2]; // Report ID is in column 2
+                        const issueTypeCell = rows[i].getElementsByTagName('td')[5]; // Issue Type is in column 5
+                        const infrastructureTypeCell = rows[i].getElementsByTagName('td')[6]; // Infrastructure Type is in column 6
+                        const statusCell = rows[i].getElementsByTagName('td')[7]; // Status is in column 7
 
-                if (usernameCell || reportIdCell || issueTypeCell || infrastructureTypeCell || statusCell) {
-                    const usernameText = usernameCell.textContent || usernameCell.innerText;
-                    const reportIdText = reportIdCell.textContent || reportIdCell.innerText;
-                    const issueTypeText = issueTypeCell.textContent || issueTypeCell.innerText;
-                    const infrastructureTypeText = infrastructureTypeCell.textContent || infrastructureTypeCell.innerText;
-                    const statusText = statusCell.textContent || statusCell.innerText;
+                        if (usernameCell || reportIdCell || issueTypeCell || infrastructureTypeCell || statusCell) {
+                            const usernameText = usernameCell.textContent || usernameCell.innerText;
+                            const reportIdText = reportIdCell.textContent || reportIdCell.innerText;
+                            const issueTypeText = issueTypeCell.textContent || issueTypeCell.innerText;
+                            const infrastructureTypeText = infrastructureTypeCell.textContent || infrastructureTypeCell.innerText;
+                            const statusText = statusCell.textContent || statusCell.innerText;
 
-                    if (
-                        usernameText.toUpperCase().indexOf(filterValue) > -1 ||
-                        reportIdText.toUpperCase().indexOf(filterValue) > -1 ||
-                        issueTypeText.toUpperCase().indexOf(filterValue) > -1 ||
-                        infrastructureTypeText.toUpperCase().indexOf(filterValue) > -1 ||
-                        statusText.toUpperCase().indexOf(filterValue) > -1
-                    ) {
-                        rows[i].style.display = ''; // Show row if match is found
-                    } else {
-                        rows[i].style.display = 'none'; // Hide row if no match
+                            if (
+                                usernameText.toUpperCase().indexOf(filterValue) > -1 ||
+                                reportIdText.toUpperCase().indexOf(filterValue) > -1 ||
+                                issueTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                                infrastructureTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                                statusText.toUpperCase().indexOf(filterValue) > -1
+                            ) {
+                                rows[i].style.display = ''; // Show row if match is found
+                            } else {
+                                rows[i].style.display = 'none'; // Hide row if no match
+                            }
+                        }
                     }
-                }
-            }
-        });
-    });
+                });
+            });
     </script>
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>

@@ -16,7 +16,7 @@ class MainController extends Controller
         return view('pages.login');
     }
 
-    public function handleLogin(Request $request)
+    public function submit(Request $request)
     {
         // Simple validation
         $request->validate([
@@ -31,6 +31,8 @@ class MainController extends Controller
         } else {
             // Return back to login page with error message on failure
             return redirect()->route('page.login')->withErrors(['loginError' => 'Invalid Credentials']);
+
+            return "Form submitted!";
         }
     }
 

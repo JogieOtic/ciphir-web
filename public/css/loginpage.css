@@ -205,3 +205,55 @@ nav {
 .eye-logo img {
   width: 10px;
 }
+
+/* Input Wrapper */
+.input-wrapper {
+    position: relative; /* Relative position for the toggle icon */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 15px;
+    padding-right: 40px; /* Add space for the toggle icon */
+    margin: 0;
+    border-radius: 25px;  /* Rounded corners */
+    box-sizing: border-box;
+    border: none;         /* Remove default border */
+    background-color: #f3f3f3; /* Light background color */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    font-size: 16px;      /* Adjust font size */
+    color: #333;          /* Text color */
+    outline: none;        /* Remove default focus outline */
+}
+
+.input-wrapper input::placeholder {
+    color: #aaa;          /* Subtle placeholder color */
+}
+
+/* Eye Icon Styling */
+.toggle-password {
+    position: absolute;
+    color: black;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.toggle-password img {
+    width: 20px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.toggle-password img:hover {
+    opacity: 1;
+}
+
+/* Add hover and focus effects */
+.input-wrapper input:focus {
+    background-color: #fff; /* White background on focus */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Outer shadow on focus */
+}

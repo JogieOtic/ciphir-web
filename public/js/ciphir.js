@@ -87,43 +87,65 @@ window.onclick = function(event) {
 
 //*****************************************************************************
 
-// Profile Modal Elements
+// Profile Modal
 const profileModal = document.getElementById("profileModal");
 const profileButton = document.getElementById("profileButton");
-const closeProfileModal = document.querySelector(".close-profile"); // Close button in the modal
+const closeProfileModal = document.querySelector(".close-profile");
 
-// Function to open the profile modal
+// Open Profile Modal
 profileButton.onclick = function(event) {
     event.preventDefault();
-    profileModal.style.display = "block";  // Show the modal
-    document.body.style.overflow = "hidden";  // Disable background scrolling
+    profileModal.style.display = "block";
+    document.body.style.overflow = "hidden";
 };
 
-// Close the profile modal when the 'X' button is clicked
+// Close Profile Modal
 closeProfileModal.onclick = function() {
-    profileModal.style.display = "none";  // Hide modal
-    document.body.style.overflow = "auto";  // Enable background scrolling
+    profileModal.style.display = "none";
+    document.body.style.overflow = "auto";
 };
 
-// Close the profile modal if clicked outside the modal content
-window.onclick = function(event) {
-    if (event.target !== profileModal && event.target !== profileButton) {
-        profileModal.style.display = "none";  // Hide modal if clicked outside
-        document.body.style.overflow = "auto";  // Enable background scrolling
-    }
-};
-
-// Close the profile modal if clicked outside the modal content
 window.onclick = function(event) {
     if (event.target == profileModal) {
-        profileModal.style.display = "none";  // Hide modal
-        document.body.style.overflow = "auto";  // Enable background scrolling again
+        profileModal.style.display = "none";
+        document.body.style.overflow = "auto";
     }
 };
 
-// Close the profile modal when 'Manage Account' is clicked (optional if it navigates somewhere)
-const manageAccountButton = document.querySelector('.profile-option.manage-account');
-manageAccountButton.onclick = function() {
-    profileModal.style.display = "none";  // Close modal after clicking manage account
-    document.body.style.overflow = "auto";  // Enable background scrolling again
+// Edit Profile Modal
+const editModal = document.getElementById("editProfileModal");
+const editIcons = document.querySelectorAll(".edit-icon");
+const closeModalButton = document.querySelector(".modal-content-edit .close");
+const saveButton = document.getElementById("saveProfileButton");
+const cancelButton = document.getElementById("cancelEditButton");
+
+// Open Edit Modal
+editIcons.forEach(function(icon) {
+    icon.addEventListener("click", function() {
+        editModal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    });
+});
+
+// Close Edit Modal
+closeModalButton.onclick = function() {
+    editModal.style.display = "none";
+    document.body.style.overflow = "auto";
+};
+
+cancelButton.onclick = function() {
+    editModal.style.display = "none";
+    document.body.style.overflow = "auto";
+};
+
+// Save Profile Changes
+saveButton.onclick = function() {
+    const updatedUsername = document.getElementById("editUsername").value;
+    const updatedPassword = document.getElementById("editPassword").value;
+
+    // Save logic goes here
+    alert(`Profile Updated: Username = ${updatedUsername}, Password = ${updatedPassword}`);
+
+    editModal.style.display = "none";
+    document.body.style.overflow = "auto";
 };

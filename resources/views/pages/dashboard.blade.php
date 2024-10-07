@@ -59,6 +59,42 @@
                     </div>
                 </div>
             </div>
+            <div id="editModal" class="modal">
+            <div class="modal-content-edit">
+                <span class="close">&times;</span> <!-- Add the close button -->
+
+                <h3>Edit Profile</h3>
+
+                <!-- Profile Input Fields -->
+                <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" value="ciphir_admin" readonly>
+                            <span class="edit-icon"><i class="fas fa-edit"></i></span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="oldPassword">Old Password</label>
+                            <input type="password" id="oldPassword" value="********" readonly>
+                            <span class="edit-icon"><i class="fas fa-edit"></i></span>
+                        </div>
+
+                        <div class="input-group" style="display:none;" id="newPasswordFields"> <!-- Hidden initially -->
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter New Password">
+                        </div>
+
+                        <div class="input-group" style="display:none;" id="confirmPasswordFields"> <!-- Hidden initially -->
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm New Password">
+                        </div>
+
+                        <!-- Buttons Hidden Initially -->
+                        <div class="button-group" id="buttons" style="display:none;">
+                            <button id="saveButton">Save</button>
+                            <button id="cancelButton">Cancel</button>
+                        </div>
+                    </div>
+                </div>
 
             <!-- Insightful Data Section -->
             <section class="admin-info">
@@ -92,27 +128,6 @@
             </section>
         </div>
     </main>
-
-    
-    <div id="editModal" class="modal">
-    <div class="modal-content-edit">
-        <h3>Profile Information</h3>
-        <label for="employeeId">Employee ID</label>
-        <div>
-            <input type="text" id="employeeId" placeholder="Enter Employee ID">
-        </div>
-        <label for="email">Email</label>
-        <div>
-            <input type="email" id="email" placeholder="Enter Email">
-        </div>
-        <div class="button-group">
-            <button id="saveButton">Save</button>
-            <button id="cancelButton">Cancel</button>
-        </div>
-    </div>
-    </div>
-
-
 
     <script>
             var modal = document.getElementById("profileModal");
