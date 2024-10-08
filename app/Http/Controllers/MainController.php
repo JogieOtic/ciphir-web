@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Report;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class MainController extends Controller
 {
@@ -13,28 +18,29 @@ class MainController extends Controller
 
     public function login()
     {
-        return view('pages.login');
+        return view('pages.login');  // Ensure that you have a login Blade file in resources/views/pages/login.blade.php
     }
-
     public function submit(Request $request)
     {
-        // Simple validation
+        // Validate input
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        // Sample login logic (replace this with real authentication)
-        if ($request->email === 'admin@example.com' && $request->password === 'password123') {
-            // Redirect to dashboard on successful login
+        // Find admin by username
+        $admin = DB::table('Admin')->where('username', $request->username)->first();
+
+        // Check if admin exists and password matches
+        if ($admin && Hash::check($request->password, $admin->Password)) {
+            // Login successful, redirect to the dashboard
             return redirect()->route('page.dashboard');
         } else {
-            // Return back to login page with error message on failure
+            // Invalid credentials, redirect back with error message
             return redirect()->route('page.login')->withErrors(['loginError' => 'Invalid Credentials']);
-
-            return "Form submitted!";
         }
     }
+
 
     public function dashboard()
     {
@@ -93,151 +99,19 @@ class MainController extends Controller
     }
 
 
-    public function priorityreport()
-    {
-        return view('pages.priorityreport');
+    public function showPriorityReports() {
+        $reports = Report::all();  // Replace this with the actual query you're using
+        return view('pages.priorityreport', ['reports' => $reports]);
     }
+    
 
     public function reporthistory()
     {
-        // For now, just create a sample empty array or dummy data
-        $reports = [
-            (object)[
-                'username' => 'JohnDoe',
-                'report_id' => '100001',
-                'date' => '2024-07-10',
-                'time' => '12:00 pm',
-                'issue_type' => 'Exposed Wires',
-                'infrastructure_type' => 'Electric Grids',
-                'status' => 'On Process'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'jogyo',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Roadside',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Resolved'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'JaneSmith',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Resolved'
-            ],
-        ]; // Dummy data until the database is ready
+        // Join Report and Resident tables to get the Username from the Resident table
+        $reports = DB::table('Report')
+                    ->join('Resident', 'Report.Resident_ID', '=', 'Resident.Resident_ID')
+                    ->select('Report.*', 'Resident.Username')
+                    ->get();
 
         // Pass the $reports variable to the view
         return view('pages.reporthistory', compact('reports'));

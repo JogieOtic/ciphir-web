@@ -76,7 +76,7 @@ table tr:hover {
     color: orange;
 }
 
-.status.on-process {
+.status.in-progress {
     color: rgb(3, 116, 255);
 }
 

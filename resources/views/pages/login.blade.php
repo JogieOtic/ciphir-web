@@ -25,12 +25,10 @@
             <h3>Please enter CIPHIR admin credentials</h3>
             <form action="{{ route('login.submit') }}" method="POST">
                     @csrf <!-- CSRF protection -->
-                    <!-- Email Field -->
+                    <!-- Username Field -->
                     <div class="input-wrapper">
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="text" name="username" placeholder="Username" required>
                     </div>
-
-                    
                     <!-- Password Field with Eye Icon -->
                     <div class="input-wrapper">
                         <input type="password" id="password" name="password" placeholder="Password" required>

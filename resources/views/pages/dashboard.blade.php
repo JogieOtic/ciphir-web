@@ -15,6 +15,9 @@
             </div>
             <div class="user">
                 <p>Welcome, ADMIN</p>
+                <a href="/notification" id="notification">
+                        <i class="fas fa-bell"></i>
+                    </a>
                 <a href="#profileModal" id="profileButton">
                     <i class="fas fa-user-circle"></i>
                 </a>
@@ -41,9 +44,6 @@
                     </a></li>
                     <li><a href="/reporthistory" id="reporthistory">
                         <i class="fas fa-history"></i> Report History
-                    </a></li>
-                    <li><a href="/notification" id="notification">
-                        <i class="fas fa-bell"></i> Notification
                     </a></li>
                     </ul>
                 </nav>

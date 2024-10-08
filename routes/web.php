@@ -10,6 +10,7 @@ Route::get('/dashboard', [MainController::class, 'dashboard'])->name('page.dashb
 Route::get('/profile', [MainController::class, 'profile'])->name('page.profile');
 Route::get('/newreport', [MainController::class, 'newreport'])->name('page.newreport');
 Route::get('/priorityreport', [MainController::class, 'priorityreport'])->name('page.priorityreport');
+Route::get('/priority-reports', [ReportController::class, 'showPriorityReports']);
 Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('page.reporthistory');
 
 // Route::middleware([

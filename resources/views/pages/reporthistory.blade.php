@@ -90,27 +90,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Loop through the reports from the database -->
                             @foreach($reports as $index => $report)
                             <tr>
                                 <td>{{ $index + 1 }}.</td>
-                                <td>{{ $report->username }}</td>
-                                <td>{{ $report->report_id }}</td>
-                                <td>{{ $report->date }}</td>
-                                <td>{{ $report->time }}</td>
-                                <td>{{ $report->issue_type }}</td>
-                                <td>{{ $report->infrastructure_type }}</td>
+                                <td>{{ $report->Username }}</td> <!-- This should display the Username -->
+                                <td>{{ $report->Report_No }}</td> <!-- Report number -->
+                                <td>{{ \Carbon\Carbon::parse($report->ReportDateTime)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->ReportDateTime)->format('H:i') }}</td>
+                                <td>{{ $report->Description }}</td> <!-- Issue description -->
+                                <td>{{ $report->ReportLocation }}</td> <!-- Report Location -->
                                 <td>
-                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->status)) }}">
-                                        {{ $report->status }}
+                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->ReportStatus)) }}">
+                                        {{ $report->ReportStatus }}
                                     </span>
                                 </td>
-                                <td><button class="view-details-btn" onclick="viewDetails({{ $index + 1 }})">View Details</button></td>
+                                <td><button class="view-details-btn">View Details</button></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-
                     <!-- If no reports are available -->
                     @if(empty($reports))
                         <p>No reports available at the moment.</p>

@@ -146,51 +146,7 @@ header {
 }
 
 /* Notification Section */
-.notification {
-    margin-top: 20px;
-}
 
-.notification h3 {
-    color: #2D4373;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.notification-item {
-    background-color: white;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.notification-item h4 {
-    color: red;
-    margin: 0;
-    font-size: 14px;
-}
-
-.notification-item p {
-    margin: 5px 0 0;
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-.notification button {
-    background-color: gray;
-    color: white;
-    padding: 5px 15px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.notification button:hover {
-    background-color: #2D4373;
-}
 
 
 /* Profile Modal Specific Styles */
