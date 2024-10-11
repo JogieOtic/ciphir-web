@@ -160,6 +160,78 @@ class MainController extends Controller
                 'infrastructure_type' => 'Roads',
                 'status' => 'Pending'
             ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
+            (object)[
+                'username' => 'Bia',
+                'report_id' => '100002',
+                'date' => '2024-07-09',
+                'time' => '10:30 am',
+                'issue_type' => 'Pothole',
+                'infrastructure_type' => 'Roads',
+                'status' => 'Pending'
+            ],
         ]; // Dummy data until the database is ready
 
         // Pass the $reports variable to the view

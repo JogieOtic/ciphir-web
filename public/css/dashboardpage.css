@@ -85,7 +85,7 @@ header {
 }
 
 .sidebar {
-    background-color: white;
+    background-color: #dde8f0;
     width: 180px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -353,13 +353,14 @@ header {
 /* Admin Info Section */
 .admin-info {
     background-color: #dde8f0;
-    margin-left: 220px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-left: 230px;
     margin-top: 20px;
     padding: 20px;
     display: flex;
     gap: 20px;
     border-radius: 20px;
-    width: 1230px;
+    width: 1240px;
 }
 
 
@@ -411,19 +412,19 @@ header {
 }
 
 .stat-item.registered-users i {
-    color: blue; /* Blue for Registered Users */
+    color: blue;
 }
 
 .stat-item.reports-today i {
-    color: orange; /* Yellow for Reports Submitted Today */
+    color: orange;
 }
 
 .stat-item.resolved-reports i {
-    color: green; /* Green for Resolved Reports */
+    color: green;
 }
 
 .stat-item.unresolved-reports i {
-    color: red; /* Red for Unresolved Reports */
+    color: red;
 }
 
 .chart-container {
@@ -456,7 +457,7 @@ header {
     text-align: center;
     border-radius: 20px;
     color: white;
-    background-color: rgba(135, 133, 133, 0.25);
+    background-color: #dde8f0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     max-width: 1250px;
     margin-right: auto;
@@ -479,7 +480,7 @@ header {
 }
 
 .issue-card {
-    background-color: #2D4373;
+    background-color: #97CBDC;
     border-radius: 20px;
     width: calc(19.5% - 5px);
     min-width: 150px;
@@ -513,7 +514,7 @@ header {
     font-size: 10px;
 }
 
-.learn-more {
+.view-details {
     color: #d0e3ff;
     text-decoration: none;
     display: inline-block;
@@ -525,7 +526,7 @@ header {
     margin-bottom: 10px;
 }
 
-.learn-more:hover {
+.view-details:hover {
     background-color: #d0e3ff;
     color: #1c2753;
 }

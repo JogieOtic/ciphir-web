@@ -160,9 +160,9 @@
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="stat-item unresolved-reports">
-                        <h3>Unresolved Reports</h3>
+                        <h3>Pending Reports</h3>
                         <p>7</p>
-                        <i class="fas fa-times-circle"></i>
+                        <i class="fas fa-clock"></i>
                     </div>
                 </div>
 
@@ -366,28 +366,28 @@
                 <div class="issue-card">
                     <img src="/img/electric.png" alt="Electric Posts">
                     <h3>Waste Management</h3>
-                    <a href="#" class="learn-more">View  Details</a>
+                    <a href="#" class="view-details">View  Details</a>
 
                 </div>
                 <div class="issue-card">
                     <img src="/img/electric.png" alt="Electric Posts">
                     <h3>Electric Posts</h3>
-                    <a href="#" class="learn-more">View Details</a>
+                    <a href="#" class="view-details">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/road.jpg" alt="Road Issue">
                     <h3>Road Issue</h3>
-                    <a href="#" class="learn-more">View Details</a>
+                    <a href="#" class="view-details">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/waste.jpg" alt="Waste Disposal">
                     <h3>Waste Disposal</h3>
-                    <a href="#" class="learn-more">View Details</a>
+                    <a href="#" class="view-details">View Details</a>
                 </div>
                 <div class="issue-card">
                     <img src="/img/waste.jpg" alt="Waste Disposal">
                     <h3>Waste Disposal</h3>
-                    <a href="#" class="learn-more">View Details</a>
+                    <a href="#" class="view-details">View Details</a>
                 </div>
             </div>
       </section>

@@ -35,7 +35,7 @@
         </div>
     </section>
 
-    <!-- Google Play Button -->
+    <!-- Google Play Button
     <section class="google">
         <div class="google-play-container">
             <div class="text-container">
@@ -48,7 +48,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- News and Updates -->
     <section id="news-updates" class="news-updates">
@@ -125,7 +125,7 @@
     <section id="public-safety" class="public-safety">
         <h2>Public Safety Office</h2>
         <div class="public-safety-details">
-            <img src="/img/RENNEE Photo.png" alt="PS Officer">
+            <img src="/img/person1.png" alt="PS Officer">
             <div class="contact-info">
                 <h3>Mr. Renne F. Gumba</h3>
                 <p>CDGHI I / Executive Officer</p>
