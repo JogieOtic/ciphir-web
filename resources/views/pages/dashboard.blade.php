@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="/css/dashboardpage.css" rel="stylesheet">
+    <link href="/css/notificationpage.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -13,11 +14,12 @@
                 <img src="/img/Web System logo.png" alt="CIPHIR Logo">
                 <p>Empowering Communities<br>Through Connection and Collaboration</p>
             </div>
+            <div class="notification">
+            <a href="/notification" id="notification">
+                    <i class="fas fa-bell"></i>
+                </a>
+            </div>
             <div class="user">
-                <p>Welcome, ADMIN</p>
-                <a href="/notification" id="notification">
-                        <i class="fas fa-bell"></i>
-                    </a>
                 <a href="#profileModal" id="profileButton">
                     <i class="fas fa-user-circle"></i>
                 </a>
@@ -33,21 +35,65 @@
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                    <li><a href="/dashboard" class="active" id="homelink">
-                        <i class="fas fa-home"></i> Home
-                    </a></li>
-                    <li><a href="/newreport" id="newreportlink">
-                        <i class="fas fa-file-alt"></i> New Reports
-                    </a></li>
-                    <li><a href="/priorityreport" id="priorityreport">
-                        <i class="fas fa-exclamation-circle"></i> Priority Report
-                    </a></li>
-                    <li><a href="/reporthistory" id="reporthistory">
-                        <i class="fas fa-history"></i> Report History
-                    </a></li>
+                        <li><a href="/dashboard" class="active" id="homelink">
+                            <i class="fas fa-home"></i> Home
+                        </a></li>
+                        <li><a href="/newreport" id="newreportlink">
+                            <i class="fas fa-file-alt"></i> New Reports
+                        </a></li>
+                        <li><a href="/priorityreport" id="priorityreport">
+                            <i class="fas fa-exclamation-circle"></i> Priority Report
+                        </a></li>
+                        <li><a href="/reporthistory" id="reporthistory">
+                            <i class="fas fa-history"></i> Report History
+                        </a></li>
                     </ul>
                 </nav>
             </div>
+
+             <!-- Notification Panel Section -->
+            <div id="notificationSidebar" class="notification-sidebar">
+                <div class="notification-header">
+                    <h2>Notifications</h2>
+                    <span class="close-btn" id="closeNotification">&times;</span>
+                </div>
+                <div class="notification-content">
+                    <!-- Clickable Notification for Unprocessed Report -->
+                    @if($notifications->isEmpty())
+                    <p>No new notifications</p>
+                    @else
+                        @foreach($notifications as $notification)
+                            <a href="/admin/reports/{{ $notification->data['report_id'] }}" class="notification-link">
+                                <div class="notification-item">
+                                    <div class="notification-header1">
+                                        <span class="title">{{ $notification->data['issue_type'] }}</span>
+                                        <span class="status-dot red-dot"></span> <!-- Optionally, adjust the color dynamically -->
+                                    </div>
+                                    <div class="notification-body">
+                                        <p><strong>Type of Issue:</strong> {{ $notification->data['issue_type'] }}</p>
+                                        <p>{{ $notification->data['message'] }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+
+                    <!-- Clickable Notification for Duplicate Report -->
+                    <a href="/duplicate-report-details" class="notification-link">
+                        <div class="notification-item duplicate-report">
+                            <div class="notification-header1">
+                                <span class="title">Duplicate Report</span>
+                                <span class="status-dot yellow-dot"></span>
+                            </div>
+                            <div class="notification-body">
+                                <p><strong>Type of Issue:</strong> Roads</p>
+                                <p>This report appears to be a duplicate. Please verify and merge or dismiss it.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
 
             <div id="profileModal" class="profile-modal">
                 <div class="modal-content">
@@ -59,12 +105,11 @@
                     </div>
                 </div>
             </div>
+
             <div id="editModal" class="modal">
             <div class="modal-content-edit">
                 <span class="close">&times;</span> <!-- Add the close button -->
-
-                <h3>Edit Profile</h3>
-
+                <h3>Profile Information</h3>
                 <!-- Profile Input Fields -->
                 <div class="input-group">
                             <label for="username">Username</label>
@@ -140,8 +185,8 @@
             btn.onclick = function(event) {
                 event.preventDefault();
                 modal.style.display = "block";
-                
-                document.body.style.overflow = "hidden"; 
+
+                document.body.style.overflow = "hidden";
 
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
@@ -170,7 +215,7 @@
 
 
 
-            // Manage Your Account      
+            // Manage Your Account
             var editModal = document.getElementById("editModal");
             var manageAccountLink = document.getElementById("manageAccount");
             var cancelButton = document.getElementById("cancelButton");
@@ -217,7 +262,7 @@
         event.preventDefault();
         document.getElementById("homeContent").style.display = "none";
         document.getElementById("newReportsContent").style.display = "block";
-        
+
         // Update active link styling
         document.getElementById("homeLink").classList.remove("active");
         this.classList.add("active");
@@ -286,7 +331,34 @@
         });
     </script>
 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notificationIcon = document.getElementById('notification');
+            const notificationSidebar = document.getElementById('notificationSidebar');
+            const closeNotification = document.getElementById('closeNotification');
+
+            // Hide the notification panel by default
+            notificationSidebar.style.right = '-400px'; // Push it off screen by default
+
+            // Show the notification panel when the bell icon is clicked
+            notificationIcon.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default anchor link behavior
+                if (notificationSidebar.style.right === '0px') {
+                    notificationSidebar.style.right = '-400px'; // Close the sidebar
+                } else {
+                    notificationSidebar.style.right = '0px'; // Open the sidebar
+                }
+            });
+
+            // Close the notification panel when the close button is clicked
+            closeNotification.addEventListener('click', function () {
+                notificationSidebar.style.right = '-400px'; // Push it off screen to hide
+            });
+        });
+    </script>
+    <!-- <script src="{{ asset('js/notification.js') }}"></script> -->
+
+
     <!-- Latest Resolved Issues -->
    <section class="resolved-issues">
             <h2>Latest Resolved Issues</h2>

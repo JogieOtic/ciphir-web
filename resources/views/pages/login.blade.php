@@ -27,7 +27,7 @@
                     @csrf <!-- CSRF protection -->
                     <!-- Username Field -->
                     <div class="input-wrapper">
-                        <input type="text" name="username" placeholder="Username" required>
+                        <input type="text" name="username" placeholder=" Admin Username" required>
                     </div>
                     <!-- Password Field with Eye Icon -->
                     <div class="input-wrapper">

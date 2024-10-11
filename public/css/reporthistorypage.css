@@ -3,7 +3,7 @@
     margin-left: 215px;
     background-color: rgba(135, 133, 133, 0.25);
     padding: 20px;
-    padding-top: 60px; 
+    padding-top: 60px;
     width: calc(100% - 200px);
     overflow-x: hidden;
 }
@@ -65,24 +65,30 @@ table tr:hover {
     background-color: #f1f1f1;  /* Highlight rows on hover */
 }
 
-/* Status text colors */
+/* Status label styling */
 .status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    color: white;
     font-weight: bold;
-    font-size: 14px;
+    text-transform: uppercase;
+    font-size: 12px;
 }
 
-/* Color styles for different statuses */
+/* Specific status color designs */
 .status.pending {
-    color: orange;
+    background-color: #e74c3c; /* Red for pending */
 }
 
 .status.in-progress {
-    color: rgb(3, 116, 255);
+    background-color: #3498db; /* Blue for in progress */
 }
 
 .status.resolved {
-    color: rgb(0, 255, 0);
+    background-color: #2ecc71; /* Green for resolved */
 }
+
 
 /* Star icon color */
 .star {

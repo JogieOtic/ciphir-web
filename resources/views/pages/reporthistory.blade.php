@@ -11,11 +11,16 @@
 </head>
 
 <body>
-    <header>
+<header>
         <div class="container">
             <div class="logo">
                 <img src="/img/Web System logo.png" alt="CIPHIR Logo">
                 <p>Empowering Communities<br>Through Connection and Collaboration</p>
+            </div>
+            <div class="notification">
+            <a href="/notification" id="notification">
+                    <i class="fas fa-bell"></i>
+                </a>
             </div>
             <div class="user">
                 <a href="#profileModal" id="profileButton">
@@ -33,25 +38,22 @@
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                    <li><a href="/dashboard"  id="homelink">
-                        <i class="fas fa-home"></i> Home
-                    </a></li>
-                    <li><a href="/newreport"  id="newreportlink">
-                        <i class="fas fa-file-alt"></i> New Reports
-                    </a></li>
-                    <li><a href="/priorityreport" id="priorityreport">
-                        <i class="fas fa-exclamation-circle"></i> Priority Report
-                    </a></li>
-                    <li><a href="/reporthistory" class="active" id="reporthistory">
-                        <i class="fas fa-history"></i> Report History
-                    </a></li>
-                    <li><a href="/notification" id="notification">
-                        <i class="fas fa-bell"></i> Notification
-                    </a></li>
+                        <li><a href="/dashboard"  id="homelink">
+                            <i class="fas fa-home"></i> Home
+                        </a></li>
+                        <li><a href="/newreport" id="newreportlink">
+                            <i class="fas fa-file-alt"></i> New Reports
+                        </a></li>
+                        <li><a href="/priorityreport" id="priorityreport">
+                            <i class="fas fa-exclamation-circle"></i> Priority Report
+                        </a></li>
+                        <li><a href="/reporthistory" class="active" id="reporthistory">
+                            <i class="fas fa-history"></i> Report History
+                        </a></li>
                     </ul>
                 </nav>
             </div>
-            
+
             <!--Profile Modal-->
             <div id="profileModal" class="profile-modal">
                 <div class="modal-content">
@@ -85,6 +87,7 @@
                                 <th>Time</th>
                                 <th>Issue Type</th>
                                 <th>Infrastructure Type</th>
+                                <th>Location</th>
                                 <th>Status</th>
                                 <th>Info</th>
                             </tr>
@@ -93,23 +96,27 @@
                             @foreach($reports as $index => $report)
                             <tr>
                                 <td>{{ $index + 1 }}.</td>
-                                <td>{{ $report->Username }}</td> <!-- This should display the Username -->
-                                <td>{{ $report->Report_No }}</td> <!-- Report number -->
-                                <td>{{ \Carbon\Carbon::parse($report->ReportDateTime)->format('Y-m-d') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($report->ReportDateTime)->format('H:i') }}</td>
-                                <td>{{ $report->Description }}</td> <!-- Issue description -->
-                                <td>{{ $report->ReportLocation }}</td> <!-- Report Location -->
+                                <td>{{ $report->username }}</td>
+                                <td>{{ $report->report_no }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('H:i') }}</td>
+                                <td>{{ $report->issue_type }}</td>
+                                <td>{{ $report->infrastructure_type }}</td>
+                                <td>{{ $report->reportLocation }}</td>
                                 <td>
-                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->ReportStatus)) }}">
-                                        {{ $report->ReportStatus }}
-                                    </span>
+                                    @if($report->reportStatus === 'Pending')
+                                        <span class="status pending">Pending</span>
+                                    @elseif($report->reportStatus === 'In Progress')
+                                        <span class="status in-progress">In Progress</span>
+                                    @elseif($report->reportStatus === 'Resolved')
+                                        <span class="status resolved">Resolved</span>
+                                    @endif
                                 </td>
                                 <td><button class="view-details-btn">View Details</button></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <!-- If no reports are available -->
                     @if(empty($reports))
                         <p>No reports available at the moment.</p>
                     @endif
@@ -118,7 +125,7 @@
         </div>
     </main>
 
-    
+
     <div id="editModal" class="modal">
     <div class="modal-content-edit">
         <h3>Profile Information</h3>
@@ -150,8 +157,8 @@
             btn.onclick = function(event) {
                 event.preventDefault();
                 modal.style.display = "block";
-                
-                document.body.style.overflow = "hidden"; 
+
+                document.body.style.overflow = "hidden";
 
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
@@ -180,7 +187,7 @@
 
 
 
-            // Manage Your Account      
+            // Manage Your Account
             var editModal = document.getElementById("editModal");
             var manageAccountLink = document.getElementById("manageAccount");
             var cancelButton = document.getElementById("cancelButton");
@@ -227,7 +234,7 @@
                 event.preventDefault();
                 document.getElementById("homeContent").style.display = "none";
                 document.getElementById("newReportsContent").style.display = "block";
-                
+
                 // Update active link styling
                 document.getElementById("homeLink").classList.remove("active");
                 this.classList.add("active");
@@ -252,7 +259,7 @@
                     const filterValue = searchInput.value.toUpperCase();
                     const table = document.getElementById('reportTable');
                     const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-                    
+
                     for (let i = 0; i < rows.length; i++) {
                         const usernameCell = rows[i].getElementsByTagName('td')[1]; // Username is in column 1
                         const reportIdCell = rows[i].getElementsByTagName('td')[2]; // Report ID is in column 2

@@ -15,7 +15,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#public-safety">About Us</a></li>
-                <li><a href="#news-updates">Services</a></li>
+                <li><a href="#news-updates">Infrastructure</a></li>
                 <li><a href="https://www2.naga.gov.ph/emergency-hotline/" target="_blank">Emergency Hotlines</a></li>
             </ul>
         </nav>

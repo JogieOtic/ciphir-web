@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 header {
@@ -43,34 +43,34 @@ header {
     font-size: 15px;
 }
 
+.notification {
+    position: absolute;
+    right: 100px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.notification i {
+    font-size: 20px;
+    color: white;
+    padding: 0;
+}
+
 .user {
     position: absolute;
-    right: 50px;
+    right: 30px;
     display: flex;
     align-items: center;
     color: white;
 }
 
 .user i {
-    font-size: 40px;
+    font-size: 35px;
     color: white;
-    background-color: #2D4373;
-    border-radius: 50%;
-    padding: 5px;
-    margin-left: 10px;
+    padding: 0;
 }
 
-.user p {
-    color: white;
-    margin-right: 10px;
-}
-
-.user img {
-    height: 40px;
-    width: 40px;
-    object-fit: cover;
-    clip-path: circle(50% at 50% 50% );
-}
 
 
 /* Sidebar Layout */
@@ -126,7 +126,7 @@ header {
 
 .sidebar nav li a.active {
     color: white;
-    background-color: #2D4373;
+    background-color: #2d43736f;
     display: block;
     padding: 10px 15px;
     width: calc(100% + 10px);
@@ -139,14 +139,11 @@ header {
     color: white;
     background-color: #2D4373;
     padding: 10px 15px;
-    width: calc(100% + 5px);
+    width: calc(100% + 10px);
     margin-left: -20px;
     margin-right: -20px;
     border-radius: 20px;
 }
-
-/* Notification Section */
-
 
 
 /* Profile Modal Specific Styles */
@@ -154,7 +151,7 @@ header {
     display: none;
     position: fixed;
     top: 80px;
-    right: 10px;
+    right: 20px;
     z-index: 1001;
     width: 200px;
     background-color: #2D4373;
@@ -355,8 +352,8 @@ header {
 
 /* Admin Info Section */
 .admin-info {
-    background-color: rgba(135, 133, 133, 0.25);
-    margin-left: 235px;
+    background-color: #dde8f0;
+    margin-left: 220px;
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -386,7 +383,7 @@ header {
 }
 
 .stat-item h3 {
-    background-color: #2D4373;
+    background-color: #97CBDC;
     color: white;
     text-align: start;
     padding: 10px;

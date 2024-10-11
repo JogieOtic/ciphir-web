@@ -11,11 +11,16 @@
 </head>
 
 <body>
-    <header>
+<header>
         <div class="container">
             <div class="logo">
                 <img src="/img/Web System logo.png" alt="CIPHIR Logo">
                 <p>Empowering Communities<br>Through Connection and Collaboration</p>
+            </div>
+            <div class="notification">
+            <a href="/notification" id="notification">
+                    <i class="fas fa-bell"></i>
+                </a>
             </div>
             <div class="user">
                 <a href="#profileModal" id="profileButton">
@@ -33,34 +38,20 @@
                 <h2>Dashboard</h2>
                 <nav>
                     <ul>
-                    <li><a href="/dashboard"  id="homelink">
-                        <i class="fas fa-home"></i> Home
-                    </a></li>
-                    <li><a href="/newreport" id="newreportlink">
-                        <i class="fas fa-file-alt"></i> New Reports
-                    </a></li>
-                    <li><a href="/priorityreport"  class="active" id="priorityreport">
-                        <i class="fas fa-exclamation-circle"></i> Priority Report
-                    </a></li>
-                    <li><a href="/reporthistory" id="reporthistory">
-                        <i class="fas fa-history"></i> Report History
-                    </a></li>
-                    <li><a href="/notification" id="notification">
-                        <i class="fas fa-bell"></i> Notification
-                    </a></li>
+                        <li><a href="/dashboard"  id="homelink">
+                            <i class="fas fa-home"></i> Home
+                        </a></li>
+                        <li><a href="/newreport" id="newreportlink">
+                            <i class="fas fa-file-alt"></i> New Reports
+                        </a></li>
+                        <li><a href="/priorityreport" class="active" id="priorityreport">
+                            <i class="fas fa-exclamation-circle"></i> Priority Report
+                        </a></li>
+                        <li><a href="/reporthistory" id="reporthistory">
+                            <i class="fas fa-history"></i> Report History
+                        </a></li>
                     </ul>
                 </nav>
-            </div>
-
-            <div id="profileModal" class="profile-modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="profile-details">
-                        <h3>Administrator</h3>
-                        <a href="#editModal" id="manageAccount">Manage Account</a>
-                        <button id="logoutButton">Logout</button>
-                    </div>
-                </div>
             </div>
 
             <!-- Main dashboard content -->
@@ -76,6 +67,7 @@
                                 <th>Time</th>
                                 <th>Issue Type</th>
                                 <th>Infrastructure Type</th>
+                                <th>Severity Level</th>
                                 <th>Status</th>
                                 <th>Info</th>
                             </tr>
@@ -83,21 +75,25 @@
                         <tbody>
                             <!-- Loop through the reports from the database -->
                             @foreach($reports as $index => $report)
-                            <tr>
-                                <td>{{ $index + 1 }}.</td>
-                                <td>{{ $report->username }}</td>
-                                <td>{{ $report->report_id }}</td>
-                                <td>{{ $report->date }}</td>
-                                <td>{{ $report->time }}</td>
-                                <td>{{ $report->issue_type }}</td>
-                                <td>{{ $report->infrastructure_type }}</td>
-                                <td>
-                                    <span class="status {{ strtolower(str_replace(' ', '-', $report->status)) }}">
-                                        {{ $report->status }}
-                                    </span>
-                                </td>
-                                <td><button class="view-details-btn" onclick="viewDetails({{ $index + 1 }})">View Details</button></td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $index + 1 }}.</td>
+                                    <td>{{ $report->username }}</td>
+                                    <td>{{ $report->report_id }}</td>
+                                    <td>{{ $report->date }}</td>
+                                    <td>{{ $report->time }}</td>
+                                    <td>{{ $report->issue_type }}</td>
+                                    <td>{{ $report->infrastructure_type }}</td>
+                                    <td>{{ $report->severityLevel }}</td>
+                                    <td>
+                                        <span class="status {{ strtolower(str_replace(' ', '-', $report->status)) }}">
+                                            {{ $report->status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <!-- Pass report_id instead of index -->
+                                        <button class="view-details-btn" onclick="viewDetails('{{ $report->report_id }}')">View Details</button>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -111,7 +107,18 @@
         </div>
     </main>
 
-    
+    <div id="profileModal" class="profile-modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                    <div class="profile-details">
+                        <h3>Administrator</h3>
+                        <a href="#editModal" id="manageAccount">Manage Account</a>
+                        <button id="logoutButton">Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
     <div id="editModal" class="modal">
     <div class="modal-content-edit">
         <h3>Profile Information</h3>
@@ -143,8 +150,8 @@
             btn.onclick = function(event) {
                 event.preventDefault();
                 modal.style.display = "block";
-                
-                document.body.style.overflow = "hidden"; 
+
+                document.body.style.overflow = "hidden";
 
                 // Set the modal image source to match the admin profile picture
                 var adminPicSrc = document.getElementById("adminProfilePic").src;
@@ -173,7 +180,7 @@
 
 
 
-            // Manage Your Account      
+            // Manage Your Account
             var editModal = document.getElementById("editModal");
             var manageAccountLink = document.getElementById("manageAccount");
             var cancelButton = document.getElementById("cancelButton");
@@ -220,7 +227,7 @@
         event.preventDefault();
         document.getElementById("homeContent").style.display = "none";
         document.getElementById("newReportsContent").style.display = "block";
-        
+
         // Update active link styling
         document.getElementById("homeLink").classList.remove("active");
         this.classList.add("active");
