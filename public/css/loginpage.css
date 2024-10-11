@@ -233,27 +233,33 @@ nav {
 }
 
 /* Eye Icon Styling */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #7b7b7b;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    font-size: 16px;
+}
+
 .toggle-password {
     position: absolute;
-    color: black;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
+    right: 10px;
     cursor: pointer;
 }
 
-.toggle-password img {
-    width: 20px;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+/* Styling for icons */
+#eyeClosed, #eyeOpen {
+    width: 24px;
+    height: 24px;
+    display: none; /* Both icons are hidden initially */
 }
 
-.toggle-password img:hover {
-    opacity: 1;
-}
-
-/* Add hover and focus effects */
-.input-wrapper input:focus {
-    background-color: #fff; /* White background on focus */
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Outer shadow on focus */
+/* By default, the eye should be closed (password hidden) */
+#eyeClosed {
+    display: block; /* Closed eye is visible initially */
 }
