@@ -1,26 +1,13 @@
-const passwordInput = document.getElementById('password');
-    const togglePassword = document.getElementById('togglePassword');
-    const eyeOpen = document.getElementById('eyeOpen');
-    const eyeClosed = document.getElementById('eyeClosed');
+const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
+    const icon = togglePassword.querySelector("i");
 
-    // Toggle password visibility
-    togglePassword.addEventListener('click', function () {
-        const isPassword = passwordInput.type === 'password';
-        passwordInput.type = isPassword ? 'text' : 'password';
+    togglePassword.addEventListener("click", function () {
+        // Toggle password visibility
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
 
-        // Switch icons based on password visibility
-        if (isPassword) {
-            eyeOpen.style.display = 'block';
-            eyeClosed.style.display = 'none';
-        } else {
-            eyeOpen.style.display = 'none';
-            eyeClosed.style.display = 'block';
-        }
-    });
-
-    // Ensure that when the page loads, the eye is closed and the password is hidden
-    window.addEventListener('load', function () {
-        passwordInput.type = 'password'; // Make sure the password is hidden on page load
-        eyeOpen.style.display = 'none';  // Hide open eye
-        eyeClosed.style.display = 'block'; // Show closed eye
+        // Toggle the eye icon between fa-eye and fa-eye-slash
+        icon.classList.toggle("fa-eye");
+        icon.classList.toggle("fa-eye-slash");
     });

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,5 +48,37 @@
         </div>
     </main>
 
+    <div id="editModal" class="modal">
+            <div class="modal-content-edit">
+                <span class="close">&times;</span>
+                <h3>Profile Information</h3>
+                <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" value="ciphir_admin" readonly>
+                            <span class="edit-icon"><i class="fas fa-edit"></i></span>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="oldPassword">Old Password</label>
+                            <input type="password" id="oldPassword" value="********" readonly>
+                            <span class="edit-icon"><i class="fas fa-edit"></i></span>
+                        </div>
+
+                        <div class="input-group" style="display:none;" id="newPasswordFields">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter New Password">
+                        </div>
+
+                        <div class="input-group" style="display:none;" id="confirmPasswordFields">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm New Password">
+                        </div>
+                        <div class="button-group" id="buttons" style="display:none;">
+                            <button id="saveButton">Save</button>
+                            <button id="cancelButton">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
 </body>
-</html>
+</html> -->

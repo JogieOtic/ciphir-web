@@ -65,9 +65,9 @@
                 </div>
             </div>
 
-            <!-- Main dashboard content -->
-            <div class="dashboard-container">
-                <div class="table-container">
+            <!-- Table Container -->
+            <div class="newreport-dashboard-container">
+            <div class="table-container">
                     <table id="reportTable">
                         <thead>
                             <tr>
@@ -78,34 +78,34 @@
                                 <th>Time</th>
                                 <th>Issue Type</th>
                                 <th>Infrastructure Type</th>
+                                <th>Location</th>
+                                <th>Severity Level</th>
                                 <th>Info</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Loop through the reports from the database -->
                             @foreach($reports as $index => $report)
-                                <tr>
-                                    <td>{{ $index + 1 }}.</td>
-                                    <td>{{ $report->username }}</td>
-                                    <td>{{ $report->report_id }}</td>
-                                    <td>{{ $report->date }}</td>
-                                    <td>{{ $report->time }}</td>
-                                    <td>{{ $report->issue_type }}</td>
-                                    <td>{{ $report->infrastructure_type }}</td>
-                                    <td>
-                                        <!-- Pass report_id instead of index -->
-                                        <button class="view-details-btn" onclick="viewDetails('{{ $report->report_id }}')">View Details</button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ $index + 1 }}.</td>
+                                <td>{{ $report->username }}</td>
+                                <td>{{ $report->report_no }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('Y-m-d') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('H:i') }}</td>
+                                <td>{{ $report->issue_type }}</td>
+                                <td>{{ $report->infrastructure_type }}</td>
+                                <td>{{ $report->reportLocation }}</td>
+                                <td>{{ $report->severityLevel }}</td>
+                                <td>
+                                    <a href="{{ route('page.reportdetail', ['id' => $report->report_no]) }}">View Details</a>
+                                </td>
+                            </tr>
                             @endforeach
-
                         </tbody>
                     </table>
-
-                    <!-- If no reports are available -->
                     @if(empty($reports))
                         <p>No reports available at the moment.</p>
                     @endif
+                </div>
                 </div>
             </div>
         </div>
@@ -235,6 +235,85 @@
         document.getElementById("newReportLink").classList.remove("active");
         this.classList.add("active");
     };
+    </script>
+
+<script>
+            document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const table = document.getElementById('reportTable');
+            const rows = Array.from(table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+            // Function to format the time to include AM/PM
+            function formatTime(date) {
+                let hours = date.getHours();
+                const minutes = date.getMinutes();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                const minutesFormatted = minutes < 10 ? '0' + minutes : minutes; // zero-padding minutes
+                return hours + ':' + minutesFormatted + ' ' + ampm;
+            }
+
+            // Function to parse the date in the table and return a Date object
+            function parseDate(dateString, timeString) {
+                const [year, month, day] = dateString.split('-');
+                const [hour, minute] = timeString.split(':');
+                return new Date(year, month - 1, day, hour, minute); // Months are zero-based
+            }
+
+            // Sort rows by the report date and time (newest first)
+            rows.sort((rowA, rowB) => {
+                const dateA = parseDate(rowA.getElementsByTagName('td')[3].textContent, rowA.getElementsByTagName('td')[4].textContent);
+                const dateB = parseDate(rowB.getElementsByTagName('td')[3].textContent, rowB.getElementsByTagName('td')[4].textContent);
+
+                return dateB - dateA; // Newest reports first
+            });
+
+            // Append the sorted rows back to the table and format time with AM/PM
+            const tbody = table.getElementsByTagName('tbody')[0];
+            rows.forEach((row, index) => {
+                row.getElementsByTagName('td')[0].textContent = (index + 1) + '.'; // Update numbering
+                const date = parseDate(row.getElementsByTagName('td')[3].textContent, row.getElementsByTagName('td')[4].textContent);
+                row.getElementsByTagName('td')[4].textContent = formatTime(date); // Update the time with AM/PM
+                tbody.appendChild(row);
+            });
+
+            // Filter functionality based on the search input
+            searchInput.addEventListener('keyup', function() {
+                const filterValue = searchInput.value.toUpperCase();
+                let visibleIndex = 1; // To re-number the visible rows during search
+
+                rows.forEach((row) => {
+                    const usernameCell = row.getElementsByTagName('td')[1]; // Username is in column 1
+                    const reportIdCell = row.getElementsByTagName('td')[2]; // Report ID is in column 2
+                    const issueTypeCell = row.getElementsByTagName('td')[5]; // Issue Type is in column 5
+                    const infrastructureTypeCell = row.getElementsByTagName('td')[6]; // Infrastructure Type is in column 6
+                    const statusCell = row.getElementsByTagName('td')[7]; // Status is in column 7
+
+                    if (usernameCell || reportIdCell || issueTypeCell || infrastructureTypeCell || statusCell) {
+                        const usernameText = usernameCell.textContent || usernameCell.innerText;
+                        const reportIdText = reportIdCell.textContent || reportIdCell.innerText;
+                        const issueTypeText = issueTypeCell.textContent || issueTypeCell.innerText;
+                        const infrastructureTypeText = infrastructureTypeCell.textContent || infrastructureTypeCell.innerText;
+                        const statusText = statusCell.textContent || statusCell.innerText;
+
+                        if (
+                            usernameText.toUpperCase().indexOf(filterValue) > -1 ||
+                            reportIdText.toUpperCase().indexOf(filterValue) > -1 ||
+                            issueTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                            infrastructureTypeText.toUpperCase().indexOf(filterValue) > -1 ||
+                            statusText.toUpperCase().indexOf(filterValue) > -1
+                        ) {
+                            row.style.display = ''; // Show row if match is found
+                            row.getElementsByTagName('td')[0].textContent = visibleIndex + '.'; // Update numbering for visible rows
+                            visibleIndex++;
+                        } else {
+                            row.style.display = 'none'; // Hide row if no match
+                        }
+                    }
+                });
+            });
+        });
     </script>
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>

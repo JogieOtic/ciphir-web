@@ -1,5 +1,5 @@
 <header>
-    <div class="container">
+    <div class="header-container">
         <div class="logo">
             <img src="/img/Web System logo.png" alt="CIPHIR Logo">
             <p>Empowering Communities<br>Through Connection and Collaboration</p>

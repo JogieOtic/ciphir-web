@@ -27,8 +27,8 @@
             <h2>Centralized Information Platform</h2>
             <h2>for Community Hazards and</h2>
             <h2>Infrastructure Reports</h2>
-            <h4>________________________________</h4>
         </div>
+        </br><hr style = "width: 35%; border: 1px solid #2D4373; margin-top: 30px; margin-left: 0px">
         <!-- Sign in Button -->
         <div class="container2">
             <a href="/login" style="text-decoration: none;" class="sign-in-btn">Sign In</a>
@@ -129,7 +129,7 @@
             <div class="contact-info">
                 <h3>Mr. Renne F. Gumba</h3>
                 <p>CDGHI I / Executive Officer</p>
-                <h3>__________________________________________________________________</h3>
+                <hr>
                 <p>Address: Public Safety Office, G/F Raul S. Roco Library Bldg., Naga City Hall Complex, Naga City</p>
                 <p>Phone: +63-54-871-2050 (local number)</p>
                 <p>Email: pso@naga.gov.ph</p>

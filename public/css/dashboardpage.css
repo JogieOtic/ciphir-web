@@ -1,7 +1,7 @@
 /* Dashboard */
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: white;
@@ -76,9 +76,10 @@ header {
 /* Sidebar Layout */
 
 .container-sidebar {
+    position: absolute;
     display: flex;
     height: 100vh;
-    width: 100%;
+    width: fit-content;
     margin: 0;
     padding: 0;
     flex-shrink: 0;
@@ -355,12 +356,12 @@ header {
     background-color: #dde8f0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     margin-left: 230px;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 80px;
+    padding: 10px;
     display: flex;
     gap: 20px;
     border-radius: 20px;
-    width: 1240px;
+    width: 1260px;
 }
 
 
@@ -374,7 +375,6 @@ header {
 .stat-item {
     background-color: white;
     padding: 20px;
-    top: 50px;
     position: relative;
     border-radius: 20px;
     text-align: center;
@@ -433,7 +433,6 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 50px;
     padding: 20px;
     background-color: white;
     border-radius: 20px;

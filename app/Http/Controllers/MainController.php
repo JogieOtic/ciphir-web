@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;  // Import View facade
-use Illuminate\Support\Facades\DB;    // Import DB facade
-use Illuminate\Support\Facades\Hash;  // Import Hash facade
-use Illuminate\Support\Facades\Session; // Import Session facade
-use Illuminate\Support\Facades\Redirect; // Import Redirect facade
-use App\Models\Admin;  // Import Admin model
-use Illuminate\Support\Facades\Auth; // Import Auth facade
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 
 
 class MainController extends Controller
@@ -18,6 +18,7 @@ class MainController extends Controller
     {
         return view('pages.main');
     }
+
 
     public function login()
     {
@@ -79,16 +80,17 @@ class MainController extends Controller
 
     public function dashboard()
     {
+
         // Get the admin ID from session
         $adminID = session('adminID');
 
-        // Fetch the admin from the database using the ID
+        // // Fetch the admin from the database using the ID
         $admin = Admin::find($adminID);
 
-        // Check if admin exists and fetch unread notifications
+        // // Check if admin exists and fetch unread notifications
         $notifications = $admin ? $admin->unreadNotifications : [];
 
-        // Get admin information from session
+        // // Get admin information from session
         $adminUsername = session('adminUsername');
 
         // Pass the notifications and admin username to the view
@@ -104,10 +106,11 @@ class MainController extends Controller
     public function notification()
     {
         // Fetch unread notifications for the logged-in admin
-        $user = Auth::user()->unreadNotifications;
+        //$user = Auth::user()->unreadNotifications;
 
         // Render the view for notifications and pass the notifications data
-        return view('pages.dashboard', compact('notifications'));  // Ensure 'pages.notifications' exists
+        return view('pages.dashboard');
+        //, compact('notifications'));  // Ensure 'pages.notifications' exists
     }
 
 
@@ -122,173 +125,58 @@ class MainController extends Controller
 
     public function newReport()
     {
-        // For now, just create a sample empty array or dummy data
-        $reports = [
-            (object)[
-                'username' => 'Jogyo',
-                'report_id' => '100001',
-                'date' => '2024-07-10',
-                'time' => '12:00 pm',
-                'issue_type' => 'Exposed Wires',
-                'infrastructure_type' => 'Electric Grids',
-                'status' => 'On Process'
-            ],
-            (object)[
-                'username' => 'Nad',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Dia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'status' => 'Pending'
-            ],
-        ]; // Dummy data until the database is ready
+        // Get the search query from the request
+        //$search = $request->input('search');
+
+        // Fetch all reports, applying the search filter if provided
+        $reports = DB::table('Reported_Issue')
+            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+            // ->when($search, function ($query, $search) {
+            //     return $query->where('User.username', 'like', "%{$search}%")
+            //                 ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
+            //                 ->orWhere('Issues.issue_type', 'like', "%{$search}%")
+            //                 ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+            //                 ->orWhere('Reported_Issue.report_id', 'like', "%{$search}%")
+            //                 ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
+            //                 ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
+
+            //})
+            ->get();
 
         // Pass the $reports variable to the view
         return view('pages.newreport', compact('reports'));
     }
 
 
-    public function showPriorityReports()
+    public function showpriorityReports()
     {
-        $reports = [
-            (object)[
-                'username' => 'Jogyo',
-                'report_id' => '100001',
-                'date' => '2024-07-10',
-                'time' => '12:00 pm',
-                'issue_type' => 'Exposed Wires',
-                'infrastructure_type' => 'Electric Grids',
-                'severityLevel' => 'High', // Add severity level
-                'status' => 'On Process'
-            ],
-            (object)[
-                'username' => 'Nad',
-                'report_id' => '100002',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'severityLevel' => 'Medium', // Add severity level
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Dia',
-                'report_id' => '100003',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'severityLevel' => 'Medium', // Add severity level
-                'status' => 'Pending'
-            ],
-            (object)[
-                'username' => 'Bia',
-                'report_id' => '100004',
-                'date' => '2024-07-09',
-                'time' => '10:30 am',
-                'issue_type' => 'Pothole',
-                'infrastructure_type' => 'Roads',
-                'severityLevel' => 'Low', // Add severity level
-                'status' => 'Pending'
-            ],
-        ];
+         // Fetch all reports, applying the search filter if provided
+         $reports = DB::table('Reported_Issue')
+         ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+         ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+         ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+         ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+         // ->when($search, function ($query, $search) {
+         //     return $query->where('User.username', 'like', "%{$search}%")
+         //                 ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
+         //                 ->orWhere('Issues.issue_type', 'like', "%{$search}%")
+         //                 ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+         //                 ->orWhere('Reported_Issue.report_id', 'like', "%{$search}%")
+         //                 ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
+         //                 ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
 
-        return view('pages.priorityreport', compact('reports'));
+         //})
+         ->get();
+
+     // Pass the $reports variable to the view
+     return view('pages.priorityreport', compact('reports'));
     }
 
 
-
+//********************************************************************** */
     /**
      * Shows the report history page with all the reports from the database
      *
@@ -304,14 +192,15 @@ class MainController extends Controller
             ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
             ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
             ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
-            ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type')
+            ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
             ->when($search, function ($query, $search) {
                 return $query->where('User.username', 'like', "%{$search}%")
                             ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
                             ->orWhere('Issues.issue_type', 'like', "%{$search}%")
                             ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
-                            ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
-                            ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%");
+                            ->orWhere('Reported_Issue.report_id', 'like', "%{$search}%")
+                            ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
+                            ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
 
             })
             ->get();
@@ -320,14 +209,68 @@ class MainController extends Controller
         return view('pages.reporthistory', compact('reports'));
     }
 
-
-
-
-
-    public function logout()
+//******************************************************** */
+    public function reportdetail($id)
     {
-        session()->forget(['adminUsername', 'adminID']);
-        return redirect()->route('page.login');
+        $report = DB::table('Reported_Issue')
+            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->select('Reported_Issue.*',
+                     'User.username',
+                     'User.contactNumber',
+                     'Infrastructure.infrastructure_type',
+                     'Issues.issue_type',
+                     'Issues.severityLevel')
+            ->where('Reported_Issue.report_no', $id)
+            ->first();
+
+        // Display the query log to see the exact query being run
+        return view('pages.reportdetail', compact('report'));
+
     }
 
-}
+//******************************************************** */
+    public function updateStatus(Request $request, $id)
+    {
+        // Validate the request to ensure the status is valid
+        $request->validate([
+            'reportdetail-status' => 'required|in:Pending,In Progress,Resolved',
+        ]);
+
+        // Update the status of the report in the database
+        DB::table('Reported_Issue')
+            ->where('report_no', $id)
+            ->update([
+                'reportStatus' => $request->input('reportdetail-status'),
+            ]);
+
+        // Retrieve the updated report
+        $report = DB::table('Reported_Issue')
+            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->select('Reported_Issue.*',
+                    'User.username',
+                    'User.contactNumber',
+                    'Infrastructure.infrastructure_type',
+                    'Issues.issue_type',
+                    'Issues.severityLevel')
+            ->where('Reported_Issue.report_no', $id)
+            ->first();
+
+        // Redirect back to the report detail page with the updated report and a success message
+        return redirect()->back()->with([
+            'success' => 'Report status updated successfully.',
+            'report' => $report // Send the updated report back to the view
+        ]);
+    }
+
+//********************************************************** */
+    public function logout()
+        {
+            session()->forget(['adminUsername', 'adminID']);
+            return redirect()->route('page.login');
+        }
+
+    }

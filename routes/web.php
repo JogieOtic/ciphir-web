@@ -13,15 +13,18 @@ Route::get('/profile', [MainController::class, 'profile'])->name('page.profile')
 Route::post('/profile/update', [MainController::class, 'updateProfile'])->name('profile.update');
 Route::get('/newreport', [MainController::class, 'newreport'])->name('page.newreport');
 Route::get('/priorityreport', [MainController::class, 'showPriorityReports'])->name('page.priorityreport');
-// Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('page.reporthistory');
+Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('page.reporthistory');
 Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('reporthistory');
 Route::get('/notification', [MainController::class, 'notification'])->name('page.notification');
+Route::get('/reportdetail/{id}', [MainController::class, 'reportdetail'])->name('page.reportdetail');
+Route::post('/reportdetail/{id}/updateStatus', [MainController::class, 'updateStatus'])->name('page.updateStatus');
+Route::post('/report/{id}/update-status', [MainController::class, 'updateStatus'])->name('page.updateStatus');
 
-Route::get('/db-check', function () {
-    try {
-        DB::connection()->getPdo();
-        return 'Connected to database successfully!';
-    } catch (\Exception $e) {
-        return 'Connection failed: ' . $e->getMessage();
-    }
-});
+// Route::get('/db-check', function () {
+//     try {
+//         DB::connection()->getPdo();
+//         return 'Connected to database successfully!';
+//     } catch (\Exception $e) {
+//         return 'Connection failed: ' . $e->getMessage();
+//     }
+// });

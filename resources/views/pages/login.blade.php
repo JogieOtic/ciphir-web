@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - CIPHIR</title>
     <link href="/css/loginpage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
 </head>
 <body>
     <header>
@@ -30,22 +32,13 @@
                         <input type="text" name="username" placeholder=" Admin Username" required>
                     </div>
                     <!-- Password Field with Eye Icon -->
-                    <div class="input-wrapper">
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-                        <span class="toggle-password" id="togglePassword">
-                            <!-- Closed Eye Icon -->
-                            <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.98 8.646a1.12 1.12 0 011.64-.094L12 13.707l6.38-5.155a1.12 1.12 0 111.46 1.634l-7.08 5.725c-.5.404-1.22.404-1.72 0l-7.08-5.725a1.12 1.12 0 01-.094-1.64z" />
-                            </svg>
-                            <!-- Open Eye Icon -->
-                            <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-.12.379-.26.744-.42 1.094M4.21 15.014A9.959 9.959 0 012.458 12M15.905 18.636A9.967 9.967 0 0112 19c-4.478 0-8.268-2.943-9.542-7 .275-.72.635-1.39 1.054-2.01m16.81 3.99A9.955 9.955 0 0121.542 12" />
-                            </svg>
+                    <div class="input-wrapper" style="position: relative;">
+                        <input type="password" id="password" name="password" placeholder="Password" required style="padding-right: 30px;">
+                        <span class="toggle-password" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                            <!-- Font Awesome Eye Slash Icon by Default -->
+                            <i class="fas fa-eye-slash"></i>
                         </span>
                     </div>
-
-
                     <button type="submit" class="log-in-btn">Login</button>
 
                     <!-- Error message display section -->
@@ -57,7 +50,6 @@
                     </div>
                 @endif
             </form>
-
         </div>
 
         <div class="login-info">
