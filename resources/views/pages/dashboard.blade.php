@@ -90,36 +90,58 @@
     </main>
 
 
-            <!-- Insightful Data Section -->
-            <section class="admin-info">
-                <div class="stats">
-                    <div class="stat-item registered-users">
-                        <h3>Registered Users</h3>
-                        <p>49</p>
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-item reports-today">
-                        <h3>Reports Submitted Today</h3>
-                        <p>10</p>
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="stat-item resolved-reports">
-                        <h3>Resolved Reports</h3>
-                        <p>4</p>
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-item unresolved-reports">
-                        <h3>Unresolved Reports</h3>
-                        <p>7</p>
-                        <i class="fas fa-times-circle"></i>
-                    </div>
-                </div>
+            <div class="stats">
+            <div class="stat-item registered-users">
+                <h3>Registered Users</h3>
+                <p>{{ $registeredUsers }}</p>
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-item reports-today">
+                <h3>Reports Submitted Today</h3>
+                <p>{{ $reportsToday }}</p>
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="stat-item resolved-reports">
+                <h3>Resolved Reports</h3>
+                <p>{{ $resolvedReports }}</p>
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-item unresolved-reports">
+                <h3>Unresolved Reports</h3>
+                <p>{{ $unresolvedReports }}</p>
+                <i class="fas fa-times-circle"></i>
+            </div>
+        </div>
 
-                <!-- Common Infrastructure Report Chart -->
-                <div class="chart-container">
-                    <canvas id="infraChart"></canvas>
-                </div>
-            </section>
+        <!-- Infrastructure Report Chart -->
+        <div class="chart-container">
+            <canvas id="infraChart"></canvas>
+        </div>
+
+        <script>
+            var infraChartData = @json($infrastructureReports);
+            var ctx = document.getElementById('infraChart').getContext('2d');
+            var infraChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
+                    datasets: [{
+                        label: 'Common Infrastructure Type Reported',
+                        data: infraChartData.map(data => data.total),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
 
     <!-- Latest Resolved Issues -->
    <section class="resolved-issues">

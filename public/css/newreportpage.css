@@ -67,5 +67,27 @@ table td {
 }
 
 table tr:hover {
-    background-color: #f1f1f1;  /* Highlight rows on hover */
+    background-color: #f1f1f1;
+}
+
+.high-severity {
+    background-color: rgba(255, 99, 132, 0.2);
+    border-left: 5px solid #e57373;
+}
+
+/* Medium Severity Row Styling */
+.medium-severity {
+    background-color: rgba(255, 206, 86, 0.2);
+    border-left: 5px solid #fbc02d;
+}
+
+/* Low Severity Row Styling */
+.low-severity {
+    background-color: rgba(75, 192, 192, 0.2);
+    border-left: 5px solid #43a047;
+}
+
+
+table tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
 }

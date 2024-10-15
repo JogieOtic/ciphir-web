@@ -85,7 +85,10 @@
                         </thead>
                         <tbody>
                             @foreach($reports as $index => $report)
-                            <tr>
+                            <tr class="@if(in_array($report->severityLevel, ['High', 'Very High'])) high-severity
+                                       @elseif($report->severityLevel === 'Medium') medium-severity
+                                       @elseif(in_array($report->severityLevel, ['Low', 'Very Low'])) low-severity
+                                       @endif">
                                 <td>{{ $index + 1 }}.</td>
                                 <td>{{ $report->username }}</td>
                                 <td>{{ $report->report_no }}</td>

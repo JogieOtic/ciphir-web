@@ -47,7 +47,7 @@ class MainController extends Controller
             return redirect()->route('page.login')->withErrors(['loginError' => 'Invalid Credentials']);
         }
     }
-
+//******************************************************************************* */
     public function updateProfile(Request $request)
     {
         $request->validate([
@@ -76,44 +76,57 @@ class MainController extends Controller
         return back()->with('success', 'Successfully updated your profile.');
     }
 
-
+//********************************************************************************** */
 
     public function dashboard()
     {
-
-        // Get the admin ID from session
+     
         $adminID = session('adminID');
 
-        // // Fetch the admin from the database using the ID
+
         $admin = Admin::find($adminID);
 
-        // // Check if admin exists and fetch unread notifications
+
         $notifications = $admin ? $admin->unreadNotifications : [];
 
-        // // Get admin information from session
+
         $adminUsername = session('adminUsername');
 
-        // Pass the notifications and admin username to the view
-        return view('pages.dashboard', compact('notifications', 'adminUsername'));
+
+        $registeredUsers = DB::table('User')->count();
+
+        $reportsToday = DB::table('Reported_Issue')
+                        ->whereDate('created_at', '=', date('Y-m-d'))
+                        ->count();
+
+        $resolvedReports = DB::table('Reported_Issue')
+                            ->where('reportStatus', 'Resolved')
+                            ->whereMonth('created_at', date('m'))
+                            ->count();
+
+        $unresolvedReports = DB::table('Reported_Issue')
+                                ->whereIn('reportStatus', ['Pending', 'In Progress'])
+                                ->count();
+
+        $infrastructureReports = DB::table('Reported_Issue')
+                                    ->select(DB::raw('infrastructure_id, COUNT(*) as total'))
+                                    ->groupBy('infrastructure_id')
+                                    ->get();
+
+        // Pass the collected data to the view
+        return view('pages.dashboard', compact(
+            'notifications',
+            'adminUsername',
+            'registeredUsers',
+            'reportsToday',
+            'resolvedReports',
+            'unresolvedReports',
+            'infrastructureReports'
+        ));
     }
 
 
-    /**
-     * Display a listing of unread notifications for the logged-in admin.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function notification()
-    {
-        // Fetch unread notifications for the logged-in admin
-        //$user = Auth::user()->unreadNotifications;
-
-        // Render the view for notifications and pass the notifications data
-        return view('pages.dashboard');
-        //, compact('notifications'));  // Ensure 'pages.notifications' exists
-    }
-
-
+//********************************************************************************************8 */
     public function profile()
     {
         // Get admin information from session
@@ -149,7 +162,7 @@ class MainController extends Controller
         // Pass the $reports variable to the view
         return view('pages.newreport', compact('reports'));
     }
-
+//***************************************************************************************8 */
 
     public function showpriorityReports()
     {
@@ -176,7 +189,7 @@ class MainController extends Controller
     }
 
 
-//********************************************************************** */
+//*************************************************************************************************** */
     /**
      * Shows the report history page with all the reports from the database
      *
@@ -209,7 +222,7 @@ class MainController extends Controller
         return view('pages.reporthistory', compact('reports'));
     }
 
-//******************************************************** */
+//*********************************************************************************************** */
     public function reportdetail($id)
     {
         $report = DB::table('Reported_Issue')
@@ -230,7 +243,7 @@ class MainController extends Controller
 
     }
 
-//******************************************************** */
+//****************************************************************************************** */
     public function updateStatus(Request $request, $id)
     {
         // Validate the request to ensure the status is valid
@@ -266,7 +279,7 @@ class MainController extends Controller
         ]);
     }
 
-//********************************************************** */
+//************************************************************************************************ */
     public function logout()
         {
             session()->forget(['adminUsername', 'adminID']);

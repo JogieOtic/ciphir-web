@@ -368,6 +368,8 @@ header {
 .stats {
     display: flex;
     flex-direction: column;
+    padding-top: 81px;
+    padding-left: 235px;
     gap: 15px;
     flex-basis: 220px;
 }

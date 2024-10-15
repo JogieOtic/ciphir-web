@@ -95,7 +95,10 @@
                         </thead>
                         <tbody>
                             @foreach($reports as $index => $report)
-                            <tr>
+                            <tr class="@if(in_array($report->severityLevel, ['High', 'Very High'])) high-severity
+                                       @elseif($report->severityLevel === 'Medium') medium-severity
+                                       @elseif(in_array($report->severityLevel, ['Low', 'Very Low'])) low-severity
+                                       @endif">
                                 <td>{{ $index + 1 }}.</td>
                                 <td>{{ $report->username }}</td>
                                 <td>{{ $report->report_no }}</td>
@@ -135,11 +138,11 @@
         <h3>Profile Information</h3>
         <label for="employeeId">Employee ID</label>
         <div>
-            <input type="text" id="employeeId" placeholder="Enter Employee ID">
+            <input type="text" id="employeeId" placeholder="Enter Username">
         </div>
         <label for="email">Email</label>
         <div>
-            <input type="email" id="email" placeholder="Enter Email">
+            <input type="email" id="email" placeholder="Password">
         </div>
         <div class="button-group">
             <button id="saveButton">Save</button>
