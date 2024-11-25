@@ -84,30 +84,18 @@ table tr:hover {
 
 /* Specific status color designs */
 .status.pending {
-    /* background-color: #ff9d0030; */
-    color: rgb(223, 208, 49);
-    text-shadow:
-    0 0 10px rgb(204, 255, 0),
-    0 0 20px rgb(204, 255, 0),
-    0 0 30px rgb(204, 255, 0);
+    background-color: #ff9d0030;
+    color: #ffbb00;
 }
 
 .status.in-progress {
-    /* background-color: #3498db24; */
+    background-color: #3498db24;
     color: #3498db;
-    text-shadow:
-    0 0 10px rgb(53, 220, 250),
-    0 0 20px rgb(53, 220, 250),
-    0 0 30px rgb(53, 220, 250);
 }
 
 .status.resolved {
-    /* background-color: #2ecc702d; */
+    background-color: #2ecc702d;
     color: #2ecc71;
-    text-shadow:
-    0 0 10px rgb(42, 255, 163),
-    0 0 20px rgb(42, 255, 163),
-    0 0 30px rgb(42, 255, 163);
 }
 
 /* Star icon color */
