@@ -80,7 +80,7 @@ class MainController extends Controller
 
     public function dashboard()
     {
-     
+
         $adminID = session('adminID');
 
 
@@ -287,3 +287,4 @@ class MainController extends Controller
         }
 
     }
+ 

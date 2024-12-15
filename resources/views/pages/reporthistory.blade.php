@@ -77,21 +77,22 @@
                 <!-- Table Container -->
                 <div class="table-container">
                     <table id="reportTable">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Username</th>
-                                <th>Report ID</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Issue Type</th>
-                                <th>Infrastructure Type</th>
-                                <th>Location</th>
-                                <th>Severity Level</th>
-                                <th>Status</th>
-                                <th>Info</th>
-                            </tr>
-                        </thead>
+                    <thead>
+                        <tr>
+                            <th data-column="no" data-order="asc">No.</th>
+                            <th data-column="username" data-order="asc">Username</th>
+                            <th data-column="report_no" data-order="asc">Report ID</th>
+                            <th data-column="date" data-order="asc">Date</th>
+                            <th data-column="time" data-order="asc">Time</th>
+                            <th data-column="issue_type" data-order="asc">Issue Type</th>
+                            <th data-column="infrastructure_type" data-order="asc">Infrastructure Type</th>
+                            <th data-column="location" data-order="asc">Location</th>
+                            <th data-column="severity_level" data-order="asc">Severity Level</th>
+                            <th data-column="status" data-order="asc">Status</th>
+                            <th>Info</th>
+                        </tr>
+                    </thead>
+
                         <tbody>
                             @foreach($reports as $index => $report)
                             <tr class="@if(in_array($report->severityLevel, ['High', 'Very High'])) high-severity
@@ -150,7 +151,7 @@
     </div>
     </div>
 
-
+*********************************************************************************************
 
     <script>
             var modal = document.getElementById("profileModal");
@@ -235,6 +236,9 @@
                 content.classList.remove('blur');
             }
     </script>
+
+*********************************************************************************************
+
     <script>
             document.getElementById("newReportLink").onclick = function(event) {
                 event.preventDefault();
@@ -256,6 +260,8 @@
                 this.classList.add("active");
             };
     </script>
+
+*********************************************************************************************
 
     <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -335,6 +341,50 @@
             });
         });
     </script>
+
+**********************************************************************************************
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('reportTable');
+            const headers = table.querySelectorAll('th[data-column]');
+            const tbody = table.querySelector('tbody');
+
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const column = header.getAttribute('data-column');
+                    const order = header.getAttribute('data-order');
+                    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                    // Determine sort order
+                    const isAscending = order === 'asc';
+
+                    // Sort rows
+                    rows.sort((a, b) => {
+                        const aText = a.querySelector(`td:nth-child(${header.cellIndex + 1})`).innerText.trim();
+                        const bText = b.querySelector(`td:nth-child(${header.cellIndex + 1})`).innerText.trim();
+
+                        // Handle numeric and string sorting
+                        if (!isNaN(aText) && !isNaN(bText)) {
+                            return isAscending ? aText - bText : bText - aText;
+                        } else {
+                            return isAscending
+                                ? aText.localeCompare(bText)
+                                : bText.localeCompare(aText);
+                        }
+                    });
+
+                    // Append sorted rows to the tbody
+                    rows.forEach(row => tbody.appendChild(row));
+
+                    // Toggle sort order for the next click
+                    header.setAttribute('data-order', isAscending ? 'desc' : 'asc');
+                });
+            });
+        });
+    </script>
+
+
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
 </html>

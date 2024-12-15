@@ -3,7 +3,7 @@
     font-family: 'Poppins', sans-serif;
     margin-left: 215px;
     background-color: rgba(135, 133, 133, 0.25);
-    padding: 20px;
+    padding: 18px;
     padding-top: 60px;
     width: 1284px;
     overflow-x: hidden;
@@ -11,8 +11,8 @@
 
 /* Table container adjustments */
 .table-container {
-    width: 101%;
-    margin-left: -5px;
+    width: 102%;
+    margin-left: -10px;
     overflow-y: auto;
     background-color: rgb(255, 255, 255);
     padding: 0px;
@@ -30,14 +30,14 @@ table {
 
 table th, table td {
     padding: 12px 15px;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 /* Left align Username column */
-table td:nth-child(2),
-table th:nth-child(2) {
-    text-align: left;
+table td:nth-child(10),
+table th:nth-child(10) {
+    text-align: center;
 }
 
 table td:nth-child(6),
@@ -51,14 +51,39 @@ table th {
     color: white;
     font-weight: bold;
     font-size: 14px;
-    text-transform: uppercase;
     top: 0;
     z-index: 1;
     letter-spacing: 0.05em;
     position: sticky;
-    position: -webkit-sticky;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     padding: 12px 15px;
+}
+
+table tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+th[data-column] {
+    cursor: pointer;
+    position: relative;
+}
+
+th[data-column]:after {
+    content: ' ▲'; /* Default ascending arrow */
+    font-size: 10px;
+    margin-left: 5px;
+    color: #888;
+    display: none; /* Initially hidden */
+}
+
+th[data-column][data-order="asc"]:after {
+    content: ' ▲'; /* Ascending arrow */
+    display: inline;
+}
+
+th[data-column][data-order="desc"]:after {
+    content: ' ▼'; /* Descending arrow */
+    display: inline;
 }
 
 /* Table Body Row Styling */
@@ -151,9 +176,3 @@ table tr:hover {
     background-color: rgba(75, 192, 192, 0.2);
     border-left: 5px solid #43a047;
 }
-
-
-table tr:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
