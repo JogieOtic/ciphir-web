@@ -450,6 +450,89 @@ header {
     margin: 0 auto;
 }
 
+/* Infrastructure Report Statistics */
+.infrastructure-statistics {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    margin-left: 238px;
+    max-width: 400px;
+}
+
+.infrastructure-statistics h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.total-reports {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.statistics-overview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-issues h1 {
+    font-size: 36px;
+    color: #333;
+    margin: 0;
+}
+
+.total-issues p {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.category-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Infrastructure Report Icons */
+.category-list .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.category-list .icon.roads { background-color: #FFDFD3; }
+.category-list .icon.railways { background-color: #D3E3FF; }
+.category-list .icon.transit { background-color: #D5F8E1; }
+.category-list .icon.grids { background-color: #FFF3D3; }
+.category-list .icon.pipelines { background-color: #FCE5E6; }
+.category-list .icon.drainage { background-color: #E1F4FE; }
+.category-list .icon.stormwater { background-color: #F4E1FF; }
+.category-list .icon.waste { background-color: #D8F3DC; }
+.category-list .icon.parks { background-color: #FFD6A5; }
+
+.category-list h4 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.category-list .value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
 
 
 /* Latest Resolved Issues */

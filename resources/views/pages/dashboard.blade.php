@@ -33,7 +33,7 @@
             </div>
         </div>
     </header>
- 
+
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
     <main>
@@ -112,35 +112,65 @@
             </div>
         </div>
 
-        <!-- Infrastructure Report Chart -->
-        <div class="chart-container">
-            <canvas id="infraChart"></canvas>
+        <!-- Infrastructure Report Statistics -->
+        <div class="infrastructure-statistics">
+            <h3>Infrastructure Report Statistics</h3>
+            <div class="statistics-overview">
+                <div class="total-issues">
+                    <h1>{{ $infrastructureReports->sum('total') }}</h1>
+                    <p>Total Reports</p>
+                </div>
+                <canvas id="infraChart"></canvas>
+            </div>
+            <ul class="category-list">
+                @foreach ($infrastructureReports as $report)
+                    <li>
+                        <div class="icon {{ strtolower(str_replace(' ', '-', $report->name)) }}"></div>
+                        <h4>{{ $report->name }}</h4>
+                        <p class="value">{{ $report->total }}</p>
+                    </li>
+                @endforeach
+            </ul>
         </div>
 
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="{{ asset('js/dashboard.js') }}"></script>
+
         <script>
-            var infraChartData = @json($infrastructureReports);
-            var ctx = document.getElementById('infraChart').getContext('2d');
-            var infraChart = new Chart(ctx, {
-                type: 'bar',
+            const infrastructureReports = @json($infrastructureReports);
+
+            // Extract labels and data for the chart
+            const labels = infrastructureReports.map(report => report.name);
+            const data = infrastructureReports.map(report => report.total);
+
+            // Initialize the Doughnut Chart
+            const ctx = document.getElementById('infraChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
                 data: {
-                    labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
+                    labels: labels,
                     datasets: [{
-                        label: 'Common Infrastructure Type Reported',
-                        data: infraChartData.map(data => data.total),
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
+                        data: data,
+                        backgroundColor: [
+                            '#FFDFD3', '#D3E3FF', '#D5F8E1', '#FFF3D3',
+                            '#FCE5E6', '#E1F4FE', '#F4E1FF', '#D8F3DC', '#FFD6A5'
+                        ],
+                        borderWidth: 0
                     }]
                 },
                 options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
                     }
                 }
             });
         </script>
+
+
+
 
     <!-- Latest Resolved Issues -->
    <section class="resolved-issues">

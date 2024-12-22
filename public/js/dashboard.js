@@ -102,54 +102,6 @@ this.classList.add("active");
 };
 
 
-var ctx = document.getElementById('infraChart').getContext('2d');
-var infraChart = new Chart(ctx, {
-type: 'bar',
-data: {
-    labels: ['Roads', 'Railways', 'Public Transit', 'Electric Grids', 'Pipelines', 'Drainage', 'Storm Water Management', 'Waste Management', 'Parks'],
-    datasets: [{
-        label: 'Common Infrastructure Type Reported',
-        data: [40, 10, 50, 80, 30, 40, 15, 30, 25],
-        backgroundColor: [
-            '#ff6384',
-            '#36a2eb',
-            '#ffcd56',
-            '#4bc0c0',
-            '#9966ff',
-            '#ff9f40',
-            '#ff6384',
-            '#36a2eb',
-            '#ffcd56'
-        ],
-        borderColor: [
-            '#ff6384',
-            '#36a2eb',
-            '#ffcd56',
-            '#4bc0c0',
-            '#9966ff',
-            '#ff9f40',
-            '#ff6384',
-            '#36a2eb',
-            '#ffcd56'
-        ],
-        borderWidth: 1
-    }]
-},
-options: {
-    scales: {
-        x: {
-            beginAtZero: true,
-            grid: {
-                display: false
-            }
-        },
-        y: {
-            beginAtZero: true
-        }
-    }
-}
-})
-
 
 document.addEventListener('DOMContentLoaded', function () {
 const notificationIcon = document.getElementById('notification');
@@ -173,4 +125,32 @@ notificationIcon.addEventListener('click', function (e) {
 closeNotification.addEventListener('click', function () {
     notificationSidebar.style.right = '-400px'; // Push it off screen to hide
 })
+});
+
+// ===== Infrastructure Doughnut Chart ===== //
+const ctxInfra = document.getElementById('infraChart').getContext('2d');
+const infraChart = new Chart(ctxInfra, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Roads', 'Railways', 'Public Transit System', 'Electric Grids',
+            'Pipelines', 'Drainage System', 'Stormwater Management',
+            'Waste Management', 'Parks'
+        ],
+        datasets: [{
+            data: [1500, 750, 620, 420, 310, 400, 350, 280, 180], // Sample values per category
+            backgroundColor: [
+                '#FFDFD3', '#D3E3FF', '#D5F8E1', '#FFF3D3',
+                '#FCE5E6', '#E1F4FE', '#F4E1FF', '#D8F3DC', '#FFD6A5'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        cutout: '75%',
+        plugins: {
+            legend: { display: false },
+            tooltip: { enabled: true }
+        }
+    }
 });

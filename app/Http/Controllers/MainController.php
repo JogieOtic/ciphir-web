@@ -78,52 +78,53 @@ class MainController extends Controller
 
 //********************************************************************************** */
 
-    public function dashboard()
-    {
+public function dashboard()
+{
+    $adminID = session('adminID');
 
-        $adminID = session('adminID');
+    // Fetch admin details
+    $admin = Admin::find($adminID);
 
+    // Fetch unread notifications
+    $notifications = $admin ? $admin->unreadNotifications : [];
 
-        $admin = Admin::find($adminID);
+    // Fetch statistics for the dashboard
+    $registeredUsers = DB::table('User')->count();
 
+    $reportsToday = DB::table('Reported_Issue')
+                    ->whereDate('created_at', '=', date('Y-m-d'))
+                    ->count();
 
-        $notifications = $admin ? $admin->unreadNotifications : [];
-
-
-        $adminUsername = session('adminUsername');
-
-
-        $registeredUsers = DB::table('User')->count();
-
-        $reportsToday = DB::table('Reported_Issue')
-                        ->whereDate('created_at', '=', date('Y-m-d'))
+    $resolvedReports = DB::table('Reported_Issue')
+                        ->where('reportStatus', 'Resolved')
+                        ->whereMonth('created_at', date('m'))
                         ->count();
 
-        $resolvedReports = DB::table('Reported_Issue')
-                            ->where('reportStatus', 'Resolved')
-                            ->whereMonth('created_at', date('m'))
+    $unresolvedReports = DB::table('Reported_Issue')
+                            ->whereIn('reportStatus', ['Pending', 'In Progress'])
                             ->count();
 
-        $unresolvedReports = DB::table('Reported_Issue')
-                                ->whereIn('reportStatus', ['Pending', 'In Progress'])
-                                ->count();
+    // Fetch infrastructure report counts
+    $infrastructureReports = DB::table('Reported_Issue')
+                                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                                ->select('Infrastructure.infrastructure_type as name', DB::raw('COUNT(*) as total'))
+                                ->groupBy('Infrastructure.infrastructure_type')
+                                ->orderBy('total', 'desc')
+                                ->get();
 
-        $infrastructureReports = DB::table('Reported_Issue')
-                                    ->select(DB::raw('infrastructure_id, COUNT(*) as total'))
-                                    ->groupBy('infrastructure_id')
-                                    ->get();
+    // Pass all required variables to the view
+    return view('pages.dashboard', compact(
+        'notifications',
+        'registeredUsers',
+        'reportsToday',
+        'resolvedReports',
+        'unresolvedReports',
+        'infrastructureReports'
+    ));
+}
 
-        // Pass the collected data to the view
-        return view('pages.dashboard', compact(
-            'notifications',
-            'adminUsername',
-            'registeredUsers',
-            'reportsToday',
-            'resolvedReports',
-            'unresolvedReports',
-            'infrastructureReports'
-        ));
-    }
+
+
 
 
 //********************************************************************************************8 */
@@ -287,4 +288,3 @@ class MainController extends Controller
         }
 
     }
- 
