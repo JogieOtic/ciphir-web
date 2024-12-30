@@ -1,4 +1,6 @@
-<x-guest-layout>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<title>{{ 'Login' }}</title>
+<x-guest-layout class="bg-blue-600">
     <x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />

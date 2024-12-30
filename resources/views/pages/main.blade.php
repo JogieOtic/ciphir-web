@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIPHIR Website</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="/css/mainpage.css" rel="stylesheet">
 </head>
 <body>
@@ -31,7 +32,11 @@
         </br><hr style = "width: 35%; border: 1px solid #2D4373; margin-top: 30px; margin-left: 0px">
         <!-- Sign in Button -->
         <div class="container2">
-            <a href="/login" style="text-decoration: none;" class="sign-in-btn">Sign In</a>
+            @if (Auth::check())
+                <a href="/dashboard" class="link">Go to dashboard</a>
+            @else
+                <a href="/login" class="link">Login</a>
+            @endif
         </div>
     </section>
 

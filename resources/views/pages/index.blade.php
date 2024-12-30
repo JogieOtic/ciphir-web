@@ -1,38 +1,28 @@
 @extends('layouts.headersidebar')
 
-{{-- <!DOCTYPE html>
+@section('title','Dashboard')
+
+@section('content')
+	<x-sidebar />
+@endsection
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/dashboardpage.css" rel="stylesheet">
-    <link href="/css/notificationpage.css" rel="stylesheet">
+	<link rel="icon" href="{{ asset('img/Web System logo.png') }}" type="image/png">
+    {{-- <link href="/css/dashboardpage.css" rel="stylesheet">
+    <link href="/css/notificationpage.css" rel="stylesheet"> --}}
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
 </head>
 <body>
+	{{-- <x-header :user="$user" /> --}}
+  {{-- <x-sidebar /> --}}
 
-    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
-
-    <main>
+    {{-- <main>
         <div class="container-sidebar">
-            <div class="sidebar">
-                <nav>
-                    <ul>
-                        <li><a href="/dashboard" class="active" id="homelink">
-                            <i class="fas fa-home"></i> Dashbaord
-                        </a></li>
-                        <li><a href="/newreport" id="newreportlink">
-                            <i class="fas fa-file-alt"></i> New Reports
-                        </a></li>
-                        <li><a href="/priorityreport" id="priorityreport">
-                            <i class="fas fa-exclamation-circle"></i> Priority Report
-                        </a></li>
-                        <li><a href="/reporthistory" id="reporthistory">
-                            <i class="fas fa-history"></i> Report History
-                        </a></li>
-                    </ul>
-                </nav>
-            </div>
-
             <div id="profileModal" class="profile-modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -68,6 +58,10 @@
             <div class="stats">
             <div class="stat-item registered-users">
                 <h3>Registered Users</h3>
+                <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="z-50">Logout</button>
+                </form>
                 <p>{{ $registeredUsers }}</p>
                 <i class="fas fa-users"></i>
             </div>
@@ -182,6 +176,9 @@
       </section>
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="{{ asset('js/dashboard.js') }}"></script>
+      <script src="{{ asset('js/dashboard.js') }}"></script> --}}
 </body>
-</html> --}}
+</html>
+
+{{-- <p>{{ $user->Username }}</p> --}}
+

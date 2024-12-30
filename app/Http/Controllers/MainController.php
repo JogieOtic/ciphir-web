@@ -14,11 +14,20 @@ use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
+
     public function main()
     {
         return view('pages.main');
     }
-
+    public function unauthorized(){
+        if (Auth::User()->Role === 'A' || Auth::User()->Role === 'SA'){
+            $message = [
+                'message' => 'You do not have access to this page.',
+                'forbidden' => 'Unauthorized 403 Forbidden',
+            ];
+            return view('unauthorized', compact('message'));
+        }// 403 Forbidden status code        
+    }
 
     public function login()
     {

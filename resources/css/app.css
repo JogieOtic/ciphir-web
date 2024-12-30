@@ -5,3 +5,26 @@
 [x-cloak] {
     display: none;
 }
+@layer components {
+    .wrapper{
+        @apply bg-[#2D4373] h-fit py-1 flex flex-row justify-between px-4;
+    }
+    .brand {
+        @apply flex flex-row gap-1 text-slate-300;
+    }
+    .brand img{
+        @apply h-14;
+    }
+    .profile-btn {
+        @apply flex flex-row gap-6 place-items-center px-2;
+    }
+    .link {
+        @apply list-none;
+    }
+    .sidebar {
+        @apply  h-screen bg-[#DDE8F0] shadow-black w-fit;
+    }
+    .nav-btn {
+        @apply w-full p-2 cursor-pointer pl-6 hover:bg-slate-400 rounded-sm;
+    }
+}
