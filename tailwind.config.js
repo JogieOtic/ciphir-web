@@ -15,6 +15,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['FigTree', ...defaultTheme.fontFamily.sans],
+                inter: ['Inter', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', 'sans-serif'], // Define Roboto as a fontFamily
             },
         },
     },

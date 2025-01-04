@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$user->Role === 'SA' ? 'Welcome, Ciphir' : ''}}</title>
+    <title>{{$user->Role === 'SA' ? 'Welcome, Ciphir' : 'Ciphir'}}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <x-sidebar/>
+    <x-sa-sidebar/>
     <div class="flex m-w-full bg-white ml-56">
     <div class="bg-slate-50 w-full max-h-screen py-3 px-3 flex flex-col gap-4">
       <div class="py-2 px-3 bg-[#DDE8F0] rounded-md">
@@ -38,10 +38,6 @@
       </table>
       
       </div>
-
-      
-
-
     </div>
   </div>
 </body>

@@ -1,3 +1,7 @@
+@extends('layouts.headersidebar')
+@section('title','Report History')
+@section('content')
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,154 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report History</title>
     <link href="/css/reporthistorypage.css" rel="stylesheet">
-    <link href="/css/dashboardpage.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
 <body>
-<header>
-        <div class="container">
-            <div class="logo">
-                <img src="/img/Web System logo.png" alt="CIPHIR Logo">
-                <p>Empowering Communities<br>Through Connection and Collaboration</p>
-            </div>
-            <div class="notification">
-            <a href="/notification" id="notification">
-                    <i class="fas fa-bell"></i>
-                </a>
-            </div>
-            <div class="user">
-                <a href="#profileModal" id="profileButton">
-                    <i class="fas fa-user-circle"></i>
-                </a>
-            </div>
-        </div>
-    </header>
 
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
-
-    <main>
-        <div class="container-sidebar">
-            <div class="sidebar">
-                <nav>
-                    <ul>
-                        <li><a href="/dashboard"  id="homelink">
-                            <i class="fas fa-dashboard"></i> Dashboard
-                        </a></li>
-                        <li><a href="/newreport" id="newreportlink">
-                            <i class="fas fa-file-alt"></i> New Reports
-                        </a></li>
-                        <li><a href="/priorityreport" id="priorityreport">
-                            <i class="fas fa-exclamation-circle"></i> Priority Report
-                        </a></li>
-                        <li><a href="/reporthistory" class="active" id="reporthistory">
-                            <i class="fas fa-history"></i> Report History
-                        </a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <!--Profile Modal-->
-            <div id="profileModal" class="profile-modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="profile-details">
-                        <h3>Administrator</h3>
-                        <a href="#editModal" id="manageAccount">Manage Account</a>
-                        <button id="logoutButton">Logout</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main dashboard content -->
-            <div class="reporthistory-dashboard-container">
-                <div class="search-container">
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Search here">
-                        <i class="fas fa-search search-icon"></i>
-                    </div>
-                </div>
-
-                <!-- Table Container -->
-                <div class="table-container">
-                    <table id="reportTable">
-                    <thead>
-                        <tr>
-                            <th data-column="no" data-order="asc">No.</th>
-                            <th data-column="username" data-order="asc">Username</th>
-                            <th data-column="report_no" data-order="asc">Report ID</th>
-                            <th data-column="date" data-order="asc">Date</th>
-                            <th data-column="time" data-order="asc">Time</th>
-                            <th data-column="issue_type" data-order="asc">Issue Type</th>
-                            <th data-column="infrastructure_type" data-order="asc">Infrastructure Type</th>
-                            <th data-column="location" data-order="asc">Location</th>
-                            <th data-column="severity_level" data-order="asc">Severity Level</th>
-                            <th data-column="status" data-order="asc">Status</th>
-                            <th>Info</th>
-                        </tr>
-                    </thead>
-
-                        <tbody>
-                            @foreach($reports as $index => $report)
-                            <tr class="@if(in_array($report->severityLevel, ['High', 'Very High'])) high-severity
-                                       @elseif($report->severityLevel === 'Medium') medium-severity
-                                       @elseif(in_array($report->severityLevel, ['Low', 'Very Low'])) low-severity
-                                       @endif">
-                                <td>{{ $index + 1 }}.</td>
-                                <td>{{ $report->username }}</td>
-                                <td>{{ $report->report_no }}</td>
-                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('Y-m-d') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($report->reportDateTime)->format('H:i') }}</td>
-                                <td>{{ $report->issue_type }}</td>
-                                <td>{{ $report->infrastructure_type }}</td>
-                                <td>{{ $report->reportLocation }}</td>
-                                <td>{{ $report->severityLevel }}</td>
-                                <td>
-                                    @if($report->reportStatus === 'Pending')
-                                        <span class="status pending">Pending</span>
-                                    @elseif($report->reportStatus === 'In Progress')
-                                        <span class="status in-progress">In Progress</span>
-                                    @elseif($report->reportStatus === 'Resolved')
-                                        <span class="status resolved">Resolved</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('page.reportdetail', ['id' => $report->report_no]) }}">View Details</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @if(empty($reports))
-                        <p>No reports available at the moment.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </main>
-
-
-    <div id="editModal" class="modal">
-    <div class="modal-content-edit">
-        <h3>Profile Information</h3>
-        <label for="employeeId">Employee ID</label>
-        <div>
-            <input type="text" id="employeeId" placeholder="Enter Username">
-        </div>
-        <label for="email">Email</label>
-        <div>
-            <input type="email" id="email" placeholder="Password">
-        </div>
-        <div class="button-group">
-            <button id="saveButton">Save</button>
-            <button id="cancelButton">Cancel</button>
-        </div>
-    </div>
-    </div>
-
-*********************************************************************************************
-
     <script>
             var modal = document.getElementById("profileModal");
             var btn = document.getElementById("profileButton");
@@ -237,7 +100,6 @@
             }
     </script>
 
-*********************************************************************************************
 
     <script>
             document.getElementById("newReportLink").onclick = function(event) {
@@ -261,7 +123,6 @@
             };
     </script>
 
-*********************************************************************************************
 
     <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -342,7 +203,7 @@
         });
     </script>
 
-**********************************************************************************************
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -388,3 +249,5 @@
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+@endsection

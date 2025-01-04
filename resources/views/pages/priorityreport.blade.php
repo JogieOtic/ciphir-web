@@ -1,59 +1,22 @@
-<!DOCTYPE html>
+@extends('layouts.headersidebar')
+@section('title','Priority Reports')
+@section('content')
+    <div class="bg-green-700 w-full">priority view</div>
+@endsection
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Priority Report</title>
     <link href="/css/priorityreportpage.css" rel="stylesheet">
-    <link href="/css/dashboardpage.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
 <body>
-<header>
-        <div class="container">
-            <div class="logo">
-                <img src="/img/Web System logo.png" alt="CIPHIR Logo">
-                <p>Empowering Communities<br>Through Connection and Collaboration</p>
-            </div>
-            <div class="notification">
-            <a href="/notification" id="notification">
-                    <i class="fas fa-bell"></i>
-                </a>
-            </div>
-            <div class="user">
-                <a href="#profileModal" id="profileButton">
-                    <i class="fas fa-user-circle"></i>
-                </a>
-            </div>
-        </div>
-    </header>
-
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
-    <main>
-        <div class="container-sidebar">
-            <div class="sidebar">
-                <nav>
-                    <ul>
-                        <li><a href="/dashboard"  id="homelink">
-                            <i class="fas fa-dashboard"></i> Dashboard
-                        </a></li>
-                        <li><a href="/newreport" id="newreportlink">
-                            <i class="fas fa-file-alt"></i> New Reports
-                        </a></li>
-                        <li><a href="/priorityreport" class="active" id="priorityreport">
-                            <i class="fas fa-exclamation-circle"></i> Priority Report
-                        </a></li>
-                        <li><a href="/reporthistory" id="reporthistory">
-                            <i class="fas fa-history"></i> Report History
-                        </a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </main>
 
     <!-- Table content -->
         <div class="priorityreport-row">
@@ -444,4 +407,4 @@
 
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
-</html>
+</html> --}}

@@ -6,39 +6,13 @@
     <title>CIPHIR Website</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="/css/mainpage.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="/img/Web System logo.png" alt="CIPHIR Logo">
-                <p class="header-text">Empowering Communities<br>Through Connection and Collaboration</p>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#public-safety">About Us</a></li>
-                <li><a href="#news-updates">Infrastructure</a></li>
-                <li><a href="https://www2.naga.gov.ph/emergency-hotline/" target="_blank">Emergency Hotlines</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <h1>CIPHIR</h1>
-            <h2>Centralized Information Platform</h2>
-            <h2>for Community Hazards and</h2>
-            <h2>Infrastructure Reports</h2>
-        </div>
-        </br><hr style = "width: 35%; border: 1px solid #2D4373; margin-top: 30px; margin-left: 0px">
-        <!-- Sign in Button -->
-        <div class="container2">
-            @if (Auth::check())
-                <a href="/dashboard" class="link">Go to dashboard</a>
-            @else
-                <a href="/login" class="link">Login</a>
-            @endif
-        </div>
-    </section>
+    <x-header />
+    <div class="pt-10">...</div>
+    <x-hero />
 
     <!-- Google Play Button
     <section class="google">

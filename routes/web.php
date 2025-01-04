@@ -30,9 +30,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth:web'])->group(function () {
   Route::get('/sa-dashboard', [SuperAdminController::class, 'index'])->name('sa.dashboard');
+  // client routes
   Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-  Route::get('/profile', [MainController::class, 'profile'])->name('page.profile');
+  Route::get('/newreport', [AdminController::class, 'newreport'])->name('page.newreport');
+  Route::get('/reportdetail/{id}', [MainController::class, 'reportdetail'])->name('page.reportdetail');
+  Route::get('/priorityreport', [AdminController::class, 'showPriorityReports'])->name('page.priorityreport');
+  Route::get('/reporthistory', [AdminController::class, 'reporthistory'])->name('reporthistory');
+  // Route::get('/profile', [MainController::class, 'profile'])->name('page.profile');
 });
 
 // Unauthorized Access for not Authenticated users

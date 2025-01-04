@@ -67,41 +67,6 @@ nav {
   border-radius: 20px;
 }
 
-
-  /* Hero Section Styles*/
-  .hero {
-  background-size: 800px;
-  height: 75vh;
-  background-image: url("/img/mainimage2.png");
-  background-repeat: no-repeat;
-  background-position: 100%;
-  background-color: white;
-  padding: 50px 15px;
-}
-
-.hero h1 {
-  font-size: 70px;
-  font-weight: bold;
-  color: #243464;
-  margin-right: 30px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.hero h2 {
-  font-size: 30px;
-  font-weight: bold;
-  height: 3px;
-  color: #243464;
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.hero h4 {
-  color: #243464;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-
   /*sign in button*/
 .sign-in-btn {
   background-color: #2D4373;

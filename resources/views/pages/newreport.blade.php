@@ -1,3 +1,7 @@
+@extends('layouts.headersidebar')
+
+@section('title','New Reports')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,66 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Report</title>
     <link href="/css/newreportpage.css" rel="stylesheet">
-    <link href="/css/dashboardpage.css" rel="stylesheet">
+    {{-- <link href="/css/dashboardpage.css" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
 <body>
-<header>
-        <div class="container">
-            <div class="logo">
-                <img src="/img/Web System logo.png" alt="CIPHIR Logo">
-                <p>Empowering Communities<br>Through Connection and Collaboration</p>
-            </div>
-            <div class="notification">
-            <a href="/notification" id="notification">
-                    <i class="fas fa-bell"></i>
-                </a>
-            </div>
-            <div class="user">
-                <a href="#profileModal" id="profileButton">
-                    <i class="fas fa-user-circle"></i>
-                </a>
-            </div>
-        </div>
-    </header>
-
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
     <main>
         <div class="container-sidebar">
-            <div class="sidebar">
-                <!-- <h2>Dashboard</h2> -->
-                <nav>
-                    <ul>
-                        <li><a href="/dashboard"  id="homelink">
-                            <i class="fas fa-dashboard"></i> Dashboard
-                        </a></li>
-                        <li><a href="/newreport" class="active" id="newreportlink">
-                            <i class="fas fa-file-alt"></i> New Reports
-                        </a></li>
-                        <li><a href="/priorityreport" id="priorityreport">
-                            <i class="fas fa-exclamation-circle"></i> Priority Report
-                        </a></li>
-                        <li><a href="/reporthistory" id="reporthistory">
-                            <i class="fas fa-history"></i> Report History
-                        </a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div id="profileModal" class="profile-modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div class="profile-details">
-                        <h3>Administrator</h3>
-                        <a href="#editModal" id="manageAccount">Manage Account</a>
-                        <button id="logoutButton">Logout</button>
-                    </div>
-                </div>
-            </div>
-
             <!-- Table Container -->
             <div class="newreport-dashboard-container">
             <div class="table-container">
@@ -321,3 +275,4 @@
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 </body>
 </html>
+@endsection
