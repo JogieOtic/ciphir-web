@@ -3,7 +3,7 @@
   <div class="py-2 px-3 bg-[#DDE8F0] rounded-md shadow-md text-center">
     <span class="text-2xl font-medium mx-auto">Latest Resolved Issues</span>
   </div>
-  <div class="flex flex-row py-12 px-3 justify-evenly">
+  <div class="flex flex-row py-12 px-3 gap-0 md:gap-4 md:flex-wrap justify-start lg:justify-evenly">
 		@for ($count = 0; $count < $latestResolved->count(); $count++)
       {{-- card with button --}}
       <div class="transition duration-300 ease-out transform hover:scale-105 flex flex-col w-fit bg-[#ccd7df] place-items-center py-6 rounded-md shadow-md px-6 gap-5">
@@ -74,9 +74,3 @@
 		@endfor
 	</div>
 </section>
-
-<script>
-  console.log(@json($latestResolved->count()))
-</script>
-{{-- modal for each card --}}
-<!-- Main modal -->
