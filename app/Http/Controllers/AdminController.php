@@ -101,42 +101,71 @@ class AdminController extends Controller
             'latestResolved',
         ));
     }
-    public function showpriorityReports()
+
+    public function showpriorityReports(Request $request)
     {
+        $search = $request->input('search');
         // Fetch all reports, applying the search filter if provided
         $reports = DB::table('Reported_Issue')
         ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
         ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
         ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
-        ->whereIn('priorityLevel', ['High', 'Medium'])
+        ->whereIn('priorityLevel', ['Very High', 'High'])
+        // ->whereIn('priorityLevel', ['Medium', 'High'])
+        ->whereIn('reportStatus', ['In Progress', 'Pending'])
         ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
-        // ->when($search, function ($query, $search) {
-        //     return $query->where('User.username', 'like', "%{$search}%")
-        //                 ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
-        //                 ->orWhere('Issues.issue_type', 'like', "%{$search}%")
-        //                 ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
-        //                 ->orWhere('Reported_Issue.report_id', 'like', "%{$search}%")
-        //                 ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
-        //                 ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
+        ->when($search, function ($query, $search) {
+            return $query->where('User.username', 'like', "%{$search}%")
+                        ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
+                        ->orWhere('Issues.issue_type', 'like', "%{$search}%")
+                        ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+                        ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
+                        ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
+                        ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
 
-        //})
+        })
         ->get();
         // return response()->json($reports);
         // Pass the $reports variable to the view
         return view('pages.priorityreport', compact('reports'));
     }
-    public function newReport()
+
+
+
+    public function newReport(Request $request)
     {
         // Get the search query from the request
         //$search = $request->input('search');
-
+        $url = AdminController::URL;
         // Fetch all reports, applying the search filter if provided
+        // search query
+        if($request->input('search')){
+            $search = $request->input('search');
+
+            $reports = DB::table('Reported_Issue')
+            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->where('reportStatus', ['Pending', 'In Progress'])
+            ->when($search, function ($query, $search) {
+                return $query->where('User.username', 'like', "%{$search}%")
+                            ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
+                            ->orWhere('Issues.issue_type', 'like', "%{$search}%")
+                            ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+                            ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
+                            ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
+            })
+            ->get();
+            return view('pages.newreport', compact('reports'));
+        }
         $reports = DB::table('Reported_Issue')
             ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
             ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
             ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->whereIn('priorityLevel', ['Medium', 'High', 'Low'])
             ->orderBy('created_at','desc')
-            ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+            ->whereIn('reportStatus', ['Pending', 'In Progress'])
+            ->select('Reported_Issue.*', 'User.username', 'User.fullname', 'User.contactNumber', 'User.address', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
             // ->when($search, function ($query, $search) {
             //     return $query->where('User.username', 'like', "%{$search}%")
             //                 ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
@@ -150,34 +179,88 @@ class AdminController extends Controller
             ->get();
         // return response()->json($reports);
         // Pass the $reports variable to the view
-        return view('pages.newreport', compact('reports'));
+        return view('pages.newreport', compact('reports','url'));
     }
+    
     public function reporthistory(Request $request)
     {
-        // Get the search query from the request
-        $search = $request->input('search');
-        
         // Fetch all reports, applying the search filter if provided
+        if(!empty($request)){
+            // search query
+            if($request->input('search')){
+                $search = $request->input('search');
+
+                $reports = DB::table('Reported_Issue')
+                ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+                ->where('reportStatus', 'Resolved')
+                ->when($search, function ($query, $search) {
+                    return $query->where('User.username', 'like', "%{$search}%")
+                                ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
+                                ->orWhere('Issues.issue_type', 'like', "%{$search}%")
+                                ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+                                ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
+                                ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
+                })
+                ->get();
+                return view('pages.reporthistory', compact('reports'));
+            }
+            // date query
+            if($request->input('start') || ($request->input('start') && $endDate = $request->input('end'))) {
+                $startDate = $request->input('start'); // Start date
+                $endDate = Carbon::parse($request->input('end'))->endOfDay(); // Set the end date to the end of the day
+
+                $reports = DB::table('Reported_Issue')
+                    ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+                    ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                    ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+                    ->where('reportStatus', 'Resolved')
+                    ->whereBetween('Reported_Issue.created_at', [$startDate, $endDate]) // Include up to the end of the end date
+                    ->orderBy('created_at', 'desc')
+                    ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')    
+                    ->get();
+
+                return view('pages.reporthistory', compact('reports'));
+            }
+            // Default query
+                $reportsQuery = DB::table('Reported_Issue')
+                ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+                ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+                ->where('reportStatus', 'Resolved');
+                $order = $request->input('order', 'asc'); // Default to 'asc'
+                $orderSeverity = $request->input('orderSeverity', 'asc'); // Default to 'asc'
+
+            // Check for sorting by username
+            if ($request->has('sort') && $request->input('sort') === 'User.username') {
+                $reportsQuery->orderBy('User.username', $order);
+            }
+
+            // Check for sorting by severity level
+            if ($request->has('sortSeverity') && $request->input('sortSeverity') === 'severityLevel') {
+                $reportsQuery->orderByRaw("FIELD(Issues.severityLevel, 'Low', 'Medium', 'High', 'Very High') {$orderSeverity}");
+                $reportsQuery->orderBy('User.username', $order);
+
+            }
+
+            // Fetch the results
+            $reports = $reportsQuery->get();
+
+            return view('pages.reporthistory', compact('reports'));
+        }
         $reports = DB::table('Reported_Issue')
-            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
-            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
-            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
-            ->where('reportStatus', 'Resolved')
-            ->when($search, function ($query, $search) {
-                return $query->where('User.username', 'like', "%{$search}%")
-                            ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
-                            ->orWhere('Issues.issue_type', 'like', "%{$search}%")
-                            ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
-                            ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
-                            ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
-            })
-            
-            ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')    
-            ->get();
-            // return response()->json($reports);
-        // Pass the $reports variable to the view
+        ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+        ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+        ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+        ->where('reportStatus', 'Resolved')
+        ->orderBy('created_at', 'desc')
+        ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')    
+        ->get();
         return view('pages.reporthistory', compact('reports'));
     }
+
     public function reportdetail($id)
     {
         $report = DB::table('Reported_Issue')
@@ -196,5 +279,47 @@ class AdminController extends Controller
         // Display the query log to see the exact query being run
         return view('pages.reportdetail', compact('report'));
 
+    }
+    public function updateReportStatus(Request $request){
+        // Validate the request
+        $validated = $request->validate([
+            'report_no' => 'required|exists:Reported_Issue,report_no',
+            'reportStatus' => 'required|string|in:Pending,In Progress,Resolved', // Ensure the status is one of the allowed values
+            'priorityLevel' => 'required|string|in:Low,Medium,High,Very High'
+        ]);
+        // Get the current date and time in the Philippines
+        $updated_at = Carbon::now('Asia/Manila')->format('Y-m-d H:i:s');
+        $oldStatus = DB::table('Reported_Issue')
+                        ->where('report_no', $validated['report_no'])
+                        ->where('priorityLevel', $validated['priorityLevel'])
+                        ->select('reportStatus', 'priorityLevel')
+                        ->get();
+        // Update the status
+
+        $updateStatus = DB::table('Reported_Issue')
+        ->where('report_no', $validated['report_no'])
+        ->update(['reportStatus' => $validated['reportStatus'], 'priorityLevel' => $validated['priorityLevel'], 'status_updated_at' => $updated_at]);
+
+        $newStatus = DB::table('Reported_Issue')
+                        ->where('report_no', $validated['report_no'])
+                        ->where('priorityLevel', $validated['priorityLevel'])
+                        ->select('reportStatus', 'priorityLevel')
+                        ->get();
+        // return response()->json($newStatus[0]);
+        $message = 'Report no ' . $validated['report_no'] . ' updated successfully!';
+        if ($updateStatus) {
+            return redirect()->back()->with('success', $message);
+        } else {
+            return redirect()->back()->with('error', 'Failed to update report status.');
+        }
+    }
+
+    // map rendering base on id of the admin client
+    public function location($id){
+        $latLong = DB::table('Reported_Issue')
+                    ->where('Reported_Issue.report_no', $id)
+                    ->select('latitude', 'longitude')
+                    ->get();
+        return view('pages.map-view', compact('latLong'));
     }
 }

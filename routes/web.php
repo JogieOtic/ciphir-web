@@ -32,11 +32,12 @@ Route::middleware(['auth:web'])->group(function () {
   Route::get('/sa-dashboard', [SuperAdminController::class, 'index'])->name('sa.dashboard');
   // client routes
   Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-  Route::get('/newreport', [AdminController::class, 'newreport'])->name('page.newreport');
+  Route::get('/newreport', [AdminController::class, 'newreport'])->name('newreport');
   Route::get('/reportdetail/{id}', [MainController::class, 'reportdetail'])->name('page.reportdetail');
-  Route::get('/priorityreport', [AdminController::class, 'showPriorityReports'])->name('page.priorityreport');
+  Route::get('/priorityreport', [AdminController::class, 'showPriorityReports'])->name('priorityreport');
   Route::get('/reporthistory', [AdminController::class, 'reporthistory'])->name('reporthistory');
-  // Route::get('/profile', [MainController::class, 'profile'])->name('page.profile');
+  Route::get('/map-view/{id}', [AdminController::class, 'location'])->name('map.location');
+  Route::patch('/update-report-status', [AdminController::class, 'updateReportStatus'])->name('updateReportStatus');
 });
 
 // Unauthorized Access for not Authenticated users

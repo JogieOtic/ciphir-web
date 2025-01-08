@@ -2,18 +2,33 @@
 @section('title','Report History')
 @section('content')
 <div class="w-full">
-    <x-searchHistory />
+    <x-search :url="'reporthistory'"/>
     <section class="w-full overflow-auto h-[calc(100vh-162px)]">
         <table class="w-full table-auto border-collapse border border-gray-300 bg-blue-100">
             <thead>
                 <tr class="bg-blue-500 text-white sticky top-0">
                     <th class="table-head">No. #</th>
-                    <th class="table-head">Username</th>
+                    <th class="table-head">
+                        <a href="{{ route('reporthistory', ['sort' => 'User.username', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">
+                            Username
+                            @if (request('sort') === 'User.username')
+                                <i class="fa fa-solid {{ request('order') === 'asc' ? 'fa-caret-up' : 'fa-caret-down' }}"></i>
+                            @endif
+                        </a>                   
+                    </th>
                     <th class="table-head">Time</th>
                     <th class="table-head">Date</th>
                     <th class="table-head">Infrastructure: Issue</th>
                     <th class="table-head">Location</th>
-                    <th class="table-head">Severity Level</th>
+                    <th class="table-head">
+                        <a href="{{ route('reporthistory', ['sortSeverity' => 'severityLevel', 'orderSeverity' => request('orderSeverity') === 'asc' ? 'desc' : 'asc']) }}">
+                            Severity Level
+                            @if (request('sortSeverity') === 'severityLevel')
+                                <i class="fa fa-solid {{ request('orderSeverity') === 'asc' ? 'fa-caret-up' : 'fa-caret-down' }}"></i>
+                            @endif
+                        </a>
+                        
+                    </th>
                     <th class="table-head">Details</th>
                 </tr>
             </thead>
@@ -23,7 +38,7 @@
                         <tr class="hover:bg-blue-200">
                             <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $count + 1 }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700 lowercase">{{ $reports[$count]->username }}</td>
-                            <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ \Carbon\Carbon::parse($reports[$count]->reportDateTime)->format('H : i A') }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ \Carbon\Carbon::parse($reports[$count]->reportDateTime)->format('h : i A') }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ \Carbon\Carbon::parse($reports[$count]->reportDateTime)->format('M d, Y') }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $reports[$count]->infrastructure_type }}: 
                                 <span class="
@@ -43,10 +58,10 @@
                             </td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $reports[$count]->reportLocation }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700">
-                                {{ $reports[$count]->reportStatus }}
+                                {{ $reports[$count]->severityLevel }}
                             </td>
                             <td class="border border-gray-300 px-4 py-2 text-gray-700 text-center">
-                                <button type="button" data-modal-target="detail-modal-{{ $reports[$count]->report_no }}" data-modal-toggle="detail-modal-{{ $reports[$count]->report_no }}" class="btn-table">view</button>
+                                <button type="button" data-modal-target="detail-modal-{{ $reports[$count]->report_no }}" data-modal-toggle="detail-modal-{{ $reports[$count]->report_no }}" class="btn-table mx-auto">view</button>
                             </td>
                         </tr>
                     @endif
@@ -67,6 +82,7 @@
                                         <span class="sr-only">Close modal</span>
                                     </button>
                                 </div>
+                                
                                 <!-- Modal body -->
                                 <div class="p-4 md:p-5 space-y-4">
                                     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">

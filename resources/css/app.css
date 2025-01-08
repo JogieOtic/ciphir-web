@@ -70,7 +70,7 @@
         @apply hover:bg-blue-700 bg-blue-600 w-fit text-slate-200 rounded-full py-2 px-6;
     }
     .resident-info {
-        @apply w-full h-fit flex flex-row text-slate-200 gap-4 border-b border-dashed border-slate-500;
+        @apply w-full h-fit flex flex-row gap-4;
     }
     .new-reports-container {
         @apply bg-pink-300 w-full;
