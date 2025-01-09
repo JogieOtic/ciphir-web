@@ -104,6 +104,7 @@ class AdminController extends Controller
 
     public function showpriorityReports(Request $request)
     {
+        $url = AdminController::URL;
         $search = $request->input('search');
         // Fetch all reports, applying the search filter if provided
         $reports = DB::table('Reported_Issue')
@@ -113,7 +114,7 @@ class AdminController extends Controller
         ->whereIn('priorityLevel', ['Very High', 'High'])
         // ->whereIn('priorityLevel', ['Medium', 'High'])
         ->whereIn('reportStatus', ['In Progress', 'Pending'])
-        ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+        ->select('Reported_Issue.*', 'User.username', 'User.fullname','User.address', 'User.contactNumber', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
         ->when($search, function ($query, $search) {
             return $query->where('User.username', 'like', "%{$search}%")
                         ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
@@ -127,7 +128,7 @@ class AdminController extends Controller
         ->get();
         // return response()->json($reports);
         // Pass the $reports variable to the view
-        return view('pages.priorityreport', compact('reports'));
+        return view('pages.priorityreport', compact('reports', 'url'));
     }
 
 
@@ -151,12 +152,13 @@ class AdminController extends Controller
                 return $query->where('User.username', 'like', "%{$search}%")
                             ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
                             ->orWhere('Issues.issue_type', 'like', "%{$search}%")
-                            ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+                            ->orWhere('Reported_Issue.street', 'like', "%{$search}%")
+                            ->orWhere('Reported_Issue.barangay', 'like', "%{$search}%")
                             ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
                             ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
             })
             ->get();
-            return view('pages.newreport', compact('reports'));
+            return view('pages.newreport', compact('reports', 'url'));
         }
         $reports = DB::table('Reported_Issue')
             ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
@@ -184,6 +186,7 @@ class AdminController extends Controller
     
     public function reporthistory(Request $request)
     {
+        $url = AdminController::URL;
         // Fetch all reports, applying the search filter if provided
         if(!empty($request)){
             // search query
@@ -199,12 +202,13 @@ class AdminController extends Controller
                     return $query->where('User.username', 'like', "%{$search}%")
                                 ->orWhere('Infrastructure.infrastructure_type', 'like', "%{$search}%")
                                 ->orWhere('Issues.issue_type', 'like', "%{$search}%")
-                                ->orWhere('Reported_Issue.reportLocation', 'like', "%{$search}%")
+                                ->orWhere('Reported_Issue.street', 'like', "%{$search}%")
+                                ->orWhere('Reported_Issue.barangay', 'like', "%{$search}%")
                                 ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
                                 ->orWhere('Issues.severityLevel', 'like', "%{$search}%");
                 })
                 ->get();
-                return view('pages.reporthistory', compact('reports'));
+                return view('pages.reporthistory', compact('reports', 'url'));
             }
             // date query
             if($request->input('start') || ($request->input('start') && $endDate = $request->input('end'))) {
@@ -224,14 +228,14 @@ class AdminController extends Controller
                 return view('pages.reporthistory', compact('reports'));
             }
             // Default query
-                $reportsQuery = DB::table('Reported_Issue')
-                ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
-                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
-                ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
-                ->select('Reported_Issue.*', 'User.username', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
-                ->where('reportStatus', 'Resolved');
-                $order = $request->input('order', 'asc'); // Default to 'asc'
-                $orderSeverity = $request->input('orderSeverity', 'asc'); // Default to 'asc'
+            $reportsQuery = DB::table('Reported_Issue')
+            ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+            ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+            ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+            ->select('Reported_Issue.*', 'User.username', 'User.fullname', 'User.address', 'User.contactNumber', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'Issues.severityLevel')
+            ->where('reportStatus', 'Resolved');
+            $order = $request->input('order', 'asc'); // Default to 'asc'
+            $orderSeverity = $request->input('orderSeverity', 'asc'); // Default to 'asc'
 
             // Check for sorting by username
             if ($request->has('sort') && $request->input('sort') === 'User.username') {
@@ -248,7 +252,7 @@ class AdminController extends Controller
             // Fetch the results
             $reports = $reportsQuery->get();
 
-            return view('pages.reporthistory', compact('reports'));
+            return view('pages.reporthistory', compact('reports', 'url'));
         }
         $reports = DB::table('Reported_Issue')
         ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
@@ -322,4 +326,63 @@ class AdminController extends Controller
                     ->get();
         return view('pages.map-view', compact('latLong'));
     }
+    public function profile($id)
+    {
+        $userInfo = DB::table('Admin')
+                    ->where('Admin_ID', $id)
+                    ->select('Admin.*')
+                    ->get();
+
+        // Pass admin data to the profile view
+        // return response()->json($userInfo);
+        return view('pages.profile', compact('userInfo'));
+    }
+    public function changeUsername(Request $request)
+    {
+        // Validate the input
+        $validated = $request->validate([
+            'oldUsername' => 'required|string',
+            'newUsername' => 'required|string|unique:Admin,Username', // Ensure new username is unique
+            'password' => 'required|string',
+        ]);
+
+        // Retrieve the currently authenticated admin
+        $admin = Admin::where('Username', $validated['oldUsername'])->first();
+
+        // Check if the old username exists and the password is correct
+        if (!$admin || !Hash::check($validated['password'], $admin->Password)) {
+            return redirect()->back()->withErrors(['error' => 'Invalid old username or password.']);
+        }
+
+        // Update the username
+        $admin->Username = $validated['newUsername'];
+        $admin->save();
+
+        return redirect()->back()->with('success', 'Username successfully changed!');
+    }
+    public function changePassword(Request $request)
+    {
+        // return response()->json($request);
+
+        // Validate the input
+        $validated = $request->validate([
+            'Username' => 'required|string', // Ensure username is provided
+            'oldPassword' => 'required|string', // Ensure old password is provided
+            'newPassword' => 'required|string|confirmed', // Ensure new password matches confirmation
+        ]);
+        // Retrieve the admin record based on the username
+        $admin = Admin::where('Username', $validated['Username'])->first();
+
+        // Check if the admin exists and if the old password is correct
+        if (!$admin || !Hash::check($validated['oldPassword'], $admin->Password)) {
+            return response()->json(['error' => 'Invalid username or password.'], 401);
+        }
+
+        // Update the password
+        $admin->Password = bcrypt($validated['newPassword']); // Hash the new password
+        $admin->save();
+
+        return redirect()->back()->with('success', 'Password successfully changed!');
+    }
+
 }

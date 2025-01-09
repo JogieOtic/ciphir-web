@@ -1,69 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - CIPHIR</title>
-    <link href="/css/loginpage.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+@extends('layouts.headersidebar')
 
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <img src="/img/Web System logo.png" alt="CIPHIR Logo">
-                <p class="header-text">Empowering Communities<br>Through Connection and Collaboration</p>
+@section('title','login')
+@section('content')
+<div 
+    class="w-screen h-screen" 
+    style="background-image: url('{{ asset('img/background2.png') }}'); 
+        background-size: cover; 
+        background-position: center;" >
+    <div class="backdrop-blur-sm w-screen h-screen flex justify-center items-center pt-16">
+        <div class="flex flex-row rounded-md overflow-clip">
+            {{-- login card --}}
+            <div class="bg-[#243464] py-6 space-y-6 px-10 font-inter flex flex-col justify-center text-slate-200">
+                <h5 class="text-xl font-medium">ADMIN LOGIN</h5>
+                <h3 class="text-md font-normal">Please enter CIPHIR admin credentials</h3>
+                <form action="{{ route('login') }}" method="POST">
+                        @csrf <!-- CSRF protection -->
+                        <!-- Username Field -->
+                        <div class="flex flex-col space-y-6">
+                            <div>
+                                <label for="username" class="block pl-1 mb-2 text-sm font-medium tracking-wider">Usermame</label>
+                                <input type="text" name="username" placeholder="juandelacruz" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
+                            </div>
+                            <!-- Password Field with Eye Icon -->
+                            <div>
+                                <label for="password" class="block pl-1 mb-2 text-sm font-medium tracking-wider">Password</label>
+                                <div class="flex items-center">
+                                    <input type="password" id="passwordInput" value="password123" name="password" placeholder="Password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required/>
+                                <span class="-ml-8 cursor-pointer text-gray-700" id="togglePassword">
+                                    <!-- Font Awesome Eye Slash Icon by Default -->
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col justify-center items-center mt-4 h-12">
+                            
+                        <!-- Error message display section -->
+                        @if ($errors->any())
+                            <div class="pb-2 text-red-500 text-xs">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}!</div>
+                            @endforeach
+                            </div>
+                        @endif
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium h-fit rounded-full text-sm w-full sm:w-auto px-5 py-2 text-center">Login</button>
+                        </div>
+    
+                </form>
             </div>
-            <ul class="nav-links">
-                <li><a href="/">Main Page</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="login-container">
-        <div class="login-box">
-            <h2>ADMIN LOGIN</h2>
-            <h3>Please enter CIPHIR admin credentials</h3>
-            <form action="{{ route('login.submit') }}" method="POST">
-                    @csrf <!-- CSRF protection -->
-                    <!-- Username Field -->
-                    <div class="input-wrapper">
-                        <input type="text" name="username" placeholder=" Admin Username" required>
-                    </div>
-                    <!-- Password Field with Eye Icon -->
-                    <div class="input-wrapper" style="position: relative;">
-                        <input type="password" id="password" name="password" placeholder="Password" required style="padding-right: 30px;">
-                        <span class="toggle-password" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-                            <!-- Font Awesome Eye Slash Icon by Default -->
-                            <i class="fas fa-eye-slash"></i>
-                        </span>
-                    </div>
-                    <button type="submit" class="log-in-btn">Login</button>
-
-                    <!-- Error message display section -->
-                    @if ($errors->any())
-                        <div class="error-messages">
-                        @foreach ($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-            </form>
-        </div>
-
-        <div class="login-info">
-            <div class="logo-eye">
-                <img src="/img/eye1.png" alt="Eye Logo" class="eye-logo">
+    
+            <div class="bg-[#ffff]/75 px-8 py-6 flex flex-col w-[42rem] text-[#223a83]">
+                <div class="w-full flex justify-end">
+                    <img src="/img/eye1.png" alt="Eye Logo" class="eye-logo">
+                </div>
+                <div class="-mt-16">
+                    <h5 class="text-7xl font-bold font-inter pb-6">CIPHIR</h5>
+                <h5 class="text-3xl font-medium font-inter w-[36rem] ">Centralized Information Platform for Community Hazards and Infrastructure Reports</h5>
+                <hr class="w-4/6 h-1 my-4 border-0 rounded bg-[#223c83]">
+                <p class="text-wrap pb-4">Welcome to CIPHIR, the dedicated admin panel for managing community hazards and infrastructure reports. Use this platform to efficiently track, address, and resolve issues reported by residents, ensuring a safer and well-maintained community. Log in to access your dashboard and start making a difference today.</p>
+                </div>
             </div>
-            <h1>CIPHIR</h1>
-            <h2>Centralized Information Platform for Community Hazards and Infrastructure Reports</h2>
-            <h4>________________________________________________________________________</h4>
-            <p>Welcome to CIPHIR, the dedicated admin panel for managing community hazards and infrastructure reports. Use this platform to efficiently track, address, and resolve issues reported by residents, ensuring a safer and well-maintained community. Log in to access your dashboard and start making a difference today.</p>
         </div>
     </div>
+    
+</div>
+<script>
+    // Toggle Password Visibility
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("passwordInput");
 
-    <script src="/js/login.js"></script>
+    togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute
+        const type =
+            passwordInput.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+        passwordInput.setAttribute("type", type);
 
-</body>
-</html>
+        // Toggle the eye slash icon
+        this.innerHTML =
+            type === "password"
+                ? '<i class="fas fa-eye-slash"></i>'
+                : '<i class="fas fa-eye"></i>';
+    });
+</script>
+@endsection

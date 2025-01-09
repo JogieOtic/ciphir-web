@@ -14,13 +14,13 @@ class AuthController extends Controller
             return Auth::User()->Role === 'SA' ? redirect()->route('sa.dashboard'): redirect()->route('admin.dashboard');
             
         }
-        return view('auth.login');
+        return view('pages.login');
     }
 
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
         // php artisan config:clear
@@ -28,7 +28,7 @@ class AuthController extends Controller
         // php artisan cache:clear
         // php artisan view:clear
 
-        $admin = Admin::where('Username', $request->email)->first();
+        $admin = Admin::where('Username', $request->username)->first();
 
         if ($admin && Hash::check($request->password, $admin->Password)) {
             Auth::login($admin);

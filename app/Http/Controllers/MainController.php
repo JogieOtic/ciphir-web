@@ -25,43 +25,6 @@ class MainController extends Controller
             return view('unauthorized', compact('message'));
         }// 403 Forbidden status code        
     }
-//******************************************************************************* */
-    public function updateProfile(Request $request){
-        $request->validate([
-            'oldPassword' => 'required|string',
-            'newPassword' => 'required|string|confirmed', // Ensures the confirmation field matches
-            'username' => 'required|string',
-        ]);
-
-        // Fetch current admin
-        $admin = DB::table('Admin')->where('id', session('adminID'))->first();
-
-        // Verify old password
-        if (!Hash::check($request->oldPassword, $admin->Password)) {
-            return back()->withErrors(['oldPassword' => 'Old password is incorrect.']);
-        }
-
-        // Update admin details
-        DB::table('Admin')
-            ->where('id', $admin->id)
-            ->update([
-                'username' => $request->username,
-                'Password' => Hash::make($request->newPassword)
-            ]);
-
-        // Redirect with success message
-        return back()->with('success', 'Successfully updated your profile.');
-    }
-//********************************************************************************************8 */
-    public function profile()
-    {
-        // Get admin information from session
-        $adminUsername = session('adminUsername');
-
-        // Pass admin data to the profile view
-        return view('pages.profile', ['username' => $adminUsername]);
-    }
-//****************************************************************************************** */
     public function updateStatus(Request $request, $id)
     {
         // Validate the request to ensure the status is valid

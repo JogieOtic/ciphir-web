@@ -1,6 +1,6 @@
 <div class="sidebar">
-	<div class="text-layout font-bold text-xl h-44 pt-[6rem] pl-6 uppercase">
-		{{ Route::current()->uri() }}
+	<div class="text-layout font-bold text-xl w-full h-44 pt-14 drop-shadow-lg rounded-full shadow-inner px-4 flex justify-center">
+		<x-eye-logo />
 	</div>
 	<ul class="w-56 text-slate-900">
 		<a href="/dashboard" id="homelink">

@@ -9,21 +9,9 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 
 Route::get('/', [MainController::class, 'main'])->name('page.main');
-// Route::get('/login', [MainController::class, 'login'])->name('page.login');
-// Route::post('/login', [MainController::class, 'submit'])->name('login.submit');
-// Route::get('/dashboard', [MainController::class, 'dashboard'])->name('page.dashboard');
-// Route::get('/profile', [MainController::class, 'profile'])->name('page.profile');
-// Route::post('/profile/update', [MainController::class, 'updateProfile'])->name('profile.update');
-// Route::get('/newreport', [MainController::class, 'newreport'])->name('page.newreport');
-// Route::get('/priorityreport', [MainController::class, 'showPriorityReports'])->name('page.priorityreport');
-// Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('page.reporthistory');
-// Route::get('/reporthistory', [MainController::class, 'reporthistory'])->name('reporthistory');
 // Route::get('/notification', [MainController::class, 'notification'])->name('page.notification');
-// Route::get('/reportdetail/{id}', [MainController::class, 'reportdetail'])->name('page.reportdetail');
-// Route::post('/reportdetail/{id}/updateStatus', [MainController::class, 'updateStatus'])->name('page.updateStatus');
-// Route::post('/report/{id}/update-status', [MainController::class, 'updateStatus'])->name('page.updateStatus');
 
-
+// login verifications
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -38,6 +26,9 @@ Route::middleware(['auth:web'])->group(function () {
   Route::get('/reporthistory', [AdminController::class, 'reporthistory'])->name('reporthistory');
   Route::get('/map-view/{id}', [AdminController::class, 'location'])->name('map.location');
   Route::patch('/update-report-status', [AdminController::class, 'updateReportStatus'])->name('updateReportStatus');
+  Route::get('/profile/{id}/edit', [AdminController::class, 'profile'])->name('admin.profile');
+  Route::patch('/change-username', [AdminController::class, 'changeUsername'])->name('change-username');
+  Route::patch('/change-password', [AdminController::class, 'changePassword'])->name('change-password');
 });
 
 // Unauthorized Access for not Authenticated users

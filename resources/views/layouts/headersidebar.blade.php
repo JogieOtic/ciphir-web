@@ -15,9 +15,15 @@
 	<!-- Include header -->
   @include('components.header')
 	<!-- Include sidebar -->
-  @include('components.sidebar')
-  <main class="ml-56 pt-16">
-    @yield('content') <!-- Dynamic content -->
-  </main>
+  @if (Auth::check())
+    @include('components.sidebar') 
+    <main class="ml-56 pt-16">
+      @yield('content') <!-- Dynamic content -->
+    </main> 
+  @else  
+    <main>
+      @yield('content') <!-- Dynamic content -->
+    </main>  
+  @endif
 </body>
 </html>

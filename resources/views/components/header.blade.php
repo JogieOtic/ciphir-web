@@ -18,6 +18,14 @@
         <li class="main-li-btn">Emergency Hotlines</li>
       </a>
     </ul>
+  @elseif(Request::is('login'))
+    <a href="/" class="flex items-center">
+      <div class="h-fit py-2 flex items-center px-6 font-inter text-md border hover:border-slate-400 hover:bg-slate-600/50 rounded-full text-white transition ease-in duration-300">
+        <span>
+          <i class="fa-solid fa-house pr-2"></i> Go home
+        </span>
+      </div>    
+    </a>
   @else
     <div class="profile-btn">
       <button data-modal-target="notification-modal" data-modal-hide="profile-modal" data-modal-toggle="notification-modal" class="block" type="button">
@@ -31,13 +39,13 @@
     <div id="profile-modal" data-modal-placement="top-right" tabindex="-1" class="pt-20 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-sm max-h-full">
           <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div class="relative bg-white rounded-lg shadow">
               <!-- Modal header -->
-              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                  <h3 class="text-xl font-medium text-gray-900">
                       Administrator
                   </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="profile-modal">
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="profile-modal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
@@ -46,22 +54,30 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <div 
+                    class="bg-slate-400 w-32 h-32 mx-auto rounded-full shadow-inner"
+                    style="background-image: url('{{ asset('img/defaultProfile.jpg') }}');
+                          background-position: center;
+                          background-repeat: no-repeat;
+                          background-size: contain;
+                          position: relative;">
+                  </div>
+                  <p class="text-lg leading-relaxed text-gray-800 text-center tracking-widest font-inter font-medium pb-2">
                     {{ $user->Username }}
                   </p>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                  </p>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
-                  </p>
+                  <div class="w-full flex justify-center">
+                    <a href="/profile/{{ $user->Admin_ID }}/edit" target="_blank" class="border border-slate-700 hover:bg-slate-300 w-fit h-fit px-6 py-2 rounded-3xl">
+                    Manage your Account
+                    </a>
+                  </div>
+                  
               </div>
               <!-- Modal footer -->
               <form method="POST" action="{{ route('logout') }}" class="p-2">
                 @csrf
-                <div class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
                   <button data-modal-hide="profile-modal" type="submit" class="hover:bg-blue-700 bg-blue-600 w-1/2 text-slate-200 rounded-md py-1 mx-auto">Logout</button>
-              </div>
+                </div>
               </form>
 
               
@@ -74,13 +90,13 @@
     <div id="notification-modal" data-modal-placement="top-right" tabindex="-1" class="pt-20 fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-sm max-h-full">
           <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <div class="relative bg-white rounded-lg shadow">
               <!-- Modal header -->
-              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                  <h3 class="text-xl font-medium text-gray-900">
                       Notifications
                   </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="notification-modal">
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="notification-modal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                       </svg>
@@ -89,16 +105,16 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <p class="text-base leading-relaxed text-gray-500">
                       notif 1
                   </p>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                  <p class="text-base leading-relaxed text-gray-500">
                       notif 2
                   </p>
               </div>
               <!-- Modal footer -->
-              <div class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                  <button data-modal-hide="notification-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Open Notifications</button>
+              <div class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
+                  <button data-modal-hide="notification-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Open Notifications</button>
               </div>
           </div>
       </div>
@@ -106,3 +122,6 @@
     <!-- End of Notification Modal -->
   @endif
 </header>
+<script>
+  console.log(@json($user))
+</script>

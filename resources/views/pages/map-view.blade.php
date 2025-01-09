@@ -7,6 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>Street Map</title>
+    <link rel="icon" href="https://www.openstreetmap.org/assets/favicon-32x32-99b88fcadeef736889823c8a886b89d8cada9d4423a49a27de29bacc0a6bebd1.png">
 </head>
 <body>
     <div id="map" style="height: 100vh; width: 100%;"></div>
@@ -22,7 +24,7 @@
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
         // Initialize the map and set its view
-        const map = L.map('map').setView([latitude, longitude], 13);
+        const map = L.map('map').setView([latitude, longitude], 18);
 
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
