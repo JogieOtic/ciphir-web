@@ -105,5 +105,7 @@ class SuperAdminController extends Controller
         return ($administrator === true ? response()->json($administrator) : 'errror');
     }
 
-    public function manageAllUsers(Request $request)
+    public function manageAllUsers(Request $request) {
+        return view('sa-admin.manage-all-users');
+    }
 }
