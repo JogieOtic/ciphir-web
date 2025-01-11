@@ -111,7 +111,7 @@
 										'reportStatus' => $reports[$count]->reportStatus,
 										'lat' => $reports[$count]->latitude,
 										'long' => $reports[$count]->longitude,
-										'updateAt' => \Carbon\Carbon::parse($reports[$count]->status_updated_at)->format('F d, Y') . 'at' . \Carbon\Carbon::parse($reports[$count]->status_updated_at)->format('h:i a'),
+										'updateAt' => \Carbon\Carbon::parse($reports[$count]->status_updated_at)->format('F d, Y') . ' at ' . \Carbon\Carbon::parse($reports[$count]->status_updated_at)->format('h:i a'),
 									]"/>
 								</div>
 						</div>

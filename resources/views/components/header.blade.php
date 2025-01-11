@@ -59,7 +59,7 @@
                     style="background-image: url('{{ asset('img/defaultProfile.jpg') }}');
                           background-position: center;
                           background-repeat: no-repeat;
-                          background-size: contain;
+                          background-size: 200%;
                           position: relative;">
                   </div>
                   <p class="text-lg leading-relaxed text-gray-800 text-center tracking-widest font-inter font-medium pb-2">
