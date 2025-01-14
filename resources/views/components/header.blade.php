@@ -14,7 +14,7 @@
       <a href="#news-updates">
         <li class="main-li-btn">Infrastructure</li>
       </a>
-      <a href="https://www2.naga.gov.ph/emergency-hotline/" target="_blank"> 
+      <a href="https://www2.naga.gov.ph/emergency-hotline/" target="_blank">
         <li class="main-li-btn">Emergency Hotlines</li>
       </a>
     </ul>
@@ -24,7 +24,7 @@
         <span>
           <i class="fa-solid fa-house pr-2"></i> Go home
         </span>
-      </div>    
+      </div>
     </a>
   @else
     <div class="profile-btn">
@@ -54,7 +54,7 @@
               </div>
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
-                  <div 
+                  <div
                     class="bg-slate-400 w-32 h-32 mx-auto rounded-full shadow-inner"
                     style="background-image: url('{{ asset('img/defaultProfile.jpg') }}');
                           background-position: center;
@@ -70,7 +70,7 @@
                     Manage your Account
                     </a>
                   </div>
-                  
+
               </div>
               <!-- Modal footer -->
               <form method="POST" action="{{ route('logout') }}" class="p-2">
@@ -80,7 +80,7 @@
                 </div>
               </form>
 
-              
+
           </div>
       </div>
     </div>

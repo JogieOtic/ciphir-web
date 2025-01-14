@@ -42,9 +42,16 @@
 		<section class="w-full overflow-auto h-[calc(100vh-162px)]">
 			<table class="w-full table-auto border-collapse border border-gray-300 bg-blue-100">
 				<thead>
-					<tr class="bg-blue-500 text-white sticky top-0">
+					<tr class="bg-blue-600 text-white sticky top-0">
 						<th class="table-head">No. #</th>
-						<th class="table-head">Username</th>
+						<th class="table-head">
+                            <a href="{{ route('reporthistory', ['sort' => 'User.username', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">
+                                Username
+                                @if (request('sort') === 'User.username')
+                                    <i class="fa fa-solid {{ request('order') === 'asc' ? 'fa-caret-up' : 'fa-caret-down' }}"></i>
+                                @endif
+                            </a>
+                        </th>
 						<th class="table-head">Time</th>
 						<th class="table-head">Date</th>
 						<th class="table-head">Infrastructure: Issue</th>
@@ -62,7 +69,7 @@
 							<td class="border border-gray-300 px-4 py-2 text-gray-700 lowercase">{{ $reports[$count]->username }}</td>
 							<td class="border border-gray-300 px-4 py-2 text-gray-700">{{ \Carbon\Carbon::parse($reports[$count]->reportDateTime)->format('h : i A') }}</td>
 							<td class="border border-gray-300 px-4 py-2 text-gray-700">{{ \Carbon\Carbon::parse($reports[$count]->reportDateTime)->format('M d, Y') }}</td>
-							<td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $reports[$count]->infrastructure_type }}: 
+							<td class="border border-gray-300 px-4 py-2 text-gray-700">{{ $reports[$count]->infrastructure_type }}:
 								<span class="
 									@if(in_array($reports[$count]->severityLevel, ['High', 'Very High'])){
 										text-red-600
@@ -94,12 +101,12 @@
 						<!-- Details Modal -->
 						<div id="detail-modal-{{ $reports[$count]->report_no }}" tabindex="-1" class="fixed top-0 bg-none left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full backdrop-blur-sm">
 								<div class="relative w-full max-w-fit max-h-full">
-									<x-admin-modal-for-clients-details 
+									<x-admin-modal-for-clients-details
 									:data="(object) [
 										'reportNo' => $reports[$count]->report_no,
 										'fullname' => $reports[$count]->fullname,
-										'address' => $reports[$count]->address, 
-										'img_url' => $url . $reports[$count]->reportPhoto, 
+										'address' => $reports[$count]->address,
+										'img_url' => $url . $reports[$count]->reportPhoto,
 										'date' => \Carbon\Carbon::parse($reports[$count]->created_at)->format('F d, Y'),
 										'time' => \Carbon\Carbon::parse($reports[$count]->created_at)->format('h:i a'),
 										'cellNumber' => $reports[$count]->contactNumber,

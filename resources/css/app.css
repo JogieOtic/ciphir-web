@@ -12,6 +12,10 @@
     background-color: rgba(0, 0, 0, 0.5) !important; /* Custom dark overlay */
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 @layer components {
     .wrapper{
         @apply bg-[#2D4373] h-fit py-1 z-10 fixed w-full flex flex-row justify-between px-4;

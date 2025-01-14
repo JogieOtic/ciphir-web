@@ -23,7 +23,7 @@ class SuperAdminController extends Controller
         }
         // Call checkAuth and handle the return value
         $redirect = $this->checkAuth();
-        
+
         if ($redirect) {
             return $redirect; // Return the redirect if checkAuth triggers it
         }

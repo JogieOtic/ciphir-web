@@ -6,6 +6,7 @@
     <title>CIPHIR Website</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="/css/mainpage.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e7ad46b0ff.js" crossorigin="anonymous"></script>
 
 </head>
@@ -104,7 +105,7 @@
     <section id="public-safety" class="public-safety">
         <h2>Public Safety Office</h2>
         <div class="public-safety-details">
-            <img src="/img/person1.png" alt="PS Officer">
+            <!-- <img src="/img/person1.png" alt="PS Officer"> -->
             <div class="contact-info">
                 <h3>Mr. Renne F. Gumba</h3>
                 <p>CDGHI I / Executive Officer</p>

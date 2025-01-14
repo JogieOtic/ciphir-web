@@ -31,7 +31,7 @@
 							<i class="fas fa-check-circle text-green-600"></i>
 						</div>
 					</div>
-			</div>
+			</div>  
 			<div class="stat-item unresolved-reports">
 					<h3 class="stat-label">Unresolved Reports</h3>
 					<div class="icon-x-data">
