@@ -1,0 +1,265 @@
+/* Login Page */
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  opacity: 1;
+  z-index: -1;
+  background-image: url(/img/NAGACITY.jpg);
+}
+
+header {
+  width: 100%;
+  /* background-color: #2D4373; */
+  padding: 10px 0;
+}
+
+.header-text {
+  color: white;
+  font-size: 15px;
+  margin: 0;
+  text-align: left;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 50px;
+  margin-right: 10px;
+  margin-left: 30px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 30px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  margin-right: 30px;
+}
+
+.nav-links a:hover {
+  color: #2D4373;
+  background-color: white;
+  border-radius: 20px;
+}
+
+
+
+/* Login Page Container */
+.login-container {
+  display: flex;
+  width: 80%;
+  max-width: 1200px;
+  margin: 30px auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.login-box {
+  background-color: #25395b;
+  padding: 40px;
+  flex: 1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-box h2 {
+  font-size: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.login-box h3 {
+  font-size: small;
+
+}
+
+.login-box p {
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto 20px auto;
+  border-radius: 25px;  /* Rounded corners */
+  box-sizing: border-box;
+  border: none;         /* Remove default border */
+  background-color: #f3f3f3; /* Light background color */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
+  font-size: 16px;      /* Adjust font size */
+  color: #333;          /* Text color */
+  outline: none;        /* Remove default focus outline */
+}
+
+.login-box input::placeholder {
+  color: #aaa;          /* Subtle placeholder color */
+}
+
+/* Add hover and focus effects */
+.login-box input:focus {
+  background-color: #fff; /* White background on focus */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Outer shadow on focus */
+}
+
+.log-in-btn {
+  background-color: white;
+  color: #25395b;
+  padding: 10px 20px;
+  border-radius: 40px;
+  cursor: pointer;
+  width: 30%;
+  text-align: center;
+}
+
+.log-in-btn:hover {
+  background-color: #2D4373;
+  color: white;
+}
+
+.error-messages {
+  color: red;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* Info Section */
+.login-info {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 60px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  color: #2D4373;
+}
+
+.login-info h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.login-info h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-info p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Eye Logo Styling */
+.eye-logo {
+  position: absolute;
+  top: 140px;
+  right: 200px;
+}
+
+.eye-logo img {
+  width: 10px;
+}
+
+/* Input Wrapper */
+.input-wrapper {
+    position: relative; /* Relative position for the toggle icon */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 15px;
+    padding-right: 40px; /* Add space for the toggle icon */
+    margin: 0;
+    border-radius: 25px;  /* Rounded corners */
+    box-sizing: border-box;
+    border: none;         /* Remove default border */
+    background-color: #f3f3f3; /* Light background color */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    font-size: 16px;      /* Adjust font size */
+    color: #333;          /* Text color */
+    outline: none;        /* Remove default focus outline */
+}
+
+.input-wrapper input::placeholder {
+    color: #aaa;          /* Subtle placeholder color */
+}
+
+/* Eye Icon Styling */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #7b7b7b;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    font-size: 16px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Styling for icons */
+#eyeClosed, #eyeOpen {
+    width: 24px;
+    height: 24px;
+    display: none; /* Both icons are hidden initially */
+}
+
+/* By default, the eye should be closed (password hidden) */
+#eyeClosed {
+    display: block; /* Closed eye is visible initially */
+}

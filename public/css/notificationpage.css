@@ -1,0 +1,97 @@
+/* Notification Sidebar */
+.notification-sidebar {
+    position: fixed;
+    top: 70px;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background-color: #dde8f0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    z-index: 1000; /* Ensure it's on top of other content */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.notification-sidebar.open {
+    right: 0;
+}
+
+.notification-sidebar .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.notification-sidebar .notification-header1 {
+    display: flex;
+    padding-left: 5px;
+    padding-right: 7px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #018abd;
+    height: 50px;
+    border-radius: 10px 10px 0 0;
+    font-weight: bold;
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.notification-sidebar .close-btn {
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+}
+
+/* .notification-sidebar h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #2D4373;
+} */
+
+.notification-content {
+    margin-top: 20px;
+}
+
+.notification-item {
+    background-color: #d0e8f2;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.red-dot {
+    background-color: red;
+}
+
+.yellow-dot {
+    background-color: yellow;
+}
+
+/* Style for the issue type to make it stand out */
+.issue-type {
+    color: red;
+    font-weight: bold;
+}
+
+/* Adding borders to match the look in the provided image */
+.notification-item.unprocessed-report {
+    border: 2px solid #95cce7;
+}
+
+.notification-item.duplicate-report {
+    border: 2px solid #95cce7;
+}

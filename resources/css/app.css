@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+.modal-backdrop {
+    background-color: transparent !important; /* Removes the overlay */
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Custom dark overlay */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+@layer components {
+    .wrapper{
+        @apply bg-[#2D4373] h-fit py-1 z-10 fixed w-full flex flex-row justify-between px-4;
+    }
+    .brand {
+        @apply flex flex-row gap-1 text-slate-300;
+    }
+    .brand img{
+        @apply h-14;
+    }
+    .profile-btn {
+        @apply flex flex-row gap-6 place-items-center px-2;
+    }
+    .link {
+        @apply list-none;
+    }
+    .main-link {
+        @apply text-white flex text-center;
+    }
+    .main-li-btn {
+        @apply grid place-items-center hover:bg-[#25375f] rounded w-fit px-4 h-full;
+    }
+    .sidebar {
+        @apply fixed z-0 h-screen bg-[#DDE8F0] shadow-black w-fit;
+    }
+    .nav-btn {
+        @apply w-full p-2 cursor-pointer pl-6 hover:bg-slate-400 rounded-sm flex place-items-center gap-2;
+    }
+    .icon-layout {
+        @apply w-5 grid place-items-center;
+    }
+    .stats-container {
+        @apply flex justify-start gap-8 px-8 py-4 flex-shrink;
+    }
+    .stat-item {
+        @apply rounded-md shadow-md shadow-slate-300 overflow-clip min-w-fit w-full;
+    }
+    .stat-label {
+        @apply bg-[#2D4373] px-4 py-2 text-slate-200 font-semibold text-lg tracking-wider;
+    }
+    .resolved-issues-container, .infrastructure-statistics {
+        @apply p-4;
+    }
+    .resolved-issues {
+        @apply flex;
+    }
+    .icon-x-data {
+        @apply flex justify-around text-4xl flex-row-reverse px-4 py-8;
+    }
+    .stats-n {
+        @apply text-[#2D4373] font-bold;
+    }
+    .text-layout{
+        @apply font-inter tracking-wider;
+    }
+    .hero {
+        @apply flex h-[90vh] font-inter tracking-wider mx-auto max-w-[1440px] justify-between;
+    }
+    .left-side, .right-side {
+        @apply w-full flex text-[#101e3d] place-items-center px-8;
+    }
+    .main-hero-btn {
+        @apply hover:bg-blue-700 bg-blue-600 w-fit text-slate-200 rounded-full py-2 px-6;
+    }
+    .resident-info {
+        @apply w-full h-fit flex flex-row gap-4;
+    }
+    .new-reports-container {
+        @apply bg-pink-300 w-full;
+    }
+    .table-head {
+        @apply border border-gray-300 px-4 py-2 text-left;
+    }
+    .btn-table {
+        @apply block px-3 py-0.5 bg-blue-600 text-slate-200 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300;
+    }
+}

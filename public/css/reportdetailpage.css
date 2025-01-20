@@ -1,0 +1,166 @@
+/* Ensuring the content does not overlap with header and sidebar */
+.reportdetail-container {
+    margin-top: 60px; /* Space for fixed header */
+    margin-left: 220px; /* Space for fixed sidebar */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: calc(100vh - 60px); /* Full height minus header */
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* General Styling */
+.reportdetail-header h1 {
+    font-size: 24px;
+    color: #2D4373;
+    text-align: start;
+    margin-top: 0px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Flexbox layout for content */
+.reportdetail-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 450px;
+}
+
+/* Left column */
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Right column */
+.reportdetail-right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Section styling for consistent look */
+.reportdetail-section, .section {
+    background-color: #fff;
+    padding: 20px;
+    padding-top: 0px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.section h3 {
+    font-size: 18px;
+    color: #2D4373;
+    margin-bottom: 10px;
+}
+
+/* Resident Information */
+#resident-info p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+#resident-info p strong {
+    color: #333;
+}
+
+/* Location map */
+#location img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Description section */
+#description p {
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap; /* Handle text formatting */
+}
+
+/* Feedback section */
+#feedback #stars {
+    font-size: 18px;
+    color: gold;
+}
+
+/* Attachments section */
+#attachments img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Back Button Styling */
+.reportdetail-back-button {
+    position: absolute;
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #ddd;
+}
+
+/* Footer section */
+.reportdetail-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#complete-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#complete-btn:hover {
+    background-color: #218838;
+}
+
+#complete-btn:disabled {
+    background-color: #c4c4c4;
+    cursor: not-allowed;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .reportdetail-content {
+        flex-direction: column;
+    }
+
+    .left-column, .reportdetail-right-column {
+        width: 100%;
+    }
+}

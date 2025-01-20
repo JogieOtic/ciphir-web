@@ -1,0 +1,93 @@
+/* Main layout adjustments */
+.newreport-dashboard-container {
+    font-family: 'Poppins', sans-serif;
+    margin-left: 215px;
+    background-color: rgba(135, 133, 133, 0.25);
+    padding: 20px;
+    padding-top: 80px;
+    width: 1280px;
+    overflow-x: auto;
+}
+
+/* Table container adjustments */
+.table-container {
+    width: 100%;
+    overflow-y: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 0px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    max-height: 595px
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Left align Username column */
+table td:nth-child(2),
+table th:nth-child(2) {
+    text-align: left;
+}
+
+table td:nth-child(6),
+table th:nth-child(6) {
+    text-align: left;
+}
+
+/* Table Header Styling */
+table th {
+    background-color: #2D4373;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 1;
+    letter-spacing: 0.05em;
+    position: sticky;
+    position: -webkit-sticky;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    padding: 12px 15px;
+}
+
+/* Table Body Row Styling */
+table td {
+    color: #333;
+    font-size: 12px;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.high-severity {
+    background-color: rgba(255, 99, 132, 0.2);
+    border-left: 5px solid #e57373;
+}
+
+/* Medium Severity Row Styling */
+.medium-severity {
+    background-color: rgba(255, 206, 86, 0.2);
+    border-left: 5px solid #fbc02d;
+}
+
+/* Low Severity Row Styling */
+.low-severity {
+    background-color: rgba(75, 192, 192, 0.2);
+    border-left: 5px solid #43a047;
+}
+
+
+table tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
