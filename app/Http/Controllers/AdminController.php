@@ -51,7 +51,7 @@ class AdminController extends Controller
         $reportsToday = DB::table('Reported_Issue')
                         ->whereDate('created_at', '=', date('Y-m-d'))
                         ->count();
-        
+
         $resolvedReports = DB::table('Reported_Issue')
                             ->where('reportStatus', 'Resolved')
                             // ->whereMonth('created_at', $threeMonthsAgo->month)
@@ -148,7 +148,25 @@ class AdminController extends Controller
             })
             ->where('priorityLevel', 'High');
         })
+        ->orderBy('created_at','desc')
         ->get();
+        // date query
+        if($request->input('start') || ($request->input('start') && $endDate = $request->input('end'))) {
+            $startDate = $request->input('start'); // Start date
+            $endDate = Carbon::parse($request->input('end'))->endOfDay(); // Set the end date to the end of the day
+
+            $reports = DB::table('Reported_Issue')
+                ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+                ->whereIn('reportStatus', ['In Progress','Pending'])
+                ->where('priorityLevel', 'High')
+                ->whereBetween('Reported_Issue.created_at', [$startDate, $endDate]) // Include up to the end of the end date
+                ->orderBy('created_at', 'desc')
+                ->select('Reported_Issue.*', 'User.username', 'User.fullname', 'User.address', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'User.contactNumber', 'Reported_Issue.severityLevel')
+                ->get();
+            return view('pages.priorityreport', compact('reports', 'url'));
+        }
         // return response()->json($reports);
         // Pass the $reports variable to the view
         return view('pages.priorityreport', compact('reports', 'url'));
@@ -185,6 +203,7 @@ class AdminController extends Controller
                     ->orWhere('Reported_Issue.report_no', 'like', "%{$search}%")
                     ->orWhere('Reported_Issue.severityLevel', 'like', "%{$search}%")
                     ->orWhere('Reported_Issue.reportStatus', 'like', "%{$search}%")
+                    ->orWhere('Reported_Issue.created_at', 'like', "%{$search}%")
                     ->orWhere('Reported_Issue.priorityLevel', 'like', "%{$search}%");
                 })
                 ->whereIn('Reported_Issue.reportStatus', ['Pending', 'In Progress'])
@@ -192,6 +211,23 @@ class AdminController extends Controller
             })
             ->get();
             return view('pages.newreport', compact('reports', 'url'));
+        }
+        // date query
+        if($request->input('start') || ($request->input('start') && $endDate = $request->input('end'))) {
+            $startDate = $request->input('start'); // Start date
+            $endDate = Carbon::parse($request->input('end'))->endOfDay(); // Set the end date to the end of the day
+
+            $reports = DB::table('Reported_Issue')
+                ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')
+                ->join('Infrastructure', 'Reported_Issue.infrastructure_id', '=', 'Infrastructure.infrastructure_id')
+                ->join('Issues', 'Reported_Issue.issue_id', '=', 'Issues.issue_id')
+                ->whereIn('reportStatus', ['In Progress','Pending'])
+                ->whereIn('priorityLevel', ['Low','Medium'])
+                ->whereBetween('Reported_Issue.created_at', [$startDate, $endDate]) // Include up to the end of the end date
+                ->orderBy('created_at', 'desc')
+                ->select('Reported_Issue.*', 'User.username', 'User.fullname', 'User.address', 'Infrastructure.infrastructure_type', 'Issues.issue_type', 'User.contactNumber', 'Reported_Issue.severityLevel')
+                ->get();
+            return view('pages.newreport', compact('reports','url'));
         }
         $reports = DB::table('Reported_Issue')
             ->join('User', 'Reported_Issue.resident_id', '=', 'User.resident_id')

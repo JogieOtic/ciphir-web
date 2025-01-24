@@ -1,7 +1,7 @@
 @extends('sa-admin.index')
 @section('title', 'Profile')
 @section('content')
-  <div class="bg-white p-8 rounded-lg mx-auto shadow-lg w-[500px]">
+  <div class="bg-gray-200 p-8 rounded-lg mx-auto shadow-lg w-[500px]">
     <!-- Profile Title -->
     <h1 class="text-3xl font-bold mb-8 text-slate-800">Profile</h1>
 

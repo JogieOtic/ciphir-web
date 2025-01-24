@@ -1,5 +1,5 @@
 <div class="{{Route::is('residents') ? 'h-12 flex' : 'h-24' }} w-full bg-slate-00 flex flex-row px-8">
-  @if(Route::is('reporthistory'))
+  @if(true)
   <div class="w-full grid content-center md:flex-wrap">
     <form method="GET" action="{{ route($url) }}" class="flex items-center">
       <div class="relative">
@@ -24,17 +24,17 @@
           />
       </div>
       <button type="submit" class="ml-4 bg-blue-500 text-white px-4 py-1 rounded-lg">Filter</button>
-      <a href="/reporthistory" class="ml-4 bg-blue-800 hover:bg-slate-700 text-white px-4 py-1 rounded-lg">Reset</a>
+      <a href="{{ route($url) }}" class="ml-4 bg-blue-800 hover:bg-slate-700 text-white px-4 py-1 rounded-lg">Reset</a>
     </form>
   </div>
   @endif
   <div class="{{Route::is('residents') ? 'flex flex-row py-2 gap-2 w-full content-center justify-end' : 'w-full grid content-center justify-end'}}">
     <form method="GET" action="{{ route($url) }}">
-      <input 
-          type="text" 
-          name="search" 
-          value="{{ request('search') }}" 
-          placeholder="{{$placeholder ?? 'Name, Infrastructures, Issue....'}}" 
+      <input
+          type="text"
+          name="search"
+          value="{{ request('search') }}"
+          placeholder="{{$placeholder ?? 'Name, Infrastructures, Issue....'}}"
           class="border rounded px-2 py-1 w-72"
       />
       <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded">Search</button>
