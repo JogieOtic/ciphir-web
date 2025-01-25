@@ -1,5 +1,5 @@
 <div class="{{Route::is('residents') ? 'h-12 flex' : 'h-24' }} w-full bg-slate-00 flex flex-row px-8">
-  @if(true)
+  @if(!(Route::is('residents')))
   <div class="w-full grid content-center md:flex-wrap">
     <form method="GET" action="{{ route($url) }}" class="flex items-center">
       <div class="relative">
