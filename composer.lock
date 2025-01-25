@@ -23,7 +23,9 @@
             "require": {
                 "dasprid/enum": "^1.0.3",
                 "ext-iconv": "*",
-                "php": "^8.1"
+                "php": "^8.1",
+                "ext-mbstring": "*",
+                "ext-curl": "*"
             },
             "require-dev": {
                 "phly/keep-a-changelog": "^2.12",
